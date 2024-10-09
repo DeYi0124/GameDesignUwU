@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class GameReport : MonoBehaviour
 {
     public void ContinueGame() {
-        SceneManager.LoadSceneAsync("GameScene");
+        SceneManager.LoadSceneAsync("MainScene");   
         GameManager.Instance.reset();
     }
     public void EnterShop() {

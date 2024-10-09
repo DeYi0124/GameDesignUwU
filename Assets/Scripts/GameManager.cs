@@ -46,6 +46,7 @@ public class GameManager : MonoBehaviour
     }
 
     void OnSave(CurrentBike currBike) {
+        pause = true;
         if (CarController.Instance.bike > 0) {
             bike += CarController.Instance.bike;
         }

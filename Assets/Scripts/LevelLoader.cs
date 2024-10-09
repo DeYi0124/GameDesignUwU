@@ -28,6 +28,7 @@ public class LevelLoader : MonoBehaviour
 
         yield return new WaitForSeconds(transitionTime);
 
+        GameManager.Instance.pause = false;
         transition.SetTrigger("End");
     }
 

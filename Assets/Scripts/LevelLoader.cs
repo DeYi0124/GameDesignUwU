@@ -27,6 +27,8 @@ public class LevelLoader : MonoBehaviour
         transition.SetTrigger("Start");
 
         yield return new WaitForSeconds(transitionTime);
+
+        transition.SetTrigger("End");
     }
 
     // Update is called once per frame

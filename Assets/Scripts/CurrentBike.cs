@@ -11,18 +11,23 @@ public class CurrentBike : MonoBehaviour
     public Transform textMeshTransform;
     CarController carController;
     public event Action<CurrentBike> OnReceiving;
+    public event Action<CurrentBike> OnSave;
     void OnTriggerExit2D(Collider2D collider2D) {
         if(collider2D.CompareTag("CheckPoints")) {
             checkPointHandler checkpoint = collider2D.GetComponent<checkPointHandler>();
-            //Debug.Log("ENTER: " + checkpoint.getProgress().ToString());
             if (checkpoint.getProgress() == 0) {
-                //OnReceiving?.Invoke(this);
                 if(carController.bike < carController.maxBike)
                     carController.bike++;
                 myText.text = carController.bike.ToString() + "/" + carController.maxBike.ToString();
                 Destroy(checkpoint.transform.gameObject);
-                //OnReceiving?.Invoke(this);
             }
+        }
+    }
+
+    void OnTriggerEnter2D(Collider2D collider2D) {
+        if(collider2D.CompareTag("save")) {
+            OnSave?.Invoke(this);
+            myText.text = carController.bike.ToString() + "/" + carController.maxBike.ToString();
         }
     }
     void Awake() {

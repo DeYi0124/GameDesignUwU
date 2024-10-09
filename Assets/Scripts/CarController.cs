@@ -27,7 +27,15 @@ public class CarController : MonoBehaviour
 
     void Awake()
     {
-        Instance = this;
+        CurrentBike[] currs = FindObjectsOfType<CurrentBike>();
+        foreach (CurrentBike curr in currs) {
+            curr.OnSave += OnSave;
+        }
+        if (Instance != null && Instance != this) {
+            Destroy(gameObject);
+        }
+        else 
+            Instance = this;
         carRigidbody2D = GetComponent<Rigidbody2D>();
         bike = 0;
         maxBike = 20;
@@ -40,6 +48,11 @@ public class CarController : MonoBehaviour
         //     Destroy(this.gameObject);
         // } else
         //     DontDestroyOnLoad(gameObject);
+    }
+
+    void OnSave(CurrentBike currBike) {
+        //Debug.Log("UWUevent!");
+        bike = 0;
     }
 
     // Start is called before the first frame update

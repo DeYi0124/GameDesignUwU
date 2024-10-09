@@ -9,7 +9,7 @@ public class carInputHandler : MonoBehaviour
     void Awake()
     {
         GameObject obj = GameObject.Find("Car");
-        Debug.Log(obj);
+        //Debug.Log(obj);
         m_carController = obj.GetComponent<CarController>();
     }
     // Start is called before the first frame update

@@ -20,8 +20,15 @@ public class GameManager : MonoBehaviour
     public static event Action<GameState> OnGameStateChanged;
     public static UnityEvent OnTimeUpdated;
     void Awake() {
-        Instance = this;
-        Debug.Log("AWAKEN");
+        if (Instance != null && Instance != this) {
+            Destroy(gameObject);
+        }
+        else 
+            Instance = this;
+        CurrentBike[] currs = FindObjectsOfType<CurrentBike>();
+        foreach (CurrentBike curr in currs) {
+            curr.OnSave += OnSave;
+        }
         bike = 0;
         KPI = 10;
         coins = 0;
@@ -29,20 +36,32 @@ public class GameManager : MonoBehaviour
         pause = false;
         InvokeRepeating("UpdateTime", 1f, 1f);
         if(FindObjectsOfType<GameManager>().Length > 1) {
-            Debug.Log("DestroyinG" + FindObjectsOfType<GameManager>().Length.ToString());
+            //Debug.Log("DestroyinG" + FindObjectsOfType<GameManager>().Length.ToString());
             this.gameObject.SetActive(false);
             Destroy(this.gameObject);
-        } else
+        } else {
+            //Debug.Log("owo");
             DontDestroyOnLoad(gameObject);
+        }
+    }
+
+    void OnSave(CurrentBike currBike) {
+        if (CarController.Instance.bike > 0) {
+            bike += CarController.Instance.bike;
+        }
     }
 
     public void reset() {
         pause = false;
-        Debug.Log("RESETTING");
+        //Debug.Log("RESETTING");
         updateGameState(GameState.Morning);
         OilBar.Instance.oil = OilBar.Instance.maxOil;
-        Debug.Log("FILLING");
+        //Debug.Log("FILLING");
+        //Debug.Log((OilBar.Instance.oil));
         CarController.Instance.bike = 0;
+        KPI = (int)OilBar.Instance.oil;
+        State = GameState.Morning;
+        pause = false;
     }
 
     public (int, int) GetMoney() {
@@ -56,7 +75,7 @@ public class GameManager : MonoBehaviour
 
     void UpdateTime() {
         if(!pause) {
-            time += 10;
+            time += 1;
             //Debug.Log(time);
         }
     }
@@ -87,12 +106,12 @@ public class GameManager : MonoBehaviour
         switch(State) {
             case GameState.Morning:
                 pause = false;
-                Debug.Log("goodMorning");
+                //Debug.Log("goodMorning");
                 break;
             case GameState.Evening:
                 break;
             case GameState.Night:
-                Debug.Log("NIGHT");
+                //Debug.Log("NIGHT");
                 pause = true;
                 time = 0;
                 break;

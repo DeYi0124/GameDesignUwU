@@ -16,9 +16,22 @@ public class OilBar : MonoBehaviour
     public TextMeshProUGUI myText;
 
     // Start is called before the first frame update
+
+    void OnSave(CurrentBike currBike) {
+        oil = maxOil;
+    }
+
     void Awake() {
         //Debug.Log(GameManager.OnTimeUpdated);
-        Instance = this;
+        if (Instance != null && Instance != this) {
+            Destroy(gameObject);
+        }
+        else 
+            Instance = this;
+        CurrentBike[] currs = FindObjectsOfType<CurrentBike>();
+        foreach (CurrentBike curr in currs) {
+            curr.OnSave += OnSave;
+        }
         InvokeRepeating("oilCutPerSecond", 1f, 1f);
         //GameManager.OnTimeUpdated.AddListener(oilCutPerSecond);
     }

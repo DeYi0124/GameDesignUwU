@@ -4,6 +4,7 @@ using System;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class GameManager : MonoBehaviour
     public int bike = 0;
     public int KPI = 10;
     private static int time = 0;
+    public int skill = 1;
 
     private int coins = 0;
     private int credits = 0;
@@ -19,6 +21,11 @@ public class GameManager : MonoBehaviour
     public bool pause = false;
     public static event Action<GameState> OnGameStateChanged;
     public static UnityEvent OnTimeUpdated;
+
+    public Animator transition;
+    public float transitionTime = 3f;
+    public TextMeshProUGUI LoadText;
+
     void Awake() {
         if (Instance != null && Instance != this) {
             Destroy(gameObject);
@@ -46,10 +53,9 @@ public class GameManager : MonoBehaviour
     }
 
     void OnSave(CurrentBike currBike) {
-        pause = true;
-        if (CarController.Instance.bike > 0) {
-            bike += CarController.Instance.bike;
-        }
+        bike += CarController.Instance.bike;
+        time += 5;
+        CarController.Instance.bike = 0;
     }
 
     public void reset() {
@@ -59,6 +65,7 @@ public class GameManager : MonoBehaviour
         OilBar.Instance.oil = OilBar.Instance.maxOil;
         //Debug.Log("FILLING");
         //Debug.Log((OilBar.Instance.oil));
+        coins += bike * 5;
         CarController.Instance.bike = 0;
         KPI = (int)OilBar.Instance.oil;
         State = GameState.Morning;
@@ -76,7 +83,7 @@ public class GameManager : MonoBehaviour
 
     void UpdateTime() {
         if(!pause) {
-            time += 1;
+            time += 31;
             //Debug.Log(time);
         }
     }
@@ -93,12 +100,23 @@ public class GameManager : MonoBehaviour
         GameStateHandle();
     }
 
+    void LoadingScreen() {
+        StartCoroutine(LoadLevel());
+    }
+
+    IEnumerator LoadLevel() {
+        LoadText.text = "End Of The Day";
+        transition.SetTrigger("Start");
+        yield return new WaitForSecondsRealtime(transitionTime);
+        SceneManager.LoadScene("GameReportScene");  
+    }
+
     void GameStateHandle() {
         if(time > 30 && State == GameState.Morning) {
             updateGameState(GameState.Evening);
         } else if(time > 60 && State == GameState.Evening) {
             updateGameState(GameState.Night);
-            SceneManager.LoadSceneAsync("GameReportScene");
+            SceneManager.LoadSceneAsync("GameReportScene");  
         }
     }
 

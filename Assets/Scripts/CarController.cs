@@ -52,7 +52,6 @@ public class CarController : MonoBehaviour
 
     void OnSave(CurrentBike currBike) {
         //Debug.Log("UWUevent!");
-        bike = 0;
     }
 
     // Start is called before the first frame update

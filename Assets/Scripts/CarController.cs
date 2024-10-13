@@ -41,7 +41,7 @@ public class CarController : MonoBehaviour
         maxBike = 20;
         onGrass = false;
         onBroken = false;
-        maxSpeed = 20;
+        maxSpeed = 26;
         // if(FindObjectsOfType<CarController>().Length > 1) {
         //     Debug.Log("DestroyinG" + FindObjectsOfType<CarController>().Length.ToString());
         //     this.gameObject.SetActive(false);
@@ -75,6 +75,9 @@ public class CarController : MonoBehaviour
 
     void ApplyEngineForce()
     {
+        if(GameManager.Instance.pause) {
+            return;
+        }
         velocityVsUp = Vector2.Dot(carRigidbody2D.velocity, transform.right);
         if(velocityVsUp > maxSpeed && accInput > 0) {
             return;
@@ -96,6 +99,9 @@ public class CarController : MonoBehaviour
 
     void ApplySteering() 
     {
+        if(GameManager.Instance.pause) {
+            return;
+        }
         float steeringMin = (carRigidbody2D.velocity.magnitude / 8);
         steeringMin = Mathf.Clamp01(steeringMin);
         rotatingAngle -= steerInput * turn * steeringMin;
@@ -104,6 +110,9 @@ public class CarController : MonoBehaviour
 
     void KillOrthogonalVelocity() 
     {
+        if(GameManager.Instance.pause) {
+            return;
+        }
         Vector2 fwdVelocity = transform.right * Vector2.Dot(carRigidbody2D.velocity, transform.right);
         Vector2 rightVelocity = (-transform.up) * Vector2.Dot(carRigidbody2D.velocity, (-transform.up));
 
@@ -116,6 +125,15 @@ public class CarController : MonoBehaviour
 
     public float GetVelocityMagnitude() {
         return carRigidbody2D.velocity.magnitude;
+    }
+
+    public Vector2 GetPostion() {
+        return carRigidbody2D.position;
+    }
+
+    public void SetPosition(Vector2 pos) {
+        carRigidbody2D.velocity = Vector2.zero;
+        //carRigidbody2D.position = pos;
     }
 
     public bool IsTireScreeching(out float lateralVelocity, out bool isBraking) {

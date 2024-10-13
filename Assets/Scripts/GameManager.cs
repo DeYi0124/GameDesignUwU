@@ -12,10 +12,14 @@ public class GameManager : MonoBehaviour
     public GameState State;
     public int bike = 0;
     public int KPI = 10;
+    public float maxOil = 100f;
     private static int time = 0;
-    public int skill = 1;
+    public int skillLevel = 0;
+    public int speedLevel = 0;
+    public int oilLevel = 0;
+    public int volumeLevel = 0;
 
-    private int coins = 0;
+    public int coins = 0;
     private int credits = 0;
     
     public bool pause = false;
@@ -25,6 +29,7 @@ public class GameManager : MonoBehaviour
     public Animator transition;
     public float transitionTime = 3f;
     public TextMeshProUGUI LoadText;
+    private Vector2 carSpawn;   
 
     void Awake() {
         if (Instance != null && Instance != this) {
@@ -41,6 +46,8 @@ public class GameManager : MonoBehaviour
         coins = 0;
         credits = 0;
         pause = false;
+        carSpawn = CarController.Instance.GetPostion();
+        //CarController.Instance.SetPosition(carSpawn);
         InvokeRepeating("UpdateTime", 1f, 1f);
         if(FindObjectsOfType<GameManager>().Length > 1) {
             //Debug.Log("DestroyinG" + FindObjectsOfType<GameManager>().Length.ToString());
@@ -56,17 +63,19 @@ public class GameManager : MonoBehaviour
         bike += CarController.Instance.bike;
         time += 5;
         CarController.Instance.bike = 0;
+        CarController.Instance.SetPosition(carSpawn);
     }
 
     public void reset() {
         pause = false;
         //Debug.Log("RESETTING");
         updateGameState(GameState.Morning);
-        OilBar.Instance.oil = OilBar.Instance.maxOil;
+        OilBar.Instance.oil = maxOil;
         //Debug.Log("FILLING");
         //Debug.Log((OilBar.Instance.oil));
-        coins += bike * 5;
+        CarController.Instance.SetPosition(carSpawn);
         CarController.Instance.bike = 0;
+        bike = 0;
         KPI = (int)OilBar.Instance.oil;
         State = GameState.Morning;
         pause = false;
@@ -83,7 +92,7 @@ public class GameManager : MonoBehaviour
 
     void UpdateTime() {
         if(!pause) {
-            time += 31;
+            time += 1;
             //Debug.Log(time);
         }
     }
@@ -116,6 +125,7 @@ public class GameManager : MonoBehaviour
             updateGameState(GameState.Evening);
         } else if(time > 60 && State == GameState.Evening) {
             updateGameState(GameState.Night);
+            updateMoney(bike*5, 0);
             SceneManager.LoadSceneAsync("GameReportScene");  
         }
     }

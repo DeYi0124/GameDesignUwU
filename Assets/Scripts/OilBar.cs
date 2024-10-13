@@ -10,7 +10,6 @@ public class OilBar : MonoBehaviour
     public static OilBar Instance;
     public Slider slider;
     public Slider easeSlider;
-    public float maxOil = 100f;
     public float oil;
     private float lerpSpeed = 0.01f;
     public TextMeshProUGUI myText;
@@ -18,7 +17,7 @@ public class OilBar : MonoBehaviour
     // Start is called before the first frame update
 
     void OnSave(CurrentBike currBike) {
-        oil = maxOil;
+        oil = GameManager.Instance.maxOil;
     }
 
     void Awake() {
@@ -49,7 +48,7 @@ public class OilBar : MonoBehaviour
 
     void Start()
     {
-        oil = maxOil;
+        oil = GameManager.Instance.maxOil;
     }
 
     // Update is called once per frame
@@ -65,7 +64,7 @@ public class OilBar : MonoBehaviour
         if(slider.value != easeSlider.value) {
             easeSlider.value = Mathf.Lerp(easeSlider.value, oil, lerpSpeed);
         }
-        myText.text = "Oil: " + oil.ToString() + '/' + maxOil.ToString();
+        myText.text = "Oil: " + oil.ToString() + '/' + GameManager.Instance.maxOil.ToString();
     }
 
     void oilCut(float amount) {

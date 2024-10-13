@@ -31,7 +31,7 @@ public class LevelLoader : MonoBehaviour
     }
 
     void LoadingScreen() {
-        Debug.Log("UwU?");
+        //Debug.Log("UwU?");
         StartCoroutine(LoadLevel());
     }
 
@@ -40,6 +40,7 @@ public class LevelLoader : MonoBehaviour
         GameManager.Instance.pause = true;
         transition.SetTrigger("Start");
         yield return new WaitForSecondsRealtime(transitionTime);
+        //CarController.Instance.transform.position += new Vector3(-24, 4, 10);
         transition.SetTrigger("End");
         GameManager.Instance.pause = false;
     }

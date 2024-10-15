@@ -177,9 +177,9 @@ MonoBehaviour:
   dialogue:
     name: Alejandro
     sentences:
-    - Hi
-    - hello
-    - Adios
+    - Ohhhhhhhhhhhhhh aj;foid;hafjdkfna ijaff;lj a;ljdf ;ajf klan s;f i
+    - Oh no I don't understand this
+    - Grilled cheese obama sandwich
 --- !u!114 &96071788
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -373,6 +373,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameText: {fileID: 1385754115}
   dialogueText: {fileID: 867790538}
+  animator: {fileID: 1057350048}
 --- !u!4 &281345595
 Transform:
   m_ObjectHideFlags: 0
@@ -445,7 +446,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Button
+  m_text: 'Continue
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1165,7 +1168,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Button
+  m_text: Start
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

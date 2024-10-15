@@ -5,9 +5,7 @@
 /[Ll]ibrary/*
 !/[Ll]ibrary/*.asset
 /[Ll]ibrary/SceneVisibilityState.asset
-/[Uu]serSetting/EditorUserSettings.asset
-/[Uu]serSetting/Layouts/CurrentMaximizeLayout.dwlt
-/[Uu]serSettings/Layouts/default-2022.dwlt
+/[Uu]ser[Ss]ettings/
 /[Tt]emp/
 /[Oo]bj/
 /[Bb]uild/

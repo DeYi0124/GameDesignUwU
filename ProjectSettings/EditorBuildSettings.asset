@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MainScene.unity
     guid: 3afba26b81caf9c4a82decbc1e8f2345
+  - enabled: 1
+    path: Assets/Scenes/DialogueTemplate.unity
+    guid: 7d552ee88e28f1f4b9d1a398ef7c9e23
   m_configObjects: {}

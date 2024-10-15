@@ -46,6 +46,7 @@ public class GameManager : MonoBehaviour
         coins = 0;
         credits = 0;
         pause = false;
+        CarController.Instance.onBroken = false;
         carSpawn = CarController.Instance.GetPostion();
         //CarController.Instance.SetPosition(carSpawn);
         InvokeRepeating("UpdateTime", 1f, 1f);

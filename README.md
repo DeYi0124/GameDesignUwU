@@ -1,1 +1,7 @@
 # GameDesignUwU
+## Project Name: USYS(Uncle Shui Yuan Simulator)
+Do you have what it takes to follow in the footsteps of the legendary Uncle Shuiyuan and bring justice to those unruly students who recklessly park their bikes wherever they please? In this game, you will step into the shoes of an ambitious intern, determined to uphold the legacy of Uncle Shuiyuan—a campus icon known for his relentless enforcement of bicycle parking rules. Inspired by his astonishing feat of towing over 1,000 bikes in a single night, you will take on the challenge of maintaining order and disciplining violators, all while navigating the intricacies of university life and striving to live up to the legendary status of your mentor.
+
+## Method of Playing
+Ride your bike to every location where illegal parking occurs and tow those improperly parked bikes to the Shuiyuan bike storage system. Be warned—the students are cunning, and they’ll serve as obstacles on your journey to becoming a legend. These rule-breakers won’t make your job easy, so you'll need to stay sharp! A key feature of the game is the dynamic random event system, which adds an extra layer of challenge. You'll encounter unpredictable, real-life-inspired events that test your problem-solving and quick thinking. Whether it’s a sudden protest or a student trying to reclaim their bike mid-tow, you’ll need to handle all kinds of situations as they unfold.
+testing zeus

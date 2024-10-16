@@ -174,12 +174,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2f9b203d8ef74a4690b8c332807873f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 1
   dialogue:
-    name: Alejandro
-    sentences:
-    - Ohhhhhhhhhhhhhh aj;foid;hafjdkfna ijaff;lj a;ljdf ;ajf klan s;f i
-    - Oh no I don't understand this
-    - Grilled cheese obama sandwich
+    name: 
+    sentences: []
 --- !u!114 &96071788
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -271,7 +271,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2f9b203d8ef74a4690b8c332807873f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 2
+  id: 1
   dialogue:
     name: 
     sentences: []
@@ -469,7 +469,7 @@ MonoBehaviour:
   nameText: {fileID: 1385754115}
   dialogueText: {fileID: 867790538}
   animator: {fileID: 1057350048}
-  id: 2
+  id: 1
 --- !u!4 &281345595
 Transform:
   m_ObjectHideFlags: 0

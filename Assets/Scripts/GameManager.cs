@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using TMPro;
@@ -18,6 +19,7 @@ public class GameManager : MonoBehaviour
     public int speedLevel = 0;
     public int oilLevel = 0;
     public int volumeLevel = 0;
+    public int maxEnt = 100000;
 
     public int coins = 0;
     private int credits = 0;
@@ -94,6 +96,10 @@ public class GameManager : MonoBehaviour
         if(!pause) {
             time += 1;
             //Debug.Log(time);
+            int tmpEnt = Random.Range(1, maxEnt+1);
+            if(tmpEnt <= 50) {
+                Debug.Log("event occurs, ID: " + tmpEnt.ToString());
+            }
         }
     }
 

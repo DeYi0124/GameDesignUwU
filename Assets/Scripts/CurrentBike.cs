@@ -10,7 +10,6 @@ public class CurrentBike : MonoBehaviour
     public TextMeshProUGUI myText;
     public Transform textMeshTransform;
     CarController carController;
-    public event Action<CurrentBike> OnReceiving;
     public event Action<CurrentBike> OnSave;
     // void OnTriggerExit2D(Collider2D collider2D) {
     //     if(collider2D.CompareTag("CheckPoints")) {

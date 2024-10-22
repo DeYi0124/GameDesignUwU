@@ -39,10 +39,6 @@ public class GameManager : MonoBehaviour
         }
         else 
             Instance = this;
-        CurrentBike[] currs = FindObjectsOfType<CurrentBike>();
-        foreach (CurrentBike curr in currs) {
-            curr.OnSave += OnSave;
-        }
         bike = 0;
         KPI = 10;
         coins = 0;
@@ -58,10 +54,16 @@ public class GameManager : MonoBehaviour
         } else {
             //Debug.Log("owo");
             DontDestroyOnLoad(gameObject);
+            CurrentBike[] currs = FindObjectsOfType<CurrentBike>();
+            foreach (CurrentBike curr in currs) {
+                //Debug.Log("NMSL");
+                curr.OnSave += OnSave;
+            }
         }
     }
 
     void OnSave(CurrentBike currBike) {
+        Debug.Log("user saving");
         bike += CarController.Instance.bike;
         time += 5;
         CarController.Instance.bike = 0;

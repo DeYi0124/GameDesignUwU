@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class checkPointHandler : MonoBehaviour
 {
     bool isWorking = false;
     float progress = 1f;
     SpriteRenderer m_SpriteRenderer;
+    public event Action<checkPointHandler> OnReceiving;
+    public int id;
     
     //private float timer = 0;
 
@@ -41,6 +44,7 @@ public class checkPointHandler : MonoBehaviour
             m_SpriteRenderer.color = new Color (1, 0, 0, progress);
             if (progress == 0) {
                 CarController.Instance.bike++;
+                OnReceiving?.Invoke(this);
                 Destroy(transform.gameObject);
             }
         }

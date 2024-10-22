@@ -36,7 +36,7 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - Background
   - 
   - 
   - 
@@ -62,4 +62,10 @@ TagManager:
     locked: 0
   - name: checkpoints
     uniqueID: 358143005
+    locked: 0
+  - name: dialogueCharacters
+    uniqueID: 2392661677
+    locked: 0
+  - name: dialogueElement
+    uniqueID: 2070512535
     locked: 0

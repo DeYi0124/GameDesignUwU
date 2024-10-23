@@ -4,12 +4,13 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Networking;
 using System.IO;
+using TMPro;
 
 public class DialogueManager : MonoBehaviour
 {
 
-    public Text nameText;
-    public Text dialogueText;
+    public TextMeshProUGUI nameText;
+    public TextMeshProUGUI dialogueText;
     public Animator dialogueBoxAnimator;
     public Animator character1Animator;
     public Animator character2Animator;
@@ -17,6 +18,7 @@ public class DialogueManager : MonoBehaviour
     public Animator character4Animator;
     public Animator character5Animator;
     public Animator character6Animator;
+    public int id;
     private Queue<string> sentences;
     private Queue<string> names;
     private string[] speakerID;
@@ -24,7 +26,8 @@ public class DialogueManager : MonoBehaviour
     private int previousSpeaker = 0;
     private bool OddFirstPerson = true;
     private bool EvenFirstPerson = true;
-    public int id;
+    private float dialogueSpeed = 0.025f;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -111,16 +114,11 @@ public class DialogueManager : MonoBehaviour
         StartCoroutine(TypeSentence(sentence));
 
     }
-    IEnumerator TypeSentence (string sentence){
+    IEnumerator TypeSentence (string sentence){ 
         dialogueText.text = "";
         foreach(char letter in sentence.ToCharArray()){
             dialogueText.text += letter;
-            yield return null;
-            yield return null;
-            yield return null;
-            yield return null;
-            yield return null;
-            yield return null;
+            yield return new WaitForSeconds(dialogueSpeed);
         }
 
     }
@@ -292,7 +290,6 @@ public class DialogueManager : MonoBehaviour
                     return 0;
             default:
                 return 0;
-                break;
         }
     }
 }

@@ -12,32 +12,49 @@ public class DialogueManager : MonoBehaviour
     public Text dialogueText;
     public Animator dialogueBoxAnimator;
     public Animator character1Animator;
+    public Animator character2Animator;
+    public Animator character3Animator;
+    public Animator character4Animator;
+    public Animator character5Animator;
+    public Animator character6Animator;
     private Queue<string> sentences;
     private Queue<string> names;
+    private string[] speakerID;
+    private int currentSpeaker = 0;
+    private int previousSpeaker = 0;
+    private bool OddFirstPerson = true;
+    private bool EvenFirstPerson = true;
     public int id;
 
     // Start is called before the first frame update
     void Start()
     {  
+        sentences = new Queue<string>();
+        names = new Queue<string>();
+        speakerID = new string[7];
         LoadBackGround();
         List<int> charNum = new List<int>();
         charNum.Add(2);
         charNum.Add(2);
+        charNum.Add(6);
         LoadCharacters(charNum[id-1]);
-        sentences = new Queue<string>();
-        names = new Queue<string>();
+
         dialogueBoxAnimator.SetBool("IsOpen", false);
-        character1Animator.SetBool("InScene",false);
+        for(int i = 1;i<7;i++){
+            TalkingCurrentSpeaker(i,false);
+            InSceneCurrentSpeaker(i,false);
+        }
     }
 
 
     public void StartDialogue (Dialogue dialogue){
         //Debug.Log("starting conversation with "+ dialogue.name);
         dialogueBoxAnimator.SetBool("IsOpen", true);
-        character1Animator.SetBool("InScene",true);
         names.Clear();
         sentences.Clear();
         bool isName = true;
+        speakerID = dialogue.content[0].Trim().Split(' ');
+        dialogue.content.RemoveAt(0);
         foreach(string sentence in dialogue.content){
             //Debug.Log(sentence);
             if(isName){
@@ -51,14 +68,42 @@ public class DialogueManager : MonoBehaviour
         }
 
         DisplayNextSentence();
+
     }
 
     public void DisplayNextSentence(){ 
+        
         if (sentences.Count == 0 || names.Count == 0){
             EndDialogue();
             return;
         }
+        for(int i = 0;i< speakerID.Length;i++){
+            if(names.Peek() == speakerID[i]){
+                previousSpeaker = currentSpeaker;
+                currentSpeaker = (i+1);
+                break;
+            }
+            else if(i == speakerID.Length-1){
+                previousSpeaker = currentSpeaker;
+                currentSpeaker = 0;
+            }
+        }
+
         nameText.text = names.Dequeue();
+
+        if((currentSpeaker == 1 || currentSpeaker == 3|| currentSpeaker == 5)&& OddFirstPerson){
+            InSceneCurrentSpeaker(currentSpeaker,true);
+            OddFirstPerson = false;
+        }
+        if((currentSpeaker == 2 || currentSpeaker == 4|| currentSpeaker == 6)&& EvenFirstPerson){
+            InSceneCurrentSpeaker(currentSpeaker,true);
+            EvenFirstPerson = false;
+        }
+        TalkingCurrentSpeaker(KickSpeaker(currentSpeaker),false);
+        InSceneCurrentSpeaker(KickSpeaker(currentSpeaker),false);
+        InSceneCurrentSpeaker(currentSpeaker,true);
+        TalkingCurrentSpeaker(previousSpeaker,false);
+        TalkingCurrentSpeaker(currentSpeaker,true);
         string sentence = sentences.Dequeue();
         //Debug.Log(sentence);
         //dialogueText.text = sentence;
@@ -81,8 +126,11 @@ public class DialogueManager : MonoBehaviour
     }
     
     void EndDialogue(){
-        dialogueBoxAnimator.SetBool("IsOpen", false);
-        //Debug.Log("end of conversation.");
+        dialogueBoxAnimator.SetBool("IsOpen", false);       
+        for (int i = 1;i< 7;i++){
+            TalkingCurrentSpeaker(i,false);
+            InSceneCurrentSpeaker(i,false);
+        }
     }
     
     private void LoadBackGround(){
@@ -92,7 +140,8 @@ public class DialogueManager : MonoBehaviour
         bgRenderer.sprite = LoadImageFile(bgPath);
         List<Vector3> ScaleList = new List<Vector3>();
         ScaleList.Add(new Vector3(2,1,0));
-        ScaleList.Add(new Vector3(8,8,0)); 
+        ScaleList.Add(new Vector3(8,8,0));
+        ScaleList.Add(new Vector3(9,9,0));
         RectTransform transform = BackGround.GetComponent<RectTransform>();
         transform.localScale = ScaleList[id-1];
     }
@@ -114,6 +163,13 @@ public class DialogueManager : MonoBehaviour
         ScaleList.Add(new List<Vector3>());
         ScaleList[1].Add(new Vector3(15,15,0));
         ScaleList[1].Add(new Vector3(15,15,0));
+        ScaleList.Add(new List<Vector3>());
+        ScaleList[2].Add(new Vector3(15,15,0));
+        ScaleList[2].Add(new Vector3(15,15,0));
+        ScaleList[2].Add(new Vector3(15,15,0));
+        ScaleList[2].Add(new Vector3(15,15,0));
+        ScaleList[2].Add(new Vector3(30,30,0));
+        ScaleList[2].Add(new Vector3(15,15,0));
 
         RectTransform transform = Character.GetComponent<RectTransform>();
         transform.localScale = ScaleList[id-1][characterID-1];
@@ -129,7 +185,114 @@ public class DialogueManager : MonoBehaviour
         Sprite sprite = Sprite.Create(tex, new Rect(0.0f, 0.0f, tex.width, tex.height), pivot, 100.0f);
         //Debug.Log(id.ToString()+"sprite");
         return sprite;
-
-
+    }
+    private void TalkingCurrentSpeaker(int currentSpeaker, bool flag){
+        switch (currentSpeaker){
+            case 1:
+                character1Animator.SetBool("IsTalking",flag);
+                break;
+            case 2:
+                character2Animator.SetBool("IsTalking",flag);
+                break;
+            case 3:
+                character3Animator.SetBool("IsTalking",flag);
+                break;
+            case 4:
+                character4Animator.SetBool("IsTalking",flag);
+                break;
+            case 5:
+                character5Animator.SetBool("IsTalking",flag);
+                break;
+            case 6:
+                character6Animator.SetBool("IsTalking",flag);
+                break;
+            default:
+                break;
+        }
+    }
+    private void InSceneCurrentSpeaker(int currentSpeaker, bool flag){
+        switch (currentSpeaker){
+            case 1:
+                character1Animator.SetBool("InScene",flag);
+                break;
+            case 2:
+                character2Animator.SetBool("InScene",flag);
+                break;
+            case 3:
+                character3Animator.SetBool("InScene",flag);
+                break;
+            case 4:
+                character4Animator.SetBool("InScene",flag);
+                break;
+            case 5:
+                character5Animator.SetBool("InScene",flag);
+                break;
+            case 6:
+                character6Animator.SetBool("InScene",flag);
+                break;
+            default:
+                break;
+        }
+    }
+    private int KickSpeaker(int current){
+        switch(current){
+            case 1:
+                if(character1Animator.GetBool("InScene"))
+                    return 0;
+                else if(character3Animator.GetBool("InScene"))
+                    return 3;
+                else if(character5Animator.GetBool("InScene"))
+                    return 5;
+                else
+                    return 0;
+            case 2:
+                if(character2Animator.GetBool("InScene"))
+                    return 0;
+                else if(character4Animator.GetBool("InScene"))
+                    return 4;
+                else if(character6Animator.GetBool("InScene"))
+                    return 6;
+                else
+                    return 0;
+            case 3:
+                if(character3Animator.GetBool("InScene"))
+                    return 0;
+                else if(character1Animator.GetBool("InScene"))
+                    return 1;
+                else if(character5Animator.GetBool("InScene"))
+                    return 5;
+                else
+                    return 0;
+            case 4:
+                if(character4Animator.GetBool("InScene"))
+                    return 0;
+                else if(character2Animator.GetBool("InScene"))
+                    return 2;
+                else if(character6Animator.GetBool("InScene"))
+                    return 6;
+                else
+                    return 0;
+            case 5:
+                if(character5Animator.GetBool("InScene"))
+                    return 0;
+                else if(character1Animator.GetBool("InScene"))
+                    return 1;
+                else if(character3Animator.GetBool("InScene"))
+                    return 3;
+                else
+                    return 0;
+            case 6:
+                if(character6Animator.GetBool("InScene"))
+                    return 0;
+                else if(character2Animator.GetBool("InScene"))
+                    return 2;
+                else if(character4Animator.GetBool("InScene"))
+                    return 4;
+                else
+                    return 0;
+            default:
+                return 0;
+                break;
+        }
     }
 }

@@ -16,9 +16,8 @@ public class DialogueTrigger : MonoBehaviour
     }
     public void TriggerDialogue(){
         List<string> dialogueContent = ReadDialogueFile(id);
-        dialogue.name = dialogueContent[0]; 
-        for( int i = 1;i < dialogueContent.Count; i++){
-            dialogue.sentences.Add(dialogueContent[i]);
+        for( int i = 0;i < dialogueContent.Count; i++){
+            dialogue.content.Add(dialogueContent[i]);
         }
 
         

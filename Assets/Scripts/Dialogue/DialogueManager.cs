@@ -27,11 +27,11 @@ public class DialogueManager : MonoBehaviour
     private bool OddFirstPerson = true;
     private bool EvenFirstPerson = true;
     private float dialogueSpeed = 0.025f;
-    
+
 
     // Start is called before the first frame update
     void Start()
-    {  
+    {
         sentences = new Queue<string>();
         names = new Queue<string>();
         speakerID = new string[7];
@@ -58,7 +58,7 @@ public class DialogueManager : MonoBehaviour
         bool isName = true;
         speakerID = dialogue.content[0].Trim().Split(' ');
         dialogue.content.RemoveAt(0);
-        foreach(string sentence in dialogue.content){
+        foreach(string sentence in dialogue.con fv5 ent){
             //Debug.Log(sentence);
             if(isName){
                 names.Enqueue(sentence);
@@ -74,8 +74,8 @@ public class DialogueManager : MonoBehaviour
 
     }
 
-    public void DisplayNextSentence(){ 
-        
+    public void DisplayNextSentence(){
+
         if (sentences.Count == 0 || names.Count == 0){
             EndDialogue();
             return;
@@ -114,7 +114,7 @@ public class DialogueManager : MonoBehaviour
         StartCoroutine(TypeSentence(sentence));
 
     }
-    IEnumerator TypeSentence (string sentence){ 
+    IEnumerator TypeSentence (string sentence){
         dialogueText.text = "";
         foreach(char letter in sentence.ToCharArray()){
             dialogueText.text += letter;
@@ -122,15 +122,15 @@ public class DialogueManager : MonoBehaviour
         }
 
     }
-    
+
     void EndDialogue(){
-        dialogueBoxAnimator.SetBool("IsOpen", false);       
+        dialogueBoxAnimator.SetBool("IsOpen", false);
         for (int i = 1;i< 7;i++){
             TalkingCurrentSpeaker(i,false);
             InSceneCurrentSpeaker(i,false);
         }
     }
-    
+
     private void LoadBackGround(){
         GameObject BackGround = GameObject.Find("BackGround");
         SpriteRenderer bgRenderer = BackGround.GetComponent<SpriteRenderer>();

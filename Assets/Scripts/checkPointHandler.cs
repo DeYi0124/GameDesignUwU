@@ -44,6 +44,7 @@ public class checkPointHandler : MonoBehaviour
             m_SpriteRenderer.color = new Color (1, 0, 0, progress);
             if (progress == 0) {
                 CarController.Instance.bike++;
+                progress = -1;
                 OnReceiving?.Invoke(this);
                 Destroy(transform.gameObject);
             }

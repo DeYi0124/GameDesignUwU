@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.Networking;
 using System.IO;
 using TMPro;
+using System.Linq;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -19,6 +20,7 @@ public class DialogueManager : MonoBehaviour
     public Animator character5Animator;
     public Animator character6Animator;
     public int id;
+    public Dialogue dialogue;
     private Queue<string> sentences;
     private Queue<string> names;
     private string[] speakerID;
@@ -32,6 +34,9 @@ public class DialogueManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        id = checkPointGen.rng;
+        dialogue = new Dialogue();
+        dialogue.content = new List<string>();
         sentences = new Queue<string>();
         names = new Queue<string>();
         speakerID = new string[7];
@@ -41,18 +46,31 @@ public class DialogueManager : MonoBehaviour
         charNum.Add(2);
         charNum.Add(6);
         LoadCharacters(charNum[id-1]);
-
         dialogueBoxAnimator.SetBool("IsOpen", false);
         for(int i = 1;i<7;i++){
             TalkingCurrentSpeaker(i,false);
             InSceneCurrentSpeaker(i,false);
         }
+        TriggerDialogue(id);
     }
 
 
+    public List<string> ReadDialogueFile(int id){
+        string path = Application.streamingAssetsPath + "/Dialogue/" + id.ToString() + ".txt";
+        List<string> DialogueContent = File.ReadAllLines(path).ToList();
+        return DialogueContent;
+    }
+    public void TriggerDialogue(int id ){
+        List<string> dialogueContent = ReadDialogueFile(id);
+        for( int i = 0;i < dialogueContent.Count; i++){
+            dialogue.content.Add(dialogueContent[i]);
+        }
+        StartDialogue(dialogue);
+    }
     public void StartDialogue (Dialogue dialogue){
-        //Debug.Log("starting conversation with "+ dialogue.name);
+        
         dialogueBoxAnimator.SetBool("IsOpen", true);
+        Debug.Log("starting conversation with "+ dialogueBoxAnimator.GetBool("IsOpen").ToString());
         names.Clear();
         sentences.Clear();
         bool isName = true;

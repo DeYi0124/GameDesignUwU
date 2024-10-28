@@ -44,6 +44,7 @@ public class GameManager : MonoBehaviour
         coins = 0;
         credits = 0;
         pause = false;
+        maxEnt = 100;
         carSpawn = CarController.Instance.GetPostion();
         //CarController.Instance.SetPosition(carSpawn);
         InvokeRepeating("UpdateTime", 1f, 1f);
@@ -97,12 +98,12 @@ public class GameManager : MonoBehaviour
     void UpdateTime() {
         if(!pause) {
             time += 1;
-            //Debug.Log(time);
-            int tmpEnt = Random.Range(1, maxEnt+1);
-            if(tmpEnt <= 50) {
-                Debug.Log("event occurs, ID: " + tmpEnt.ToString());
-            }
-        }
+            // //Debug.Log(time);
+            // int tmpEnt = Random.Range(1, maxEnt+1);
+            // if(tmpEnt <= 50) {
+            //     Debug.Log("event occurs, ID: " + tmpEnt.ToString());
+            // }
+        }   
     }
 
     public int getTime() {

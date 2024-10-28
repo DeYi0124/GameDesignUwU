@@ -1,15 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
+using UnityEngine.SceneManagement;
 
 public class checkPointGen : MonoBehaviour
 {
     public GameObject myPrefab;
     public GameObject[] bikePts;
+    public static int rng;
 
     private int time = 0;
     private int allBike = 0;
+    private int rngUpperLimit = 0;
     private bool[] alreadyFilled;
+
 
     public void genBike() {
         int tmpBike = Random.Range(0, allBike);
@@ -35,7 +40,19 @@ public class checkPointGen : MonoBehaviour
     }
 
     void OnReceiving(checkPointHandler cph) {
+        rngUpperLimit = 6;
         //Debug.Log(cph.id);
         alreadyFilled[cph.id] = false;
+        rng = Random.Range(1, rngUpperLimit+1);
+        Debug.Log("rng ="+ rng.ToString());
+        if(rng <= 6) {
+            rng = 3;
+            GameManager.Instance.pause = true;
+            SceneManager.LoadScene("DialogueTemplate");
+            Debug.Log("event occurs, ID: " + rng.ToString());
+            
+        }
     }
+
+    
 }

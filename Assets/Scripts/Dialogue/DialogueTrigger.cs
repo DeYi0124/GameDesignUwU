@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using System.Linq;
-
 public class DialogueTrigger : MonoBehaviour
 {
     public int id;
@@ -15,6 +14,7 @@ public class DialogueTrigger : MonoBehaviour
         return DialogueContent;
     }
     public void TriggerDialogue(){
+        id = 3;
         List<string> dialogueContent = ReadDialogueFile(id);
         for( int i = 0;i < dialogueContent.Count; i++){
             dialogue.content.Add(dialogueContent[i]);

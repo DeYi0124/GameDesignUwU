@@ -94,12 +94,10 @@ public class Manager : MonoBehaviour
         for(int i = 1; i <= 7; i++) {
             if((oppoId + i)%15 == playerId) {
                 Result.text = "WIN";
-                CarController.Instance.bike += 10;
                 return;
             }
         }
-        //else
-        CarController.Instance.bike += 10;
+        //else;
         Result.text = "LOST";
         //exitButton.SetActive(true);
         //imgs[15].color = new Color32(255, 255, 255, 255);
@@ -108,6 +106,12 @@ public class Manager : MonoBehaviour
 
     public void onExit() {
         GameObject.FindWithTag("Car").GetComponent<Transform>().position = GameManager.carPosition;
+        if(Result.text == "WIN"){
+            CarController.Instance.bike+=5;
+        }
+        else if(Result.text == "LOST"){
+            CarController.Instance.bike -= 1;
+        }
         GameManager.Instance.pause = false;
         SceneManager.LoadSceneAsync("MainScene");
 

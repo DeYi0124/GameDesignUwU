@@ -6,6 +6,8 @@ using UnityEngine.Networking;
 using System.IO;
 using TMPro;
 using System.Linq;
+using UnityEngine.SceneManagement;
+
 
 public class DialogueManager : MonoBehaviour
 {
@@ -151,6 +153,7 @@ public class DialogueManager : MonoBehaviour
             TalkingCurrentSpeaker(i,false);
             InSceneCurrentSpeaker(i,false);
         }
+        SceneManager.LoadScene("RPS game");
     }
 
     private void LoadBackGround(){

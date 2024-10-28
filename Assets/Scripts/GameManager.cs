@@ -10,6 +10,7 @@ using TMPro;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
+    public static Vector3 carPosition;
     public GameState State;
     public int bike = 0;
     public int KPI = 10;

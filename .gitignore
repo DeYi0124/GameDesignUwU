@@ -5,6 +5,7 @@
 /[Ll]ibrary/*
 !/[Ll]ibrary/*.asset
 /[Ll]ibrary/SceneVisibilityState.asset
+/[Ll]ibrary/InspectorExpandedItems.asset
 /[Uu]ser[Ss]ettings/
 /[Tt]emp/
 /[Oo]bj/

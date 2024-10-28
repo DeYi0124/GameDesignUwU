@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3836148597644883276}
   - component: {fileID: 7131444340654523730}
   - component: {fileID: 6063036007298999037}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sprite
   m_TagString: CheckPoints
   m_Icon: {fileID: 0}
@@ -143,3 +143,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5b7d1337fc8ce544ab4064bba505584, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 0

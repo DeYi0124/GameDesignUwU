@@ -58,7 +58,7 @@ public class DialogueManager : MonoBehaviour
         bool isName = true;
         speakerID = dialogue.content[0].Trim().Split(' ');
         dialogue.content.RemoveAt(0);
-        foreach(string sentence in dialogue.con fv5 ent){
+        foreach(string sentence in dialogue.content){
             //Debug.Log(sentence);
             if(isName){
                 names.Enqueue(sentence);

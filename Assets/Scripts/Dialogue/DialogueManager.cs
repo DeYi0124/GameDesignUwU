@@ -61,16 +61,6 @@ public class DialogueManager : MonoBehaviour
             InSceneCurrentSpeaker(i,false);
         }
         StartCoroutine(ReadDialogueFile());
-        if(doneReading){
-            TriggerDialogue();
-        }
-    }
-    
-    void Update(){
-        if(doneReading){
-            TriggerDialogue();
-            doneReading = false;
-        }
     }
 
 
@@ -91,6 +81,7 @@ public class DialogueManager : MonoBehaviour
             dialogueContent = File.ReadAllLines(path).ToList();
             doneReading = true;
         }
+        TriggerDialogue();
         
     }
     public void TriggerDialogue(){
@@ -105,20 +96,22 @@ public class DialogueManager : MonoBehaviour
         names.Clear();
         sentences.Clear();
         bool isName = true;
-        speakerID = dialogue.content[0].Trim().Split(' ');
-        dialogue.content.RemoveAt(0);
-        foreach(string sentence in dialogue.content){
-            if(isName){
-                names.Enqueue(sentence);
-                isName = false;
+        if(doneReading){
+            speakerID = dialogue.content[0].Trim().Split(' ');
+            dialogue.content.RemoveAt(0);
+            foreach(string sentence in dialogue.content){
+                if(isName){
+                    names.Enqueue(sentence);
+                    isName = false;
+                }
+                else{
+                    sentences.Enqueue(sentence);
+                    isName = true;
+                }
             }
-            else{
-                sentences.Enqueue(sentence);
-                isName = true;
-            }
-        }
 
-        DisplayNextSentence();
+            DisplayNextSentence();
+        }
 
     }
 

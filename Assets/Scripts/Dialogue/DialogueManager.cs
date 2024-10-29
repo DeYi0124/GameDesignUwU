@@ -33,7 +33,6 @@ public class DialogueManager : MonoBehaviour
     private bool OddFirstPerson = true;
     private bool EvenFirstPerson = true;
     private float dialogueSpeed = 0.025f;
-    private bool doneReading = false;
 
 
     // Start is called before the first frame update
@@ -81,13 +80,11 @@ public class DialogueManager : MonoBehaviour
             yield return www.SendWebRequest();
             string tmpDialogueContent = www.downloadHandler.text;
             dialogueContent = tmpDialogueContent.Split('\n').ToList();
-            doneReading = true;
         }
         else
         {   
             yield return null;
             dialogueContent = File.ReadAllLines(path).ToList();
-            doneReading = true;
         }
         
     }
@@ -103,22 +100,21 @@ public class DialogueManager : MonoBehaviour
         names.Clear();
         sentences.Clear();
         bool isName = true;
-        if(doneReading){
-            speakerID = dialogue.content[0].Trim().Split(' ');
-            dialogue.content.RemoveAt(0);
-            foreach(string sentence in dialogue.content){
-                if(isName){
-                    names.Enqueue(sentence);
-                    isName = false;
-                }
-                else{
-                    sentences.Enqueue(sentence);
-                    isName = true;
-                }
+        speakerID = dialogue.content[0].Trim().Split(' ');
+        dialogue.content.RemoveAt(0);
+        foreach(string sentence in dialogue.content){
+            if(isName){
+                names.Enqueue(sentence);
+                isName = false;
             }
-
-            DisplayNextSentence();
+            else{
+                sentences.Enqueue(sentence);
+                isName = true;
+            }
         }
+
+        DisplayNextSentence();
+        
 
     }
 
@@ -207,11 +203,7 @@ public class DialogueManager : MonoBehaviour
         RectTransform transform = BackGround.GetComponent<RectTransform>();
         transform.localScale = ScaleList[id-1];
     }
-    private void LoadCharacters(int num){
-        for (int i = 1; i<= num; i++){
-            StartCoroutine(LoadCharacter(i));
-        }
-    }
+
     private IEnumerator LoadCharacter(int characterID){
         string characterObject = "character" + characterID.ToString();
         GameObject Character = GameObject.Find(characterObject);

@@ -63,14 +63,17 @@ public class CarController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        //Debug.Log(transform.position);
+        //Debug.Log(transform.rotation);  
     }
 
     void FixedUpdate()
     {
-        ApplyEngineForce();
-        KillOrthogonalVelocity();
-        ApplySteering();
+        if(!GameManager.Instance.pause) {
+            ApplyEngineForce();
+            KillOrthogonalVelocity();
+            ApplySteering();
+        }
     }
 
     void ApplyEngineForce()
@@ -133,7 +136,7 @@ public class CarController : MonoBehaviour
 
     public void SetPosition(Vector2 pos) {
         carRigidbody2D.velocity = Vector2.zero;
-        //carRigidbody2D.position = pos;
+        //carRigidbody2D.MovePosition(pos);
     }
 
     public bool IsTireScreeching(out float lateralVelocity, out bool isBraking) {
@@ -173,5 +176,15 @@ public class CarController : MonoBehaviour
             steerInput *= 0;
             accInput *= 0;
         }
+    }
+    
+    public void reset(){
+        Vector3 spawnPoint = new Vector3(-33,-2,0);
+        var carTransform= GameObject.FindWithTag("Car").GetComponent<Transform>();
+        carTransform.rotation = Quaternion.Euler(new Vector3(0,0,0));
+        carTransform.position = spawnPoint;
+        carRigidbody2D.drag = 0;
+        rotatingAngle = 0;
+
     }
 }

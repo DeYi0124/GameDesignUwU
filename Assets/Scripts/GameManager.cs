@@ -5,6 +5,7 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
+using System.IO;
 using TMPro;
 
 public class GameManager : MonoBehaviour
@@ -32,7 +33,7 @@ public class GameManager : MonoBehaviour
     public Animator transition;
     public float transitionTime = 3f;
     public TextMeshProUGUI LoadText;
-    private Vector2 carSpawn;   
+    private Vector2 carSpawn;  
 
     void Awake() {
         if (Instance != null && Instance != this) {
@@ -44,7 +45,6 @@ public class GameManager : MonoBehaviour
         KPI = 10;
         coins = 0;
         credits = 0;
-        pause = false;
         maxEnt = 100;
         carSpawn = CarController.Instance.GetPostion();
         //CarController.Instance.SetPosition(carSpawn);
@@ -73,18 +73,24 @@ public class GameManager : MonoBehaviour
     }
 
     public void reset() {
-        pause = false;
         //Debug.Log("RESETTING");
-        updateGameState(GameState.Morning);
+
+        
         OilBar.Instance.oil = maxOil;
         //Debug.Log("FILLING");
         //Debug.Log((OilBar.Instance.oil));
         CarController.Instance.SetPosition(carSpawn);
         CarController.Instance.bike = 0;
+        CarController.Instance.SetInputVector(new Vector2(0,0));
+        CarController.Instance.reset();
+
+        updateGameState(GameState.Morning);
+        
         bike = 0;
         KPI = (int)OilBar.Instance.oil;
         State = GameState.Morning;
-        pause = false;
+        Debug.Log(pause);
+        //pause = false;
     }
 
     public (int, int) GetMoney() {
@@ -98,7 +104,7 @@ public class GameManager : MonoBehaviour
 
     void UpdateTime() {
         if(!pause) {
-            time += 1;
+            time += 10;
             // //Debug.Log(time);
             // int tmpEnt = Random.Range(1, maxEnt+1);
             // if(tmpEnt <= 50) {

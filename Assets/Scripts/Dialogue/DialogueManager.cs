@@ -23,6 +23,7 @@ public class DialogueManager : MonoBehaviour
     public Animator character6Animator;
     public int id;
     public Dialogue dialogue;
+    private List<string> dialogueContent;
     private Queue<string> sentences;
     private Queue<string> names;
     private string[] speakerID;
@@ -31,6 +32,7 @@ public class DialogueManager : MonoBehaviour
     private bool OddFirstPerson = true;
     private bool EvenFirstPerson = true;
     private float dialogueSpeed = 0.025f;
+    private bool doneReading = false;
 
 
     // Start is called before the first frame update
@@ -43,10 +45,11 @@ public class DialogueManager : MonoBehaviour
         id = checkPointGen.rng;
         dialogue = new Dialogue();
         dialogue.content = new List<string>();
+        dialogueContent = new List<string>();
         sentences = new Queue<string>();
         names = new Queue<string>();
         speakerID = new string[7];
-        LoadBackGround();
+        StartCoroutine(LoadBackGround());
         List<int> charNum = new List<int>();
         charNum.Add(2);
         charNum.Add(2);
@@ -57,17 +60,40 @@ public class DialogueManager : MonoBehaviour
             TalkingCurrentSpeaker(i,false);
             InSceneCurrentSpeaker(i,false);
         }
-        TriggerDialogue(id);
+        StartCoroutine(ReadDialogueFile());
+        if(doneReading){
+            TriggerDialogue();
+        }
+    }
+    
+    void Update(){
+        if(doneReading){
+            TriggerDialogue();
+            doneReading = false;
+        }
     }
 
 
-    public List<string> ReadDialogueFile(int id){
+    IEnumerator ReadDialogueFile(){
         string path = Application.streamingAssetsPath + "/Dialogue/" + id.ToString() + ".txt";
-        List<string> DialogueContent = File.ReadAllLines(path).ToList();
-        return DialogueContent;
+        if (path.Contains("://") || path.Contains(":///"))
+        {
+            UnityWebRequest www = UnityWebRequest.Get(path);
+            www.downloadHandler = new DownloadHandlerBuffer();
+            yield return www.SendWebRequest();
+            string tmpDialogueContent = www.downloadHandler.text;
+            dialogueContent = tmpDialogueContent.Split('\n').ToList();
+            doneReading = true;
+        }
+        else
+        {   
+            yield return null;
+            dialogueContent = File.ReadAllLines(path).ToList();
+            doneReading = true;
+        }
+        
     }
-    public void TriggerDialogue(int id ){
-        List<string> dialogueContent = ReadDialogueFile(id);
+    public void TriggerDialogue(){
         for( int i = 0;i < dialogueContent.Count; i++){
             dialogue.content.Add(dialogueContent[i]);
         }
@@ -76,14 +102,12 @@ public class DialogueManager : MonoBehaviour
     public void StartDialogue (Dialogue dialogue){
         
         dialogueBoxAnimator.SetBool("IsOpen", true);
-        Debug.Log("starting conversation with "+ dialogueBoxAnimator.GetBool("IsOpen").ToString());
         names.Clear();
         sentences.Clear();
         bool isName = true;
         speakerID = dialogue.content[0].Trim().Split(' ');
         dialogue.content.RemoveAt(0);
         foreach(string sentence in dialogue.content){
-            //Debug.Log(sentence);
             if(isName){
                 names.Enqueue(sentence);
                 isName = false;
@@ -132,8 +156,6 @@ public class DialogueManager : MonoBehaviour
         TalkingCurrentSpeaker(previousSpeaker,false);
         TalkingCurrentSpeaker(currentSpeaker,true);
         string sentence = sentences.Dequeue();
-        //Debug.Log(sentence);
-        //dialogueText.text = sentence;
         StopAllCoroutines();
         StartCoroutine(TypeSentence(sentence));
 
@@ -156,11 +178,28 @@ public class DialogueManager : MonoBehaviour
         SceneManager.LoadScene("RPS game");
     }
 
-    private void LoadBackGround(){
+    private IEnumerator LoadBackGround(){
         GameObject BackGround = GameObject.Find("BackGround");
         SpriteRenderer bgRenderer = BackGround.GetComponent<SpriteRenderer>();
         string bgPath = Application.streamingAssetsPath + "/BackGround/" + id.ToString() + ".png";
-        bgRenderer.sprite = LoadImageFile(bgPath);
+        if (bgPath.Contains("://") || bgPath.Contains(":///"))
+        {
+            byte[] imgData;
+            Texture2D tex = new Texture2D(2, 2);
+            UnityWebRequest www = UnityWebRequest.Get(bgPath);
+            yield return www.SendWebRequest();
+            imgData = www.downloadHandler.data;
+            tex.LoadImage(imgData);
+            Vector2 pivot = new Vector2(0.5f, 0.5f);
+            Sprite sprite = Sprite.Create(tex, new Rect(0.0f, 0.0f, tex.width, tex.height), pivot, 100.0f);
+            bgRenderer.sprite = sprite;
+        }
+        else
+        {
+            yield return null;
+            bgRenderer.sprite = LoadImageFile(bgPath);
+        }
+        
         List<Vector3> ScaleList = new List<Vector3>();
         ScaleList.Add(new Vector3(2,1,0));
         ScaleList.Add(new Vector3(8,8,0));
@@ -170,15 +209,31 @@ public class DialogueManager : MonoBehaviour
     }
     private void LoadCharacters(int num){
         for (int i = 1; i<= num; i++){
-            LoadCharacter(i);
+            StartCoroutine(LoadCharacter(i));
         }
     }
-    private void LoadCharacter(int characterID){
+    private IEnumerator LoadCharacter(int characterID){
         string characterObject = "character" + characterID.ToString();
         GameObject Character = GameObject.Find(characterObject);
         SpriteRenderer charRenderer = Character.GetComponent<SpriteRenderer>();
         string charPath = Application.streamingAssetsPath + "/Character/" + id.ToString() +'/'+ characterID.ToString() + ".png";
-        charRenderer.sprite = LoadImageFile(charPath);
+        if (charPath.Contains("://") || charPath.Contains(":///"))
+        {
+            byte[] imgData;
+            Texture2D tex = new Texture2D(2, 2);
+            UnityWebRequest www = UnityWebRequest.Get(charPath);
+            yield return www.SendWebRequest();
+            imgData = www.downloadHandler.data;
+            tex.LoadImage(imgData);
+            Vector2 pivot = new Vector2(0.5f, 0.5f);
+            Sprite sprite = Sprite.Create(tex, new Rect(0.0f, 0.0f, tex.width, tex.height), pivot, 100.0f);
+            charRenderer.sprite = sprite;
+        }
+        else
+        {
+            yield return null;
+            charRenderer.sprite = LoadImageFile(charPath);
+        }
         List<List<Vector3>> ScaleList = new List<List<Vector3>>();
         ScaleList.Add(new List<Vector3>());
         ScaleList[0].Add(new Vector3(0,0,0));
@@ -206,7 +261,6 @@ public class DialogueManager : MonoBehaviour
         tex.LoadImage(imgData);
         Vector2 pivot = new Vector2(0.5f, 0.5f);
         Sprite sprite = Sprite.Create(tex, new Rect(0.0f, 0.0f, tex.width, tex.height), pivot, 100.0f);
-        //Debug.Log(id.ToString()+"sprite");
         return sprite;
     }
     private void TalkingCurrentSpeaker(int currentSpeaker, bool flag){

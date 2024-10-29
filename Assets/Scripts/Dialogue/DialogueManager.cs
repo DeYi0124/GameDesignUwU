@@ -24,6 +24,7 @@ public class DialogueManager : MonoBehaviour
     public int id;
     public Dialogue dialogue;
     private List<string> dialogueContent;
+    private List<int> charNum;
     private Queue<string> sentences;
     private Queue<string> names;
     private string[] speakerID;
@@ -49,21 +50,28 @@ public class DialogueManager : MonoBehaviour
         sentences = new Queue<string>();
         names = new Queue<string>();
         speakerID = new string[7];
-        StartCoroutine(LoadBackGround());
-        List<int> charNum = new List<int>();
+        //StartCoroutine(LoadBackGround());
+        charNum = new List<int>();
         charNum.Add(2);
         charNum.Add(2);
         charNum.Add(6);
-        LoadCharacters(charNum[id-1]);
+        //LoadCharacters(charNum[id-1]);
         dialogueBoxAnimator.SetBool("IsOpen", false);
         for(int i = 1;i<7;i++){
             TalkingCurrentSpeaker(i,false);
             InSceneCurrentSpeaker(i,false);
         }
-        StartCoroutine(ReadDialogueFile());
+        StartCoroutine(PrepWork());
     }
 
-
+    IEnumerator PrepWork(){
+        yield return StartCoroutine(LoadBackGround());
+        yield return StartCoroutine(ReadDialogueFile());
+        for(int i = 1;i <= charNum[id-1];i++){
+            yield return StartCoroutine(LoadCharacter(i));
+        }
+        TriggerDialogue();
+    }
     IEnumerator ReadDialogueFile(){
         string path = Application.streamingAssetsPath + "/Dialogue/" + id.ToString() + ".txt";
         if (path.Contains("://") || path.Contains(":///"))
@@ -81,7 +89,6 @@ public class DialogueManager : MonoBehaviour
             dialogueContent = File.ReadAllLines(path).ToList();
             doneReading = true;
         }
-        TriggerDialogue();
         
     }
     public void TriggerDialogue(){

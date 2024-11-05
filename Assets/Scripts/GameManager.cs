@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
     public int oilLevel = 0;
     public int volumeLevel = 0;
     public int maxEnt = 100000;
+    public int TimeScale = 10;
 
     public int coins = 0;
     private int credits = 0;
@@ -104,7 +105,8 @@ public class GameManager : MonoBehaviour
 
     void UpdateTime() {
         if(!pause) {
-            time += 1;
+            time += TimeScale;
+
             // //Debug.Log(time);
             // int tmpEnt = Random.Range(1, maxEnt+1);
             // if(tmpEnt <= 50) {

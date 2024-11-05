@@ -781,8 +781,8 @@ MonoBehaviour:
 
 '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 6bbfb2ddabeea2b448558ceb04ab84ed, type: 2}
+  m_sharedMaterial: {fileID: -6999420033459616077, guid: 6bbfb2ddabeea2b448558ceb04ab84ed, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -924,8 +924,8 @@ MonoBehaviour:
   m_text: Testing the industrial revolution and its consequences, Oh yeahsdfj a;dsfj
     a;fj ;aj f;a j
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 6bbfb2ddabeea2b448558ceb04ab84ed, type: 2}
+  m_sharedMaterial: {fileID: -6999420033459616077, guid: 6bbfb2ddabeea2b448558ceb04ab84ed, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1622,8 +1622,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Name
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 6bbfb2ddabeea2b448558ceb04ab84ed, type: 2}
+  m_sharedMaterial: {fileID: -6999420033459616077, guid: 6bbfb2ddabeea2b448558ceb04ab84ed, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

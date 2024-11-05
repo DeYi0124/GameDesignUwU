@@ -105,11 +105,7 @@ public class GameManager : MonoBehaviour
 
     void UpdateTime() {
         if(!pause) {
-<<<<<<< HEAD
             time += TimeScale;
-=======
-            time += 1;
->>>>>>> origin/main
             // //Debug.Log(time);
             // int tmpEnt = Random.Range(1, maxEnt+1);
             // if(tmpEnt <= 50) {

@@ -54,10 +54,11 @@ public class DialogueManager : MonoBehaviour
         nextSceneDict.Add(3,"RPS game");
         //StartCoroutine(LoadBackGround());
         charNum = new List<int>();
-        charNum.Add(2);
+        charNum.Add(1);
         charNum.Add(2);
         charNum.Add(6);
         charNum.Add(1);
+        charNum.Add(2);
 
 
         //LoadCharacters(charNum[id-1]);
@@ -179,8 +180,11 @@ public class DialogueManager : MonoBehaviour
         }
         if(nextSceneDict.ContainsKey(id))
             SceneManager.LoadScene(nextSceneDict[id]);
-        else 
+        else {
+            CarController.Instance.reset();
+            GameManager.Instance.pause = false;
             SceneManager.LoadScene("MainScene");
+        }  
     }
 
     private IEnumerator LoadBackGround(){
@@ -209,6 +213,7 @@ public class DialogueManager : MonoBehaviour
         ScaleList.Add(new Vector3(2,1,0));
         ScaleList.Add(new Vector3(8,8,0));
         ScaleList.Add(new Vector3(9,9,0));
+        ScaleList.Add(new Vector3(8,8,0));
         ScaleList.Add(new Vector3(8,8,0));
         RectTransform transform = BackGround.GetComponent<RectTransform>();
         transform.localScale = ScaleList[id-1];
@@ -252,6 +257,9 @@ public class DialogueManager : MonoBehaviour
         ScaleList[2].Add(new Vector3(15,15,0));
         ScaleList.Add(new List<Vector3>());
         ScaleList[3].Add(new Vector3(15,15,0));
+        ScaleList.Add(new List<Vector3>());
+        ScaleList[4].Add(new Vector3(12,12,0));
+        ScaleList[4].Add(new Vector3(15,15,0));
 
         RectTransform transform = Character.GetComponent<RectTransform>();
         transform.localScale = ScaleList[id-1][characterID-1];

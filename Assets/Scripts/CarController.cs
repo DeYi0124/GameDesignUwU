@@ -179,7 +179,7 @@ public class CarController : MonoBehaviour
     }
     
     public void reset(){
-        Vector3 spawnPoint = new Vector3(-33,-2,0);
+        Vector3 spawnPoint = new Vector3(-27,-2,0);
         var carTransform= GameObject.FindWithTag("Car").GetComponent<Transform>();
         carTransform.rotation = Quaternion.Euler(new Vector3(0,0,0));
         carTransform.position = spawnPoint;

@@ -8,6 +8,7 @@ TagManager:
   - Grass
   - Car
   - save
+  - EnemySprite
   layers:
   - Default
   - TransparentFX

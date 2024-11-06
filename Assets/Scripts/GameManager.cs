@@ -74,24 +74,15 @@ public class GameManager : MonoBehaviour
     }
 
     public void reset() {
-        //Debug.Log("RESETTING");
-
-        
         OilBar.Instance.oil = maxOil;
-        //Debug.Log("FILLING");
-        //Debug.Log((OilBar.Instance.oil));
         CarController.Instance.SetPosition(carSpawn);
         CarController.Instance.bike = 0;
         CarController.Instance.SetInputVector(new Vector2(0,0));
         CarController.Instance.reset();
-
         updateGameState(GameState.Morning);
-        
         bike = 0;
         KPI = (int)OilBar.Instance.oil;
         State = GameState.Morning;
-        Debug.Log(pause);
-        //pause = false;
     }
 
     public (int, int) GetMoney() {
@@ -106,7 +97,6 @@ public class GameManager : MonoBehaviour
     void UpdateTime() {
         if(!pause) {
             time += TimeScale;
-            // //Debug.Log(time);
             // int tmpEnt = Random.Range(1, maxEnt+1);
             // if(tmpEnt <= 50) {
             //     Debug.Log("event occurs, ID: " + tmpEnt.ToString());

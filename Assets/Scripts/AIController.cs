@@ -7,7 +7,7 @@ public class AIController : MonoBehaviour
 
     int MoveSpeed = 4;
     int MaxDist = 10;
-    int MinDist = 0;
+    int MinDist = 2;
     void Start()
     {
 

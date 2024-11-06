@@ -54,6 +54,7 @@ public class DialogueManager : MonoBehaviour
         charNum.Add(2);
         charNum.Add(2);
         charNum.Add(6);
+        charNum.Add(1);
         //LoadCharacters(charNum[id-1]);
         dialogueBoxAnimator.SetBool("IsOpen", false);
         for(int i = 1;i<7;i++){
@@ -200,6 +201,7 @@ public class DialogueManager : MonoBehaviour
         ScaleList.Add(new Vector3(2,1,0));
         ScaleList.Add(new Vector3(8,8,0));
         ScaleList.Add(new Vector3(9,9,0));
+        ScaleList.Add(new Vector3(8,8,0));
         RectTransform transform = BackGround.GetComponent<RectTransform>();
         transform.localScale = ScaleList[id-1];
     }
@@ -240,6 +242,8 @@ public class DialogueManager : MonoBehaviour
         ScaleList[2].Add(new Vector3(15,15,0));
         ScaleList[2].Add(new Vector3(30,30,0));
         ScaleList[2].Add(new Vector3(15,15,0));
+        ScaleList.Add(new List<Vector3>());
+        ScaleList[3].Add(new Vector3(15,15,0));
 
         RectTransform transform = Character.GetComponent<RectTransform>();
         transform.localScale = ScaleList[id-1][characterID-1];

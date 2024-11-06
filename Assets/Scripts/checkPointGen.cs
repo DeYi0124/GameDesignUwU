@@ -44,14 +44,10 @@ public class checkPointGen : MonoBehaviour
         //Debug.Log(cph.id);
         alreadyFilled[cph.id] = false;
         rng = Random.Range(1, rngUpperLimit+1);
-        Debug.Log("rng ="+ rng.ToString());
         if(rng <= 4) {
-            rng = 3;
             GameManager.Instance.pause = true;
             GameManager.carPosition = GameObject.FindWithTag("Car").GetComponent<Transform>().position;
             SceneManager.LoadSceneAsync("DialogueTemplate");
-            //Debug.Log("event occurs, ID: " + rng.ToString());
-            
         }
     }
 

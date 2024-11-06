@@ -482,7 +482,7 @@ MonoBehaviour:
   character4Animator: {fileID: 1210397997}
   character5Animator: {fileID: 345987406}
   character6Animator: {fileID: 139454983}
-  id: 3
+  id: 4
   dialogue:
     content: []
 --- !u!4 &281345595

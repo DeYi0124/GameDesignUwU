@@ -33,6 +33,7 @@ public class DialogueManager : MonoBehaviour
     private bool OddFirstPerson = true;
     private bool EvenFirstPerson = true;
     private float dialogueSpeed = 0.025f;
+    private Dictionary<int,string> nextSceneDict;
 
 
     // Start is called before the first frame update
@@ -49,12 +50,16 @@ public class DialogueManager : MonoBehaviour
         sentences = new Queue<string>();
         names = new Queue<string>();
         speakerID = new string[7];
+        nextSceneDict = new Dictionary<int,string>();
+        nextSceneDict.Add(3,"RPS game");
         //StartCoroutine(LoadBackGround());
         charNum = new List<int>();
         charNum.Add(2);
         charNum.Add(2);
         charNum.Add(6);
         charNum.Add(1);
+
+
         //LoadCharacters(charNum[id-1]);
         dialogueBoxAnimator.SetBool("IsOpen", false);
         for(int i = 1;i<7;i++){
@@ -172,7 +177,10 @@ public class DialogueManager : MonoBehaviour
             TalkingCurrentSpeaker(i,false);
             InSceneCurrentSpeaker(i,false);
         }
-        SceneManager.LoadScene("RPS game");
+        if(nextSceneDict.ContainsKey(id))
+            SceneManager.LoadScene(nextSceneDict[id]);
+        else 
+            SceneManager.LoadScene("MainScene");
     }
 
     private IEnumerator LoadBackGround(){
@@ -259,6 +267,7 @@ public class DialogueManager : MonoBehaviour
         Sprite sprite = Sprite.Create(tex, new Rect(0.0f, 0.0f, tex.width, tex.height), pivot, 100.0f);
         return sprite;
     }
+
     private void TalkingCurrentSpeaker(int currentSpeaker, bool flag){
         switch (currentSpeaker){
             case 1:

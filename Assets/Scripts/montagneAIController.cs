@@ -9,6 +9,7 @@ public class montagneAIController : MonoBehaviour
     private int outerDist = 15;
     private int innerDist = 13;
     private bool inside = false;
+    private int previousDay = 0;
     void Start()
     {
         enemyAnimator.SetBool("isWalking", false);
@@ -17,6 +18,9 @@ public class montagneAIController : MonoBehaviour
     void Update()
     {
         
+        if(GameManager.Instance.getTime() != 60){
+            Destroy(this.gameObject);
+        }
         if(!(GameManager.Instance.pause)){
             Vector3 positionDiff = CarController.Instance.transform.position - transform.position;
             var enemySprite = GameObject.Find("BlockingEnemySprite").GetComponent<SpriteRenderer>();

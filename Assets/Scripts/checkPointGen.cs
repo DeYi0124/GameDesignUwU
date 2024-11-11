@@ -45,7 +45,8 @@ public class checkPointGen : MonoBehaviour
         alreadyFilled[cph.id] = false;
         rng = Random.Range(1, rngUpperLimit+1);
         Debug.Log(rng);
-        if(rng <= 8) {
+        rng = 9;
+        if(rng <= 9) {
             GameManager.Instance.pause = true;
             GameManager.carPosition = GameObject.FindWithTag("Car").GetComponent<Transform>().position;
             SceneManager.LoadSceneAsync("DialogueTemplate");

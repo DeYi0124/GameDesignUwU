@@ -17,6 +17,8 @@ public class GameManager : MonoBehaviour
     public int bike = 0;
     public int KPI = 10;
     public float maxOil = 100f;
+    public int maxPR = 5;
+    public int PR = 5;
     private static int time = 0;
     public int skillLevel = 0;
     public int speedLevel = 0;
@@ -46,6 +48,7 @@ public class GameManager : MonoBehaviour
             Instance = this;
         bike = 0;
         KPI = 10;
+        PR = maxPR;
         coins = 0;
         credits = 0;
         maxEnt = 100;
@@ -140,7 +143,7 @@ public class GameManager : MonoBehaviour
                 SceneManager.LoadSceneAsync("GameReportScene");  
             } else {
                 days = 0;
-                coin = 0;
+                coins = 0;
                 SceneManager.LoadSceneAsync("DeathReportScene");
             }
         }
@@ -152,8 +155,8 @@ public class GameManager : MonoBehaviour
             case GameState.Morning:
                 pause = false;
                 //Debug.Log("goodMorning");
-                KPI = 10*(day+1);
-                EnemyLimit = 4 + day;
+                KPI = 10*(days+1);
+                EnemyLimit = 4 + days;
                 break;
             case GameState.Evening:
                 break;

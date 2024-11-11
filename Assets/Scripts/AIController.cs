@@ -8,18 +8,27 @@ public class AIController : MonoBehaviour
     public Animator enemyAnimator;
     private int MoveSpeed = 4;
     private int MaxDist = 10;
-    private int MinDist = 2;
+    private int MinDist = 6;
 
     void Start()
     {
         enemyAnimator.SetBool("isWalking", false);
     }
+    void OnCollisionEnter2D(Collision2D collision2D) {
+        if(collision2D.gameObject.tag == "Car") {
+            GameManager.Instance.PR -= 1;
+            StartCoroutine(wait());
+        }
+    }
 
+    IEnumerator wait() {
+        yield return new WaitForSeconds(0.5f);
+        Destroy(this.gameObject);
+    }
     void Update()
     {
         if (!(GameManager.Instance.pause)){ 
             Vector3 positionDiff = CarController.Instance.transform.position - transform.position;
-            bool flipped = false;
             var enemySprite = GameObject.Find("ChasingEnemySprite").GetComponent<SpriteRenderer>();
             if(positionDiff.x == 0)
                 return;

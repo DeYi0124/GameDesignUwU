@@ -39,9 +39,7 @@ public class DialogueManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Vector3 farFarAway = new Vector3(1000,1000,0);
-        var car = GameObject.FindWithTag("Car").GetComponent<Transform>();
-        car.position = farFarAway;
+
 
         id = checkPointGen.rng;
         dialogue = new Dialogue();
@@ -185,8 +183,6 @@ public class DialogueManager : MonoBehaviour
         if(nextSceneDict.ContainsKey(id))
             SceneManager.LoadScene(nextSceneDict[id]);
         else {
-            CarController.Instance.reset();
-            GameObject.FindWithTag("Car").GetComponent<Transform>().position = GameManager.carPosition;
             GameManager.Instance.pause = false;
             SceneManager.LoadScene("MainScene");
         }  

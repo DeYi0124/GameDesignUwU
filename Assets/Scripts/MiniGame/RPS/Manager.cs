@@ -105,7 +105,6 @@ public class Manager : MonoBehaviour
     }
 
     public void onExit() {
-        GameObject.FindWithTag("Car").GetComponent<Transform>().position = GameManager.carPosition;
         if(Result.text == "WIN"){
             CarController.Instance.bike+=5;
         }

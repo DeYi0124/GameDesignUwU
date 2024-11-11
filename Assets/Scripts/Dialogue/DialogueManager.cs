@@ -59,6 +59,9 @@ public class DialogueManager : MonoBehaviour
         charNum.Add(6);
         charNum.Add(1);
         charNum.Add(2);
+        charNum.Add(1);
+        charNum.Add(1);
+        charNum.Add(1);
 
 
         //LoadCharacters(charNum[id-1]);
@@ -182,6 +185,7 @@ public class DialogueManager : MonoBehaviour
             SceneManager.LoadScene(nextSceneDict[id]);
         else {
             CarController.Instance.reset();
+            GameObject.FindWithTag("Car").GetComponent<Transform>().position = GameManager.carPosition;
             GameManager.Instance.pause = false;
             SceneManager.LoadScene("MainScene");
         }  
@@ -213,6 +217,9 @@ public class DialogueManager : MonoBehaviour
         ScaleList.Add(new Vector3(2,1,0));
         ScaleList.Add(new Vector3(8,8,0));
         ScaleList.Add(new Vector3(9,9,0));
+        ScaleList.Add(new Vector3(8,8,0));
+        ScaleList.Add(new Vector3(8,8,0));
+        ScaleList.Add(new Vector3(8,8,0));
         ScaleList.Add(new Vector3(8,8,0));
         ScaleList.Add(new Vector3(8,8,0));
         RectTransform transform = BackGround.GetComponent<RectTransform>();
@@ -258,9 +265,14 @@ public class DialogueManager : MonoBehaviour
         ScaleList.Add(new List<Vector3>());
         ScaleList[3].Add(new Vector3(15,15,0));
         ScaleList.Add(new List<Vector3>());
-        ScaleList[4].Add(new Vector3(12,12,0));
+        ScaleList[4].Add(new Vector3(24,24,0));
         ScaleList[4].Add(new Vector3(15,15,0));
-
+        ScaleList.Add(new List<Vector3>());
+        ScaleList[5].Add(new Vector3(24,24,0));
+        ScaleList.Add(new List<Vector3>());
+        ScaleList[6].Add(new Vector3(24,24,0));
+        ScaleList.Add(new List<Vector3>());
+        ScaleList[7].Add(new Vector3(24,24,0));
         RectTransform transform = Character.GetComponent<RectTransform>();
         transform.localScale = ScaleList[id-1][characterID-1];
 

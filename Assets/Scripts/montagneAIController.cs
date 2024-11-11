@@ -19,7 +19,7 @@ public class montagneAIController : MonoBehaviour
         
         // transform.LookAt(Player);
         Vector3 positionDiff = CarController.Instance.transform.position - transform.position;
-        var enemySprite = GameObject.FindWithTag("EnemySprite").GetComponent<SpriteRenderer>();
+        var enemySprite = GameObject.Find("BlockingEnemySprite").GetComponent<SpriteRenderer>();
         if(positionDiff.x == 0)
             return;
         enemySprite.flipY = (positionDiff.x < 0);

@@ -27,6 +27,7 @@ public class montagneAIController : MonoBehaviour
 
         if (Vector3.Distance(transform.position, CarController.Instance.transform.position) >= outerDist)
         {
+            enemyAnimator.SetBool("isSpinning", false);
             enemyAnimator.SetBool("isWalking",true);
             MoveSpeed = 1;
             transform.position += transform.right * MoveSpeed * Time.deltaTime;

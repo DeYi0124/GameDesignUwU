@@ -212,18 +212,17 @@ public class DialogueManager : MonoBehaviour
             yield return null;
             bgRenderer.sprite = LoadImageFile(bgPath);
         }
-        
-        List<Vector3> ScaleList = new List<Vector3>();
-        ScaleList.Add(new Vector3(2,1,0));
-        ScaleList.Add(new Vector3(8,8,0));
-        ScaleList.Add(new Vector3(9,9,0));
-        ScaleList.Add(new Vector3(8,8,0));
-        ScaleList.Add(new Vector3(8,8,0));
-        ScaleList.Add(new Vector3(8,8,0));
-        ScaleList.Add(new Vector3(8,8,0));
-        ScaleList.Add(new Vector3(8,8,0));
+        Dictionary<int,Vector3> ScaleDict = new Dictionary<int,Vector3>();
+        ScaleDict.Add(1,new Vector3(2,1,0));
+        ScaleDict.Add(2,new Vector3(8,8,0));
+        ScaleDict.Add(3,new Vector3(9,9,0));
+        ScaleDict.Add(4,new Vector3(8,8,0));
+        ScaleDict.Add(5,new Vector3(8,8,0));
+        ScaleDict.Add(6,new Vector3(8,8,0));
+        ScaleDict.Add(7,new Vector3(8,8,0));
+        ScaleDict.Add(8,new Vector3(8,8,0));
         RectTransform transform = BackGround.GetComponent<RectTransform>();
-        transform.localScale = ScaleList[id-1];
+        transform.localScale = ScaleDict[id];
     }
 
     private IEnumerator LoadCharacter(int characterID){
@@ -248,33 +247,33 @@ public class DialogueManager : MonoBehaviour
             yield return null;
             charRenderer.sprite = LoadImageFile(charPath);
         }
-        List<List<Vector3>> ScaleList = new List<List<Vector3>>();
-        ScaleList.Add(new List<Vector3>());
-        ScaleList[0].Add(new Vector3(0,0,0));
-        ScaleList[0].Add(new Vector3(0,0,0));
-        ScaleList.Add(new List<Vector3>());
-        ScaleList[1].Add(new Vector3(15,15,0));
-        ScaleList[1].Add(new Vector3(15,15,0));
-        ScaleList.Add(new List<Vector3>());
-        ScaleList[2].Add(new Vector3(15,15,0));
-        ScaleList[2].Add(new Vector3(15,15,0));
-        ScaleList[2].Add(new Vector3(15,15,0));
-        ScaleList[2].Add(new Vector3(15,15,0));
-        ScaleList[2].Add(new Vector3(30,30,0));
-        ScaleList[2].Add(new Vector3(15,15,0));
-        ScaleList.Add(new List<Vector3>());
-        ScaleList[3].Add(new Vector3(15,15,0));
-        ScaleList.Add(new List<Vector3>());
-        ScaleList[4].Add(new Vector3(24,24,0));
-        ScaleList[4].Add(new Vector3(15,15,0));
-        ScaleList.Add(new List<Vector3>());
-        ScaleList[5].Add(new Vector3(24,24,0));
-        ScaleList.Add(new List<Vector3>());
-        ScaleList[6].Add(new Vector3(24,24,0));
-        ScaleList.Add(new List<Vector3>());
-        ScaleList[7].Add(new Vector3(24,24,0));
+        Dictionary<int,List<Vector3>> ScaleDict = new Dictionary<int,List<Vector3>>();
+        ScaleDict.Add(1,new List<Vector3>());
+        ScaleDict[1].Add(new Vector3(0,0,0));
+        ScaleDict[1].Add(new Vector3(0,0,0));
+        ScaleDict.Add(2,new List<Vector3>());
+        ScaleDict[2].Add(new Vector3(15,15,0));
+        ScaleDict[2].Add(new Vector3(15,15,0));
+        ScaleDict.Add(3,new List<Vector3>());
+        ScaleDict[3].Add(new Vector3(15,15,0));
+        ScaleDict[3].Add(new Vector3(15,15,0));
+        ScaleDict[3].Add(new Vector3(15,15,0));
+        ScaleDict[3].Add(new Vector3(15,15,0));
+        ScaleDict[3].Add(new Vector3(30,30,0));
+        ScaleDict[3].Add(new Vector3(15,15,0));
+        ScaleDict.Add(4,new List<Vector3>());
+        ScaleDict[4].Add(new Vector3(15,15,0));
+        ScaleDict.Add(5,new List<Vector3>());
+        ScaleDict[5].Add(new Vector3(24,24,0));
+        ScaleDict[5].Add(new Vector3(15,15,0));
+        ScaleDict.Add(6,new List<Vector3>());
+        ScaleDict[6].Add(new Vector3(24,24,0));
+        ScaleDict.Add(7,new List<Vector3>());
+        ScaleDict[7].Add(new Vector3(24,24,0));
+        ScaleDict.Add(8,new List<Vector3>());
+        ScaleDict[8].Add(new Vector3(24,24,0));
         RectTransform transform = Character.GetComponent<RectTransform>();
-        transform.localScale = ScaleList[id-1][characterID-1];
+        transform.localScale = ScaleDict[id][characterID-1];
 
     }
 

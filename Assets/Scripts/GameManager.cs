@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
     public static int days = 0;
     public GameState State;
     public int bike = 0;
-    public int KPI = 10;
+    public int KPI = 5;
     public float maxOil = 100f;
     public int maxPR = 5;
     public int PR = 5;
@@ -84,10 +84,9 @@ public class GameManager : MonoBehaviour
         CarController.Instance.bike = 0;
         CarController.Instance.SetInputVector(new Vector2(0,0));
         CarController.Instance.reset();
-        updateGameState(GameState.Morning);
         days ++;
+        updateGameState(GameState.Morning);
         bike = 0;
-        KPI = (int)OilBar.Instance.oil;
         State = GameState.Morning;
     }
 
@@ -155,7 +154,7 @@ public class GameManager : MonoBehaviour
             case GameState.Morning:
                 pause = false;
                 //Debug.Log("goodMorning");
-                KPI = 10*(days+1);
+                KPI = 5+10*(days);
                 EnemyLimit = 4 + days;
                 break;
             case GameState.Evening:

@@ -168,6 +168,9 @@ public class CarController : MonoBehaviour
     public void SetInputVector(Vector2 inputVector) {
         steerInput = inputVector.x;
         accInput = inputVector.y;
+        if(accInput < 0) {
+            steerInput = -steerInput;
+        } 
         if(onGrass) {
             //Debug.Log("GRASS!");
             steerInput *= 0.4f;

@@ -40,12 +40,12 @@ public class checkPointGen : MonoBehaviour
     }
 
     void OnReceiving(checkPointHandler cph) {
-        rngUpperLimit = 6;
+        rngUpperLimit = 10;
         //Debug.Log(cph.id);
         alreadyFilled[cph.id] = false;
         rng = Random.Range(1, rngUpperLimit+1);
         Debug.Log(rng);
-        if(rng <= 5) {
+        if(rng <= 8) {
             GameManager.Instance.pause = true;
             GameManager.carPosition = GameObject.FindWithTag("Car").GetComponent<Transform>().position;
             SceneManager.LoadSceneAsync("DialogueTemplate");
@@ -54,6 +54,10 @@ public class checkPointGen : MonoBehaviour
             }
             else if(rng == 4) {
                 CarController.Instance.bike -= 1;
+            }else if(rng == 6) {
+                CarController.Instance.bike = 0;
+            }else if(rng == 7) {
+                GameManager.Instance.coins = 0;
             }
         }
     }

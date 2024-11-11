@@ -132,8 +132,12 @@ public class GameManager : MonoBehaviour
             updateGameState(GameState.Evening);
         } else if(time > 60 && State == GameState.Evening) {
             updateGameState(GameState.Night);
-            updateMoney(bike*5, 0);
-            SceneManager.LoadSceneAsync("GameReportScene");  
+            if(bike >= KPI) {
+                updateMoney(bike*5, 0);
+                SceneManager.LoadSceneAsync("GameReportScene");  
+            } else {
+                SceneManager.LoadSceneAsync("DeathReportScene");
+            }
         }
     }
 

@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
     public int volumeLevel = 0;
     public int maxEnt = 100000;
     public int TimeScale = 10;
+    public int EnemyLimit = 4;
 
     public int coins = 0;
     private int credits = 0;

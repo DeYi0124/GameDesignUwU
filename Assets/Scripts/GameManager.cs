@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     public static Vector3 carPosition;
+    public static int days = 0;
     public GameState State;
     public int bike = 0;
     public int KPI = 10;
@@ -81,6 +82,7 @@ public class GameManager : MonoBehaviour
         CarController.Instance.SetInputVector(new Vector2(0,0));
         CarController.Instance.reset();
         updateGameState(GameState.Morning);
+        days ++;
         bike = 0;
         KPI = (int)OilBar.Instance.oil;
         State = GameState.Morning;
@@ -137,6 +139,8 @@ public class GameManager : MonoBehaviour
                 updateMoney(bike*5, 0);
                 SceneManager.LoadSceneAsync("GameReportScene");  
             } else {
+                days = 0;
+                coin = 0;
                 SceneManager.LoadSceneAsync("DeathReportScene");
             }
         }
@@ -148,6 +152,8 @@ public class GameManager : MonoBehaviour
             case GameState.Morning:
                 pause = false;
                 //Debug.Log("goodMorning");
+                KPI = 10*(day+1);
+                EnemyLimit = 4 + day;
                 break;
             case GameState.Evening:
                 break;

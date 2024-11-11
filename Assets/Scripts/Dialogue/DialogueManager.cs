@@ -62,6 +62,7 @@ public class DialogueManager : MonoBehaviour
         charNum.Add(1);
         charNum.Add(1);
         charNum.Add(1);
+        charNum.Add(1);
 
 
         //LoadCharacters(charNum[id-1]);
@@ -221,6 +222,7 @@ public class DialogueManager : MonoBehaviour
         ScaleDict.Add(6,new Vector3(8,8,0));
         ScaleDict.Add(7,new Vector3(8,8,0));
         ScaleDict.Add(8,new Vector3(8,8,0));
+        ScaleDict.Add(9,new Vector3(1.3f,1.3f,0));
         RectTransform transform = BackGround.GetComponent<RectTransform>();
         transform.localScale = ScaleDict[id];
     }
@@ -272,6 +274,8 @@ public class DialogueManager : MonoBehaviour
         ScaleDict[7].Add(new Vector3(24,24,0));
         ScaleDict.Add(8,new List<Vector3>());
         ScaleDict[8].Add(new Vector3(24,24,0));
+        ScaleDict.Add(9,new List<Vector3>());
+        ScaleDict[9].Add(new Vector3(35,35,0));
         RectTransform transform = Character.GetComponent<RectTransform>();
         transform.localScale = ScaleDict[id][characterID-1];
 

@@ -17,26 +17,26 @@ public class montagneAIController : MonoBehaviour
     void Update()
     {
         
-        // transform.LookAt(Player);
-        Vector3 positionDiff = CarController.Instance.transform.position - transform.position;
-        var enemySprite = GameObject.Find("BlockingEnemySprite").GetComponent<SpriteRenderer>();
-        if(positionDiff.x == 0)
-            return;
-        enemySprite.flipY = (positionDiff.x < 0);
-        transform.right = positionDiff;
+        if(!(GameManager.Instance.pause)){
+            Vector3 positionDiff = CarController.Instance.transform.position - transform.position;
+            var enemySprite = GameObject.Find("BlockingEnemySprite").GetComponent<SpriteRenderer>();
+            if(positionDiff.x == 0)
+                return;
+            enemySprite.flipY = (positionDiff.x < 0);
+            transform.right = positionDiff;
 
-        if (Vector3.Distance(transform.position, CarController.Instance.transform.position) >= outerDist)
-        {
-            enemyAnimator.SetBool("isSpinning", false);
-            enemyAnimator.SetBool("isWalking",true);
-            MoveSpeed = 1;
-            transform.position += transform.right * MoveSpeed * Time.deltaTime;
+            if (Vector3.Distance(transform.position, CarController.Instance.transform.position) >= outerDist)
+            {
+                enemyAnimator.SetBool("isSpinning", false);
+                enemyAnimator.SetBool("isWalking",true);
+                MoveSpeed = 1;
+                transform.position += transform.right * MoveSpeed * Time.deltaTime;
+            }
+            else{
+                enemyAnimator.SetBool("isWalking",false);
+                enemyAnimator.SetBool("isSpinning",true);
+            }
         }
-        else{
-            enemyAnimator.SetBool("isWalking",false);
-            enemyAnimator.SetBool("isSpinning",true);
-        }
-
 
     }
 }

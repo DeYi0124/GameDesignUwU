@@ -22,7 +22,7 @@ public class InGameShopContent : MonoBehaviour
         IWILLNOTYIELD.text = "Yield\ncost: " +level2cost[GameManager.Instance.yieldLevel];;
     }
     public void upGradeSkill() {
-        if(GameManager.Instance.skillLevel >= maxLevel - 1) {
+        if(GameManager.Instance.skillLevel >= maxLevel) {
             maxSkilltext.text = "Skill\ncost: MAX";
             Debug.Log("max level detected");
             return;
@@ -37,7 +37,7 @@ public class InGameShopContent : MonoBehaviour
         }
     }
     public void upGradeSpeed() {
-        if(GameManager.Instance.speedLevel >= maxLevel - 1) {
+        if(GameManager.Instance.speedLevel >= maxLevel) {
             maxSpeedtext.text = "Speed\ncost: MAX";
             Debug.Log("max level detected");
             return;
@@ -53,7 +53,7 @@ public class InGameShopContent : MonoBehaviour
         }
     }
     public void upGradeVolume() {
-        if(GameManager.Instance.volumeLevel >= maxLevel - 1) {
+        if(GameManager.Instance.volumeLevel >= maxLevel) {
             Debug.Log("max level detected");
             maxBiketext.text = "Bike\ncost: MAX";
             return;
@@ -69,7 +69,7 @@ public class InGameShopContent : MonoBehaviour
         }
     }
     public void upGradeOil() {
-        if(GameManager.Instance.oilLevel >= maxLevel - 1) {
+        if(GameManager.Instance.oilLevel >= maxLevel) {
             Debug.Log("max level detected");
             maxOiltext.text = "Oil\ncost: MAX";
             return;
@@ -85,7 +85,7 @@ public class InGameShopContent : MonoBehaviour
         }
     }
     public void upGradeYield() {
-        if(GameManager.Instance.yieldLevel >= maxLevel - 1) {
+        if(GameManager.Instance.yieldLevel >= maxLevel) {
             Debug.Log("max level detected");
             IWILLNOTYIELD.text = "Yield\ncost: MAX";
             return;

@@ -157,6 +157,7 @@ public class CarController : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collider2D) {
         if(collider2D.CompareTag("Grass")) {
+            carRigidbody2D.velocity *= 0.1f;
             onGrass = true;
         }
     }
@@ -173,8 +174,8 @@ public class CarController : MonoBehaviour
         } 
         if(onGrass) {
             //Debug.Log("GRASS!");
-            steerInput *= 0.4f;
-            accInput *= 0.4f;
+            steerInput *= 0.3f;
+            accInput *= 0.3f;
         }
         if(onBroken || GameManager.Instance.pause) {
             carRigidbody2D.drag = 0;

@@ -19,9 +19,9 @@ public class montagneAIController : MonoBehaviour
     {
         
         if(GameManager.Instance.getTime() > 60){
-            Debug.Log("Destroyed");
+            // Debug.Log("Destroyed");
             StartCoroutine(wait(1f));
-            Debug.Log("bla");
+            // Debug.Log("bla");
         }
         if(!(GameManager.Instance.pause)){
             Vector3 positionDiff = CarController.Instance.transform.position - transform.position;

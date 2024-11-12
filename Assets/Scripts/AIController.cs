@@ -29,7 +29,7 @@ public class AIController : MonoBehaviour
     void Update()
     {
         if(GameManager.Instance.getTime() > 60) {
-            StartCoroutine(wait(10f));
+            StartCoroutine(wait(1f));
         }
         if (!(GameManager.Instance.pause)){ 
             Vector3 positionDiff = CarController.Instance.transform.position - transform.position;

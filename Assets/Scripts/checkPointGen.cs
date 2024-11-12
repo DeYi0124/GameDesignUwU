@@ -22,7 +22,7 @@ public class checkPointGen : MonoBehaviour
     public void genBike() {
         int tmpBike = Random.Range(0, allBike);
         //Debug.Log(tmpBike);
-        if(time % 2 == 0 && !alreadyFilled[tmpBike] && !PauseMenu.isPaused && !GameManager.Instance.pause) {
+        if(time % 1 == 0 && !alreadyFilled[tmpBike] && !PauseMenu.isPaused && !GameManager.Instance.pause) {
             GameObject tmpgobj = Instantiate(myPrefab, bikePts[tmpBike].transform.position, Quaternion.identity, transform);
             checkPointHandler tmpcph = tmpgobj.GetComponent<checkPointHandler>();
             int yiedlLevel = GameManager.Instance.yieldLevel;

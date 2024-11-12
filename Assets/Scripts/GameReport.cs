@@ -12,16 +12,21 @@ public class GameReport : MonoBehaviour
     public TextMeshProUGUI bikes;
     public TextMeshProUGUI coinsEarned;
 
+    private int bikesCnt = 0;
+    private int coinsCnt = 0;
+
     void LoadingScreen() {
         StartCoroutine(LoadLevel());
     }
 
     void UpdateData() {
-        bikes.text = GameManager.Instance.bike.ToString();
-        coinsEarned.text = (GameManager.Instance.bike * 5).ToString();
+        bikes.text = bikesCnt.ToString();
+        coinsEarned.text = coinsCnt.ToString();
     }
     void Start(){
         UpdateData();
+        bikesCnt = GameManager.Instance.bike;
+        coinsCnt = (GameManager.Instance.bike * 5);
     }
     void Update() {
         UpdateData();
@@ -36,7 +41,7 @@ public class GameReport : MonoBehaviour
     }
     public void ContinueGame() {
         // LoadingScreen();
-        SceneManager.LoadScene("MainScene");   
+        SceneManager.LoadScene("MainScene");
         GameManager.Instance.reset();
     }
     public void EnterShop() {

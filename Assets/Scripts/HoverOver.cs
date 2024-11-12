@@ -19,7 +19,7 @@ public class HoverOver : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         explanationText.Add(2, "Increase the size of the oil tank of your beautiful ShueiYuan truck");
         explanationText.Add(3, "Increase the efficiency of your beautiful ShueiYuan truck, shortening the time required to take bikes");
         explanationText.Add(4, "Increase the average number of bikes per point");
-        explanation.SetActive(true);
+        // explanation.SetActive(true);
         text.text = explanationText[explanationID];
     }
     

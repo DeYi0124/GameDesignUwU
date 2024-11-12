@@ -58,7 +58,7 @@ public class checkPointHandler : MonoBehaviour
             }
         }
         if(GameManager.Instance.getTime() > 60) {
-            StartCoroutine(wait(3));
+            StartCoroutine(wait(1));
         }
     }
     public void setBikePerPoint(int i){

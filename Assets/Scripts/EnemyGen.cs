@@ -13,14 +13,13 @@ public class EnemyGen : MonoBehaviour
 
     private int time = 0;
     private int allBike = 0;
-    private int currCnt = 0;
     private bool[] alreadyFilled;
 
 
     public void genBike() {
         int tmpBike = Random.Range(0, allBike);
         //Debug.Log(tmpBike);
-        if(time % 2 == 0 && !alreadyFilled[tmpBike] && !PauseMenu.isPaused && currCnt < GameManager.Instance.EnemyLimit) {
+        if(time % 2 == 0 && !alreadyFilled[tmpBike] && !PauseMenu.isPaused && GameManager.Instance.EnemyCount < GameManager.Instance.EnemyLimit) {
             int tmp = Random.Range(0, 2);
             GameObject tmpgobj;
             if(tmp == 0) {
@@ -29,8 +28,7 @@ public class EnemyGen : MonoBehaviour
                 tmpgobj = Instantiate(bp, ePts[tmpBike].transform.position, Quaternion.identity, transform);
             }
             time = 1;
-            currCnt++;
-            alreadyFilled[tmpBike] = true;
+            GameManager.Instance.EnemyCount++;
         } else {
             time ++;
         }

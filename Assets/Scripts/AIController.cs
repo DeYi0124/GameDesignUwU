@@ -17,6 +17,7 @@ public class AIController : MonoBehaviour
     void OnCollisionEnter2D(Collision2D collision2D) {
         if(collision2D.gameObject.tag == "Car") {
             GameManager.Instance.PR -= 1;
+            GameManager.Instance.EnemyCount -= 1;
             StartCoroutine(wait());
         }
     }

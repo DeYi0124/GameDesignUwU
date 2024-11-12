@@ -27,6 +27,8 @@ public class GameManager : MonoBehaviour
     public int maxEnt = 100000;
     public int TimeScale = 10;
     public int EnemyLimit = 4;
+    public int EnemyCount = 0;
+    public String ReasonText;
 
     public int coins = 0;
     private int credits = 0;
@@ -106,6 +108,15 @@ public class GameManager : MonoBehaviour
             // if(tmpEnt <= 50) {
             //     Debug.Log("event occurs, ID: " + tmpEnt.ToString());
             // }
+            if(PR <= 0) {
+                pause = true;
+                time = 0;
+                days = 0;
+                coins = 0;
+                PR = 5;
+                ReasonText = "You have been jailed for being a criminal";
+                SceneManager.LoadSceneAsync("DeathReportScene");
+            }
         }   
     }
 
@@ -143,6 +154,8 @@ public class GameManager : MonoBehaviour
             } else {
                 days = 0;
                 coins = 0;
+                PR = 5;
+                ReasonText = "You have failed to complete your daily task.";
                 SceneManager.LoadSceneAsync("DeathReportScene");
             }
         }

@@ -9,6 +9,7 @@ public class DeathReport : MonoBehaviour
     public Animator transition;
     public float transitionTime = 3f;
     public TextMeshProUGUI LoadText;
+    public TextMeshProUGUI ReasonText;
     public TextMeshProUGUI bikes;
     public TextMeshProUGUI creditEarned;
 
@@ -19,6 +20,7 @@ public class DeathReport : MonoBehaviour
     void UpdateData() {
         bikes.text = GameManager.Instance.bike.ToString();
         creditEarned.text = 0.ToString();
+        ReasonText.text = GameManager.Instance.ReasonText;
     }
 
     void Update() {

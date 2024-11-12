@@ -18,12 +18,14 @@ public class GameManager : MonoBehaviour
     public int KPI = 5;
     public float maxOil = 100f;
     public int maxPR = 5;
+    public int maxYield = 5;
     public int PR = 5;
     private static int time = 0;
     public int skillLevel = 0;
     public int speedLevel = 0;
     public int oilLevel = 0;
     public int volumeLevel = 0;
+    public int yieldLevel = 0;
     public int maxEnt = 100000;
     public int TimeScale = 10;
     public int EnemyLimit = 4;

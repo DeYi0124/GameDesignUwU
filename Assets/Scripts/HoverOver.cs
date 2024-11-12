@@ -14,11 +14,11 @@ public class HoverOver : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     
     public void OnPointerEnter(PointerEventData eventData){
         Dictionary<int, string> explanationText = new Dictionary<int, string>();
-        explanationText.Add(0, "This is the first explanation");
-        explanationText.Add(1, "This is the second explanation");
-        explanationText.Add(2, "This is the third explanation");
-        explanationText.Add(3, "This is the fourth explanation");
-        explanationText.Add(4, "This is the fifth explanation");
+        explanationText.Add(0, "Increase the capacity of your beautiful ShueiYuan truck");
+        explanationText.Add(1, "Increase the speed of your beautiful ShueiYuan truck, this upgrade may make the truck harder to drive, so be careful!");
+        explanationText.Add(2, "Increase the size of the oil tank of your beautiful ShueiYuan truck");
+        explanationText.Add(3, "Increase the efficiency of your beautiful ShueiYuan truck, shortening the time required to take bikes");
+        explanationText.Add(4, "Increase the average number of bikes per point");
         explanation.SetActive(true);
         text.text = explanationText[explanationID];
     }

@@ -2,12 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using TMPro;
 
 public class checkPointHandler : MonoBehaviour
 {
-    bool isWorking = false;
-    float progress = 1f;
-    SpriteRenderer m_SpriteRenderer;
+    private bool isWorking = false;
+    private float progress = 1f;
+    private SpriteRenderer m_SpriteRenderer;
+    private TextMeshPro m_TextMeshPro;
+    private int bikePerPoint;
     public event Action<checkPointHandler> OnReceiving;
     public int id;
     
@@ -31,6 +34,11 @@ public class checkPointHandler : MonoBehaviour
     {
         m_SpriteRenderer = GetComponent<SpriteRenderer>();
         m_SpriteRenderer.color = new Color (1, 0, 0, progress);
+        GameObject tmp = this.gameObject.transform.GetChild(0).gameObject; 
+        tmp.SetActive(true);
+        tmp.GetComponent<TextMeshPro>().text = bikePerPoint.ToString();
+
+
     }
 
     void Update()
@@ -43,11 +51,24 @@ public class checkPointHandler : MonoBehaviour
             progress = Mathf.Clamp01(progress);  
             m_SpriteRenderer.color = new Color (1, 0, 0, progress);
             if (progress == 0) {
-                CarController.Instance.bike++;
+                CarController.Instance.bike+= bikePerPoint;
                 progress = -1;
                 OnReceiving?.Invoke(this);
                 Destroy(transform.gameObject);
             }
         }
+        if(GameManager.Instance.getTime() > 60) {
+            StartCoroutine(wait(3));
+        }
+    }
+    public void setBikePerPoint(int i){
+        bikePerPoint = i;
+    }
+    public int getBikePerPoint(){
+        return bikePerPoint;
+    }
+    IEnumerator wait(float seconds = 0.5f) {
+        yield return new WaitForSeconds(seconds);
+        Destroy(this.gameObject);
     }
 }

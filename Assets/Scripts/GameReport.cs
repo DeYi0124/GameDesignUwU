@@ -20,7 +20,9 @@ public class GameReport : MonoBehaviour
         bikes.text = GameManager.Instance.bike.ToString();
         coinsEarned.text = (GameManager.Instance.bike * 5).ToString();
     }
-
+    void Start(){
+        UpdateData();
+    }
     void Update() {
         UpdateData();
     }

@@ -175,7 +175,9 @@ public class CarController : MonoBehaviour
             //Debug.Log("GRASS!");
             steerInput *= 0.4f;
             accInput *= 0.4f;
-        } else if(onBroken || GameManager.Instance.pause) {
+        }
+        if(onBroken || GameManager.Instance.pause) {
+            carRigidbody2D.drag = 0;
             steerInput *= 0;
             accInput *= 0;
         }

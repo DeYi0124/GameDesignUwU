@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
     public int volumeLevel = 0;
     public int yieldLevel = 0;
     public int maxEnt = 100000;
-    public int TimeScale = 10;
+    public int TimeScale = 20;
     public int EnemyLimit = 4;
     public int EnemyCount = 0;
     public String ReasonText;
@@ -88,6 +88,7 @@ public class GameManager : MonoBehaviour
         CarController.Instance.bike = 0;
         CarController.Instance.SetInputVector(new Vector2(0,0));
         CarController.Instance.reset();
+        CarController.Instance.onBroken = false;
         days ++;
         updateGameState(GameState.Morning);
         bike = 0;
@@ -152,13 +153,13 @@ public class GameManager : MonoBehaviour
             updateGameState(GameState.Night);
             if(bike >= KPI) {
                 updateMoney(bike*5, 0);
-                SceneManager.LoadSceneAsync("GameReportScene");  
+                SceneManager.LoadScene("GameReportScene");  
             } else {
                 days = 0;
                 coins = 0;
                 PR = 5;
                 ReasonText = "You have failed to complete your daily task.";
-                SceneManager.LoadSceneAsync("DeathReportScene");
+                SceneManager.LoadScene("DeathReportScene");
             }
         }
     }
@@ -168,6 +169,7 @@ public class GameManager : MonoBehaviour
         switch(State) {
             case GameState.Morning:
                 pause = false;
+                time = 0;
                 //Debug.Log("goodMorning");
                 KPI = 1+10*(days);
                 EnemyLimit = 4 + days;
@@ -177,7 +179,6 @@ public class GameManager : MonoBehaviour
             case GameState.Night:
                 //Debug.Log("NIGHT");
                 pause = true;
-                time = 0;
                 break;
             case GameState.Shop:
                 break;

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class checkPointGen : MonoBehaviour
 {
@@ -14,6 +15,8 @@ public class checkPointGen : MonoBehaviour
     private int allBike = 0;
     private int rngUpperLimit = 0;
     private bool[] alreadyFilled;
+    private TextMeshPro bikePerPointText;
+    private int bikePerPointInt;
 
 
     public void genBike() {
@@ -22,6 +25,15 @@ public class checkPointGen : MonoBehaviour
         if(time % 2 == 0 && !alreadyFilled[tmpBike] && !PauseMenu.isPaused && !GameManager.Instance.pause) {
             GameObject tmpgobj = Instantiate(myPrefab, bikePts[tmpBike].transform.position, Quaternion.identity, transform);
             checkPointHandler tmpcph = tmpgobj.GetComponent<checkPointHandler>();
+            int yiedlLevel = GameManager.Instance.yieldLevel;
+            int tmprng = Random.Range(getBikePerPointRange(yiedlLevel).Item1, getBikePerPointRange(yiedlLevel).Item2+1);
+            tmpcph.setBikePerPoint(tmprng);
+            GameObject textGameObject = tmpcph.transform.GetChild(0).gameObject;
+            textGameObject.SetActive(true);
+            bikePerPointText = textGameObject.GetComponent<TextMeshPro>();
+            bikePerPointText.text = tmpcph.getBikePerPoint().ToString();
+            
+
             tmpcph.id = tmpBike;
             tmpcph.OnReceiving += OnReceiving;
             time = 1;
@@ -62,6 +74,34 @@ public class checkPointGen : MonoBehaviour
             }
         }
     }
+    public (int, int) getBikePerPointRange(int yieldLevel){
+        switch(yieldLevel){
+            case 0://1
+                return (1, 2);
+            case 1://1
+                return (1, 3);
+            case 2://2
+                return (1, 4);
+            case 3://3
+                return (1, 5);
+            case 4://5
+                return (2, 4);
+            case 5://8
+                return (2, 5);
+            case 6://13
+                return (2, 6);
+            case 7://21
+                return (3, 6);
+            case 8://34
+                return (4, 6);
+            case 9://55
+                return (5, 6);
+            case 10:
+                return (6, 6);
+            default:
+                return (0, 0);
+        }
 
+    }
     
 }

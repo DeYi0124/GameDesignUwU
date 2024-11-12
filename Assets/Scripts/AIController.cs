@@ -22,14 +22,14 @@ public class AIController : MonoBehaviour
         }
     }
 
-    IEnumerator wait() {
-        yield return new WaitForSeconds(0.5f);
+    IEnumerator wait(float seconds = 0.5f) {
+        yield return new WaitForSeconds(seconds);
         Destroy(this.gameObject);
     }
     void Update()
     {
-        if(GameManager.Instance.getTime() == 60) {
-            Destroy(this.gameObject);
+        if(GameManager.Instance.getTime() > 60) {
+            StartCoroutine(wait(10f));
         }
         if (!(GameManager.Instance.pause)){ 
             Vector3 positionDiff = CarController.Instance.transform.position - transform.position;

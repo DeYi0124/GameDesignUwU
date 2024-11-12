@@ -57,10 +57,7 @@ public class OilBar : MonoBehaviour
         if(slider.value != oil) {
             slider.value = oil;
         }
-        if (Input.GetKeyDown("space"))
-        {
-            oilCut(10);
-        }
+
         if(slider.value != easeSlider.value) {
             easeSlider.value = Mathf.Lerp(easeSlider.value, oil, lerpSpeed);
         }

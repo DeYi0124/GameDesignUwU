@@ -18,8 +18,10 @@ public class montagneAIController : MonoBehaviour
     void Update()
     {
         
-        if(GameManager.Instance.getTime() != 60){
-            Destroy(this.gameObject);
+        if(GameManager.Instance.getTime() > 60){
+            Debug.Log("Destroyed");
+            StartCoroutine(wait(1f));
+            Debug.Log("bla");
         }
         if(!(GameManager.Instance.pause)){
             Vector3 positionDiff = CarController.Instance.transform.position - transform.position;
@@ -42,5 +44,9 @@ public class montagneAIController : MonoBehaviour
             }
         }
 
+    }
+    IEnumerator wait(float seconds = 0.5f) {
+        yield return new WaitForSeconds(seconds);
+        Destroy(this.gameObject);
     }
 }

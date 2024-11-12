@@ -169,7 +169,7 @@ public class GameManager : MonoBehaviour
             case GameState.Morning:
                 pause = false;
                 //Debug.Log("goodMorning");
-                KPI = 5+10*(days);
+                KPI = 1+10*(days);
                 EnemyLimit = 4 + days;
                 break;
             case GameState.Evening:

@@ -10,11 +10,13 @@ public class levelPanel : MonoBehaviour
     public TextMeshProUGUI fuel;
     public TextMeshProUGUI speed;
     public TextMeshProUGUI skill;
+    public TextMeshProUGUI IWILLNOTYIELD;
     void Update()
     {
         volume.text = "volume level: " + GameManager.Instance.volumeLevel;
         fuel.text = "fuel level: " + GameManager.Instance.oilLevel;
         speed.text = "speed level: " + GameManager.Instance.speedLevel;
         skill.text = "skill level: " + GameManager.Instance.skillLevel;
+        IWILLNOTYIELD.text = "yield level: " + GameManager.Instance.yieldLevel;
     }
 }

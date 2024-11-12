@@ -87,13 +87,13 @@ public class InGameShopContent : MonoBehaviour
     public void upGradeYield() {
         if(GameManager.Instance.yieldLevel >= maxLevel - 1) {
             Debug.Log("max level detected");
-            IWILLNOTYIELD.text = "Oil\ncost: MAX";
+            IWILLNOTYIELD.text = "Yield\ncost: MAX";
             return;
         }
         if (GameManager.Instance.coins >= level2cost[GameManager.Instance.yieldLevel]) {
             GameManager.Instance.coins -= level2cost[GameManager.Instance.yieldLevel];
             GameManager.Instance.yieldLevel ++;
-            IWILLNOTYIELD.text = "Oil\ncost: " +level2cost[GameManager.Instance.yieldLevel];
+            IWILLNOTYIELD.text = "Yield\ncost: " +level2cost[GameManager.Instance.yieldLevel];
             GameManager.Instance.maxYield+= 1;
         } else {
             Debug.Log("poor detected");

@@ -11,6 +11,11 @@ public class checkPointHandler : MonoBehaviour
     private SpriteRenderer m_SpriteRenderer;
     private TextMeshPro m_TextMeshPro;
     private int bikePerPoint;
+    private int MoveSpeed = 4;
+    private int MaxDist = 0;
+    private int MinDist = 6;
+
+
     public event Action<checkPointHandler> OnReceiving;
     public int id;
     
@@ -46,6 +51,25 @@ public class checkPointHandler : MonoBehaviour
         // Gradually increase the red paint height
         //timer += Time.deltaTime;
 　　    //Debug.Log(timer);
+        if(GameManager.Instance.PR >= 100) {
+            Vector3 positionDiff = CarController.Instance.transform.position - transform.position;
+            var enemySprite = this.gameObject.GetComponent<SpriteRenderer>(); 
+            if (Vector3.Distance(transform.position, CarController.Instance.transform.position) < MinDist)
+            {
+                if(positionDiff.x == 0)
+                    return;
+                enemySprite.flipY = (positionDiff.x < 0);
+                transform.right = positionDiff;
+                MoveSpeed = 1;
+                transform.position += transform.right * MoveSpeed * Time.deltaTime;
+                if (Vector3.Distance(transform.position, CarController.Instance.transform.position) > MaxDist)
+                {
+                    MoveSpeed = 2;// - Vector3.Distance(transform.position, CarController.Instance.transform.position);
+                    transform.position += transform.right * MoveSpeed * Time.deltaTime;
+                }
+            }
+        }
+
         if(isWorking && CarController.Instance.bike < CarController.Instance.maxBike) {
             progress -= ((GameManager.Instance.skillLevel+1)*Time.deltaTime);
             progress = Mathf.Clamp01(progress);  

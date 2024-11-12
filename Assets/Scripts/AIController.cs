@@ -9,7 +9,6 @@ public class AIController : MonoBehaviour
     private int MoveSpeed = 4;
     private int MaxDist = 10;
     private int MinDist = 6;
-    private int previousDay = 0;
     void Start()
     {
         enemyAnimator.SetBool("isWalking", false);

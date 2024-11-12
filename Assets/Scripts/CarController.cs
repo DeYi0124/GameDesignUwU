@@ -14,7 +14,7 @@ public class CarController : MonoBehaviour
     public int maxBike = 20;
     public bool onGrass = false;
     public bool onBroken = false;
-
+    public Animator carAnimator;
     float accInput = 0;
     float steerInput = 0;
 
@@ -42,6 +42,7 @@ public class CarController : MonoBehaviour
         onGrass = false;
         onBroken = false;
         maxSpeed = 26;
+        carAnimator.SetBool("isGlowing", false);
         // if(FindObjectsOfType<CarController>().Length > 1) {
         //     Debug.Log("DestroyinG" + FindObjectsOfType<CarController>().Length.ToString());
         //     this.gameObject.SetActive(false);
@@ -63,6 +64,14 @@ public class CarController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(GameManager.Instance.PR >= 100){
+            GameObject.FindWithTag("Car").transform.GetChild(0).GetChild(5).gameObject.SetActive(true);
+            carAnimator.SetBool("isGlowing", true);
+        }
+        else{
+            GameObject.FindWithTag("Car").transform.GetChild(0).GetChild(5).gameObject.SetActive(false);
+            carAnimator.SetBool("isGlowing", false);
+        }
         //Debug.Log(transform.position);
         //Debug.Log(transform.rotation);  
     }

@@ -52,7 +52,7 @@ public class GameManager : MonoBehaviour
             Instance = this;
         bike = 0;
         KPI = 10;
-        PR = maxPR;
+        PR = 100;
         coins = 0;
         credits = 0;
         maxEnt = 100;

@@ -13,11 +13,13 @@ public class checkPointHandler : MonoBehaviour
     private int bikePerPoint;
     private int MoveSpeed = 4;
     private int MaxDist = 0;
-    private int MinDist = 6;
+    private int MinDist = 11;
 
 
     public event Action<checkPointHandler> OnReceiving;
     public int id;
+    public Transform customPivot;
+
     
     //private float timer = 0;
 
@@ -53,12 +55,27 @@ public class checkPointHandler : MonoBehaviour
 　　    //Debug.Log(timer);
         if(GameManager.Instance.PR >= 100) {
             Vector3 positionDiff = CarController.Instance.transform.position - transform.position;
-            var enemySprite = this.gameObject.GetComponent<SpriteRenderer>(); 
+            var enemySprite = this.gameObject.GetComponent<SpriteRenderer>();
+            GameObject textObject = this.gameObject.transform.GetChild(0).gameObject;
+            
             if (Vector3.Distance(transform.position, CarController.Instance.transform.position) < MinDist)
             {
                 if(positionDiff.x == 0)
                     return;
+                Vector3 positionForLHS = new Vector3(-0.4f,1.82f,0);
+                Vector3 scaleForLHS = new Vector3(-0.4f,-0.4f,0);
+                Vector3 positionForRHS = new Vector3(0.4f,-1.82f,0);
+                Vector3 scaleForRHS = new Vector3(0.4f,0.4f,0);
+                if (positionDiff.x < 0){
+                    textObject.transform.localPosition = positionForLHS;
+                    textObject.GetComponent<RectTransform>().localScale = scaleForLHS;
+                }
+                else{
+                    textObject.transform.localPosition = positionForRHS;
+                    textObject.GetComponent<RectTransform>().localScale = scaleForRHS;
+                }
                 enemySprite.flipY = (positionDiff.x < 0);
+                
                 transform.right = positionDiff;
                 MoveSpeed = 1;
                 transform.position += transform.right * MoveSpeed * Time.deltaTime;

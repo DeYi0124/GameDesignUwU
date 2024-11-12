@@ -9,7 +9,7 @@ public class AIController : MonoBehaviour
     private int MoveSpeed = 4;
     private int MaxDist = 10;
     private int MinDist = 6;
-
+    private int previousDay = 0;
     void Start()
     {
         enemyAnimator.SetBool("isWalking", false);
@@ -28,6 +28,9 @@ public class AIController : MonoBehaviour
     }
     void Update()
     {
+        if(GameManager.Instance.getTime() == 60) {
+            Destroy(this.gameObject);
+        }
         if (!(GameManager.Instance.pause)){ 
             Vector3 positionDiff = CarController.Instance.transform.position - transform.position;
             var enemySprite = GameObject.Find("ChasingEnemySprite").GetComponent<SpriteRenderer>();

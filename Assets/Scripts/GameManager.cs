@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
     public float maxOil = 100f;
     public int maxPR = 5;
     public int maxYield = 5;
-    public int PR = 5;
+    public int PR = 1;
     private static int time = 0;
     public int skillLevel = 0;
     public int speedLevel = 0;
@@ -52,7 +52,7 @@ public class GameManager : MonoBehaviour
             Instance = this;
         bike = 0;
         KPI = 10;
-        PR = 5;
+        PR = 100;
         coins = 0;
         credits = 0;
         maxEnt = 100;
@@ -77,7 +77,7 @@ public class GameManager : MonoBehaviour
     void OnSave(CurrentBike currBike) {
         Debug.Log("user saving");
         bike += CarController.Instance.bike;
-        time += 5;
+        time = (time < 54)? time + 5 : 59;
         CarController.Instance.bike = 0;
         CarController.Instance.SetPosition(carSpawn);
     }
@@ -153,6 +153,7 @@ public class GameManager : MonoBehaviour
             updateGameState(GameState.Night);
             if(bike >= KPI) {
                 updateMoney(bike*5, 0);
+                PR += (bike - KPI);
                 SceneManager.LoadScene("GameReportScene");  
             } else {
                 days = 0;

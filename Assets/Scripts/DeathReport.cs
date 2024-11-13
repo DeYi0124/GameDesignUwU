@@ -36,7 +36,8 @@ public class DeathReport : MonoBehaviour
     }
     public void ContinueGame() {
         // LoadingScreen();
-        SceneManager.LoadScene("MainMenu");   
-        GameManager.Instance.reset();
+        SceneManager.LoadScene("MainMenu");
+        Destroy(GameObject.Find("GameManager"));
+        // GameManager.Instance.reset();
     }
 }

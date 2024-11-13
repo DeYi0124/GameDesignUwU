@@ -21,6 +21,9 @@ public class GameReport : MonoBehaviour
 
     void UpdateData() {
         bikes.text = bikesCnt.ToString();
+        if(bikesCnt > GameManager.Instance.KPI) {
+            bikes.text += ("(extra bike: " + (bikesCnt - GameManager.Instance.KPI) +")");
+        }
         coinsEarned.text = coinsCnt.ToString();
     }
     void Start(){

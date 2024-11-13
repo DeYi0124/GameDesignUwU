@@ -13,13 +13,14 @@ public class InGameShopContent : MonoBehaviour
     public TextMeshProUGUI IWILLNOTYIELD;
 
     private int maxLevel = 10;
-    private int[] level2cost = {1, 1, 2, 3, 5, 8, 13, 21, 34, 55};
+    private int[] level2cost = {1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 55};
+    private string[] level2costString = {"1", "1", "2", "3", "5", "8", "13", "21", "34", "55", "MAX"};
     void Start() {
-        maxBiketext.text = "Bike\ncost: " +level2cost[GameManager.Instance.volumeLevel];
-        maxOiltext.text = "Oil\ncost: " +level2cost[GameManager.Instance.oilLevel];
-        maxSpeedtext.text = "Speed\ncost: " +level2cost[GameManager.Instance.speedLevel];
-        maxSkilltext.text = "Skill\ncost: " +level2cost[GameManager.Instance.skillLevel];
-        IWILLNOTYIELD.text = "Yield\ncost: " +level2cost[GameManager.Instance.yieldLevel];;
+        maxBiketext.text = "Bike\ncost: " +level2costString[GameManager.Instance.volumeLevel];
+        maxOiltext.text = "Oil\ncost: " +level2costString[GameManager.Instance.oilLevel];
+        maxSpeedtext.text = "Speed\ncost: " +level2costString[GameManager.Instance.speedLevel];
+        maxSkilltext.text = "Skill\ncost: " +level2costString[GameManager.Instance.skillLevel];
+        IWILLNOTYIELD.text = "Yield\ncost: " +level2costString[GameManager.Instance.yieldLevel];;
     }
     public void upGradeSkill() {
         if(GameManager.Instance.skillLevel >= maxLevel) {

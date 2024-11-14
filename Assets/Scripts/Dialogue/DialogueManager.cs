@@ -22,11 +22,18 @@ public class DialogueManager : MonoBehaviour
     public Animator character5Animator;
     public Animator character6Animator;
     public int id;
+    public GameObject continueButton, optionA, optionB, optionC;
     public Dialogue dialogue;
     private List<string> dialogueContent;
     private List<int> charNum;
     private Queue<string> sentences;
+    private Queue<string> sentencesOptionA;
+    private Queue<string> sentencesOptionB;
+    private Queue<string> sentencesOptionC;
     private Queue<string> names;
+    private Queue<string> namesOptionA;
+    private Queue<string> namesOptionB;
+    private Queue<string> namesOptionC;
     private string[] speakerID;
     private int currentSpeaker = 0;
     private int previousSpeaker = 0;
@@ -34,7 +41,10 @@ public class DialogueManager : MonoBehaviour
     private bool EvenFirstPerson = true;
     private float dialogueSpeed = 0.025f;
     private Dictionary<int,string> nextSceneDict;
-
+    private Dictionary<string,Queue<string>> namesDict;
+    private Dictionary<string,Queue<string>> sentencesDict;
+    private string currentOption;
+    private Dictionary<string,string> optionsContent;
 
     // Start is called before the first frame update
     void Start()
@@ -42,14 +52,33 @@ public class DialogueManager : MonoBehaviour
 
 
         id = checkPointGen.rng;
+        //id = 11;
         dialogue = new Dialogue();
         dialogue.content = new List<string>();
         dialogueContent = new List<string>();
         sentences = new Queue<string>();
+        sentencesOptionA = new Queue<string>();
+        sentencesOptionB = new Queue<string>();
+        sentencesOptionC = new Queue<string>();
         names = new Queue<string>();
+        namesOptionA = new Queue<string>();
+        namesOptionB = new Queue<string>();
+        namesOptionC = new Queue<string>();
         speakerID = new string[7];
         nextSceneDict = new Dictionary<int,string>();
         nextSceneDict.Add(3,"RPS game");
+        namesDict = new Dictionary<string,Queue<string>>();
+        namesDict.Add("default",names);
+        namesDict.Add("A",namesOptionA);
+        namesDict.Add("B",namesOptionB);
+        namesDict.Add("C",namesOptionC);
+        sentencesDict = new Dictionary<string,Queue<string>>();
+        sentencesDict.Add("default",sentences);
+        sentencesDict.Add("A",sentencesOptionA);
+        sentencesDict.Add("B",sentencesOptionB);
+        sentencesDict.Add("C",sentencesOptionC);
+        currentOption = "default";
+        optionsContent = new Dictionary<string,string>();
         //StartCoroutine(LoadBackGround());
         charNum = new List<int>();
         charNum.Add(1);
@@ -61,7 +90,8 @@ public class DialogueManager : MonoBehaviour
         charNum.Add(1);
         charNum.Add(1);
         charNum.Add(1);
-
+        charNum.Add(1);
+        charNum.Add(2);
 
         //LoadCharacters(charNum[id-1]);
         dialogueBoxAnimator.SetBool("IsOpen", false);
@@ -101,7 +131,74 @@ public class DialogueManager : MonoBehaviour
         for( int i = 0;i < dialogueContent.Count; i++){
             dialogue.content.Add(dialogueContent[i]);
         }
-        StartDialogue(dialogue);
+        
+        speakerID = dialogue.content[0].Trim().Split(' ');
+        dialogue.content.RemoveAt(0);
+        if(speakerID[speakerID.Count()-1] == "*")
+            StartDialogueWithOptions(dialogue);
+        else
+            StartDialogue(dialogue);
+    }
+    public void StartDialogueWithOptions(Dialogue dialogue){
+        dialogueBoxAnimator.SetBool("IsOpen", true);
+        names.Clear();
+        namesOptionA.Clear();
+        namesOptionB.Clear();
+        namesOptionC.Clear();
+        sentences.Clear();
+        sentencesOptionA.Clear();
+        sentencesOptionB.Clear();
+        sentencesOptionC.Clear();
+        string option = " ";
+        bool isName = true;
+        bool loadingOptions = false;
+        foreach(string sentence in dialogue.content){
+            if(loadingOptions){
+                if(sentence.Trim() == "A"){
+                    option = "A";
+                    continue;
+                }
+                else if(sentence.Trim() == "B"){
+                    option = "B";
+                    continue;
+                }
+                else if(sentence.Trim() == "C"){
+                    option = "C";
+                    continue;
+                }
+                if(isName){
+                    namesDict[option].Enqueue(sentence);
+                    isName = false;
+                }
+                else if(!isName){
+                    sentencesDict[option].Enqueue(sentence);
+                    isName = true;
+                }
+
+
+            }
+            else if(isName){
+                if(sentence.Contains(" || ")){
+                    names.Enqueue(sentence.Split(" || ")[0]);
+                    string[] tmpOptionsContent = sentence.Split(" || ")[1].Split('/');
+                    string[] options = {"A","B","C"};
+                    for(int i = 0;i< tmpOptionsContent.Length;i++){
+                        optionsContent.Add(options[i],tmpOptionsContent[i]);
+                    }
+                    loadingOptions = true;
+                }
+                else{
+                    names.Enqueue(sentence);
+                    isName = false;
+                }
+            }
+            else{
+                sentences.Enqueue(sentence);
+                isName = true;
+            }
+        }
+        //Debug.Log(sentencesOptionA.Count + " " + sentencesOptionB.Count + " " + sentencesOptionC.Count);
+        DisplayNextSentence();
     }
     public void StartDialogue (Dialogue dialogue){
         
@@ -109,8 +206,6 @@ public class DialogueManager : MonoBehaviour
         names.Clear();
         sentences.Clear();
         bool isName = true;
-        speakerID = dialogue.content[0].Trim().Split(' ');
-        dialogue.content.RemoveAt(0);
         foreach(string sentence in dialogue.content){
             if(isName){
                 names.Enqueue(sentence);
@@ -126,15 +221,47 @@ public class DialogueManager : MonoBehaviour
         
 
     }
-
+    public void setToOptionA(){
+        currentOption = "A";
+        DisplayNextSentence();
+        continueButton.SetActive(true);
+        optionA.SetActive(false);
+        optionB.SetActive(false);
+        optionC.SetActive(false);
+    }
+    public void setToOptionB(){
+        currentOption = "B";
+        DisplayNextSentence();
+        continueButton.SetActive(true);
+        optionA.SetActive(false);
+        optionB.SetActive(false);
+        optionC.SetActive(false);
+    }
+    public void setToOptionC(){
+        currentOption = "C";
+        DisplayNextSentence();
+        continueButton.SetActive(true);
+        optionA.SetActive(false);
+        optionB.SetActive(false);
+        optionC.SetActive(false);
+    }
     public void DisplayNextSentence(){
 
-        if (sentences.Count == 0 || names.Count == 0){
+        if (sentencesDict[currentOption].Count == 0 || namesDict[currentOption].Count == 0){
             EndDialogue();
             return;
         }
+        if(currentOption == "default" && (sentencesDict[currentOption].Count == 1 || namesDict[currentOption].Count == 1)){
+            string[] options = {"A","B","C"};
+            continueButton.SetActive(false);
+            GameObject[] optionsButton = {optionA,optionB,optionC};
+            for(int i = 0;i < optionsContent.Count;i++){
+                optionsButton[i].SetActive(true);
+                optionsButton[i].GetComponentInChildren<TextMeshProUGUI>().text = optionsContent[options[i]];
+            }
+        }
         for(int i = 0;i< speakerID.Length;i++){
-            if(names.Peek() == speakerID[i]){
+            if(namesDict[currentOption].Peek() == speakerID[i]){
                 previousSpeaker = currentSpeaker;
                 currentSpeaker = (i+1);
                 break;
@@ -145,7 +272,7 @@ public class DialogueManager : MonoBehaviour
             }
         }
 
-        nameText.text = names.Dequeue();
+        nameText.text = namesDict[currentOption].Dequeue();
 
         if((currentSpeaker == 1 || currentSpeaker == 3|| currentSpeaker == 5)&& OddFirstPerson){
             InSceneCurrentSpeaker(currentSpeaker,true);
@@ -160,7 +287,7 @@ public class DialogueManager : MonoBehaviour
         InSceneCurrentSpeaker(currentSpeaker,true);
         TalkingCurrentSpeaker(previousSpeaker,false);
         TalkingCurrentSpeaker(currentSpeaker,true);
-        string sentence = sentences.Dequeue();
+        string sentence = sentencesDict[currentOption].Dequeue();
         StopAllCoroutines();
         StartCoroutine(TypeSentence(sentence));
 
@@ -219,6 +346,7 @@ public class DialogueManager : MonoBehaviour
         ScaleDict.Add(7,new Vector3(8,8,0));
         ScaleDict.Add(8,new Vector3(8,8,0));
         ScaleDict.Add(9,new Vector3(1.3f,1.3f,0));
+        ScaleDict.Add(11, new Vector3(1.3f,1.3f,0));
         RectTransform transform = BackGround.GetComponent<RectTransform>();
         transform.localScale = ScaleDict[id];
     }
@@ -272,6 +400,9 @@ public class DialogueManager : MonoBehaviour
         ScaleDict[8].Add(new Vector3(24,24,0));
         ScaleDict.Add(9,new List<Vector3>());
         ScaleDict[9].Add(new Vector3(35,35,0));
+        ScaleDict.Add(11,new List<Vector3>());
+        ScaleDict[11].Add(new Vector3(35,35,0));
+        ScaleDict[11].Add(new Vector3(15,15,0));
         RectTransform transform = Character.GetComponent<RectTransform>();
         transform.localScale = ScaleDict[id][characterID-1];
 

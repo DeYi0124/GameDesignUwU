@@ -49,10 +49,8 @@ public class DialogueManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
-
-        id = checkPointGen.rng;
-        //id = 11;
+        // id = checkPointGen.rng;
+        id = 11;
         dialogue = new Dialogue();
         dialogue.content = new List<string>();
         dialogueContent = new List<string>();
@@ -104,14 +102,24 @@ public class DialogueManager : MonoBehaviour
 
     IEnumerator PrepWork(){
         yield return StartCoroutine(LoadBackGround());
-        yield return StartCoroutine(ReadDialogueFile());
+        //Elsa
+        if(id == 11) {
+            if(GameManager.Instance.guatiaShow > 0) {
+                yield return StartCoroutine(ReadDialogueFile(id));
+                //UwU
+            } else {
+                yield return StartCoroutine(ReadDialogueFile(-id));
+            }
+        }else {
+            yield return StartCoroutine(ReadDialogueFile(id));
+        }
         for(int i = 1;i <= charNum[id-1];i++){
             yield return StartCoroutine(LoadCharacter(i));
         }
         TriggerDialogue();
     }
-    IEnumerator ReadDialogueFile(){
-        string path = Application.streamingAssetsPath + "/Dialogue/" + id.ToString() + ".txt";
+    IEnumerator ReadDialogueFile(int tmpId){
+        string path = Application.streamingAssetsPath + "/Dialogue/" + tmpId.ToString() + ".txt";
         if (path.Contains("://") || path.Contains(":///"))
         {
             UnityWebRequest www = UnityWebRequest.Get(path);

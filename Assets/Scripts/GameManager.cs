@@ -43,6 +43,9 @@ public class GameManager : MonoBehaviour
     public float transitionTime = 3f;
     public TextMeshProUGUI LoadText;
     private Vector2 carSpawn;  
+    
+    //items
+    public int guatiaShow;
 
     void Awake() {
         if (Instance != null && Instance != this) {
@@ -56,6 +59,8 @@ public class GameManager : MonoBehaviour
         coins = 0;
         credits = 0;
         maxEnt = 100;
+        //items
+        guatiaShow = 0;
         carSpawn = CarController.Instance.GetPostion();
         //CarController.Instance.SetPosition(carSpawn);
         InvokeRepeating("UpdateTime", 1f, 1f);

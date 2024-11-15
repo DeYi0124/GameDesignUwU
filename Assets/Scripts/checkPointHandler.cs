@@ -53,7 +53,7 @@ public class checkPointHandler : MonoBehaviour
         // Gradually increase the red paint height
         //timer += Time.deltaTime;
 　　    //Debug.Log(timer);
-        if(GameManager.Instance.PR >= 100) {
+        if(GameManager.Instance.PR >= 100 && !GameManager.Instance.pause) {
             Vector3 positionDiff = CarController.Instance.transform.position - transform.position;
             var enemySprite = this.gameObject.GetComponent<SpriteRenderer>();
             GameObject textObject = this.gameObject.transform.GetChild(0).gameObject;

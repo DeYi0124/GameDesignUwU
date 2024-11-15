@@ -64,11 +64,10 @@ public class checkPointGen : MonoBehaviour
         alreadyFilled[cph.id] = false;
         rng = Random.Range(1, rngUpperLimit+1);
         Debug.Log(rng);
-        rng = 10;
-        if(rng <= 9) {
+        rng = 11;
+        if(rng <= 11) {
             GameManager.Instance.pause = true;
             GameManager.carPosition = GameObject.FindWithTag("Car").GetComponent<Transform>().position;
-            SceneManager.LoadSceneAsync("DialogueTemplate");
             if(rng == 1) {
                 CarController.Instance.bike += 3;
             }
@@ -78,7 +77,10 @@ public class checkPointGen : MonoBehaviour
                 CarController.Instance.bike = 0;
             }else if(rng == 7) {
                 GameManager.Instance.coins = 0;
+            }else if(rng == 9) {
+                GameManager.Instance.guatiaShow += 2;
             }
+            SceneManager.LoadSceneAsync("DialogueTemplate");
         }
     }
     public (int, int) getBikePerPointRange(int yieldLevel){

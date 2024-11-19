@@ -10,10 +10,10 @@ public class checkPointGen : MonoBehaviour
     public GameObject myPrefab;
     public GameObject[] bikePts;
     public static int rng;
+    public int rngUpperLimit = 10;
 
     private int time = 0;
     private int allBike = 0;
-    private int rngUpperLimit = 0;
     private bool[] alreadyFilled;
     private TextMeshPro bikePerPointText;
     private int bikePerPointInt;
@@ -59,7 +59,6 @@ public class checkPointGen : MonoBehaviour
     }
 
     void OnReceiving(checkPointHandler cph) {
-        rngUpperLimit = 10;
         //Debug.Log(cph.id);
         alreadyFilled[cph.id] = false;
         rng = Random.Range(1, rngUpperLimit+1);

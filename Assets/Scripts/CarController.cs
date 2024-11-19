@@ -202,4 +202,9 @@ public class CarController : MonoBehaviour
         rotatingAngle = 0;
 
     }
+    public void resetMomentum(){
+
+        var carTransform= GameObject.FindWithTag("Car").GetComponent<Transform>();
+        carRigidbody2D.drag = 0;
+    }
 }

@@ -40,6 +40,7 @@ public class DialogueManager : MonoBehaviour
     private bool OddFirstPerson = true;
     private bool EvenFirstPerson = true;
     private float dialogueSpeed = 0.025f;
+    private bool hasOption = false;
     private Dictionary<int,string> nextSceneDict;
     private Dictionary<string,Queue<string>> namesDict;
     private Dictionary<string,Queue<string>> sentencesDict;
@@ -49,8 +50,8 @@ public class DialogueManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // id = checkPointGen.rng;
-        id = 11;
+        id = checkPointGen.rng;
+        // id = 8;
         dialogue = new Dialogue();
         dialogue.content = new List<string>();
         dialogueContent = new List<string>();
@@ -77,6 +78,8 @@ public class DialogueManager : MonoBehaviour
         sentencesDict.Add("C",sentencesOptionC);
         currentOption = "default";
         optionsContent = new Dictionary<string,string>();
+        hasOption = false;
+        GameManager.Instance.pause = true;
         //StartCoroutine(LoadBackGround());
         charNum = new List<int>();
         charNum.Add(1);
@@ -90,7 +93,7 @@ public class DialogueManager : MonoBehaviour
         charNum.Add(1);
         charNum.Add(1);
         charNum.Add(2);
-
+        CarController.Instance.resetMomentum();
         //LoadCharacters(charNum[id-1]);
         dialogueBoxAnimator.SetBool("IsOpen", false);
         for(int i = 1;i<7;i++){
@@ -187,6 +190,7 @@ public class DialogueManager : MonoBehaviour
             }
             else if(isName){
                 if(sentence.Contains(" || ")){
+                    hasOption  = true;
                     names.Enqueue(sentence.Split(" || ")[0]);
                     string[] tmpOptionsContent = sentence.Split(" || ")[1].Split('/');
                     string[] options = {"A","B","C"};
@@ -259,7 +263,7 @@ public class DialogueManager : MonoBehaviour
             EndDialogue();
             return;
         }
-        if(currentOption == "default" && (sentencesDict[currentOption].Count == 1 || namesDict[currentOption].Count == 1)){
+        if(hasOption && currentOption == "default" && (sentencesDict[currentOption].Count == 1 || namesDict[currentOption].Count == 1)){
             string[] options = {"A","B","C"};
             continueButton.SetActive(false);
             GameObject[] optionsButton = {optionA,optionB,optionC};
@@ -345,7 +349,7 @@ public class DialogueManager : MonoBehaviour
             bgRenderer.sprite = LoadImageFile(bgPath);
         }
         Dictionary<int,Vector3> ScaleDict = new Dictionary<int,Vector3>();
-        ScaleDict.Add(1,new Vector3(2,1,0));
+        ScaleDict.Add(1,new Vector3(5,5,0));
         ScaleDict.Add(2,new Vector3(8,8,0));
         ScaleDict.Add(3,new Vector3(9,9,0));
         ScaleDict.Add(4,new Vector3(8,8,0));

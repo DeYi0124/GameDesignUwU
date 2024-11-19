@@ -67,6 +67,7 @@ public class DialogueManager : MonoBehaviour
         nextSceneDict = new Dictionary<int,string>();
         nextSceneDict.Add(3,"RPS game");
         nextSceneDict.Add(13,"addtion game");
+        nextSceneDict.Add(12,"lockGame");
         namesDict = new Dictionary<string,Queue<string>>();
         namesDict.Add("default",names);
         namesDict.Add("A",namesOptionA);
@@ -363,6 +364,7 @@ public class DialogueManager : MonoBehaviour
         ScaleDict.Add(9,new Vector3(1.3f,1.3f,0));
         ScaleDict.Add(11, new Vector3(1.3f,1.3f,0));
         ScaleDict.Add(13, new Vector3(8,8,0));
+        ScaleDict.Add(12, new Vector3(1.3f,1.3f,0));
         RectTransform transform = BackGround.GetComponent<RectTransform>();
         transform.localScale = ScaleDict[id];
     }
@@ -421,6 +423,8 @@ public class DialogueManager : MonoBehaviour
         ScaleDict[11].Add(new Vector3(15,15,0));
         ScaleDict.Add(13,new List<Vector3>());
         ScaleDict[13].Add(new Vector3(10,10,0));
+        ScaleDict.Add(12,new List<Vector3>());
+        ScaleDict[12].Add(new Vector3(15,15,0));
         RectTransform transform = Character.GetComponent<RectTransform>();
         transform.localScale = ScaleDict[id][characterID-1];
 

@@ -31,7 +31,7 @@ public class Manager : MonoBehaviour
         Exit.text = "";
     }
     void Update() {
-        
+
         if(played && delta == 0) {
             UpdateResult();
             return;
@@ -48,14 +48,14 @@ public class Manager : MonoBehaviour
             if(delta < 0.01) delta = 0;
             //Debug.Log(delta);
         }
-        
+
     }
     public void Play(int id) {
         playerId = id;
         Button []btns = this.GetComponentsInChildren<Button>();
         Image []imgs = this.GetComponentsInChildren<Image>();
         imgs[id].color = new Color32(34, 234, 69, 100);
-        
+
         for (int i = 0; i < 15; i++) {
             // Debug.Log("????" + i.ToString());
             btns[i].enabled = false;
@@ -64,7 +64,7 @@ public class Manager : MonoBehaviour
             //     continue;
             // }
             //btns[i].interactable = false;
-            
+
         }
         delta = Random.Range(10, 30);
         played = true;

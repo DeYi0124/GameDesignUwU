@@ -50,8 +50,8 @@ public class DialogueManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        id = checkPointGen.rng;
-        // id = 8;
+        //id = checkPointGen.rng;
+        id = 13;
         dialogue = new Dialogue();
         dialogue.content = new List<string>();
         dialogueContent = new List<string>();
@@ -66,6 +66,7 @@ public class DialogueManager : MonoBehaviour
         speakerID = new string[7];
         nextSceneDict = new Dictionary<int,string>();
         nextSceneDict.Add(3,"RPS game");
+        nextSceneDict.Add(13,"addtion game");
         namesDict = new Dictionary<string,Queue<string>>();
         namesDict.Add("default",names);
         namesDict.Add("A",namesOptionA);
@@ -93,6 +94,8 @@ public class DialogueManager : MonoBehaviour
         charNum.Add(1);
         charNum.Add(1);
         charNum.Add(2);
+        charNum.Add(1);
+        charNum.Add(1); //addtion game
         CarController.Instance.resetMomentum();
         //LoadCharacters(charNum[id-1]);
         dialogueBoxAnimator.SetBool("IsOpen", false);
@@ -132,17 +135,17 @@ public class DialogueManager : MonoBehaviour
             dialogueContent = tmpDialogueContent.Split('\n').ToList();
         }
         else
-        {   
+        {
             yield return null;
             dialogueContent = File.ReadAllLines(path).ToList();
         }
-        
+
     }
     public void TriggerDialogue(){
         for( int i = 0;i < dialogueContent.Count; i++){
             dialogue.content.Add(dialogueContent[i]);
         }
-        
+
         speakerID = dialogue.content[0].Trim().Split(' ');
         dialogue.content.RemoveAt(0);
         if(speakerID[speakerID.Count()-1] == "*")
@@ -213,7 +216,7 @@ public class DialogueManager : MonoBehaviour
         DisplayNextSentence();
     }
     public void StartDialogue (Dialogue dialogue){
-        
+
         dialogueBoxAnimator.SetBool("IsOpen", true);
         names.Clear();
         sentences.Clear();
@@ -230,7 +233,7 @@ public class DialogueManager : MonoBehaviour
         }
 
         DisplayNextSentence();
-        
+
 
     }
     public void setToOptionA(){
@@ -324,7 +327,7 @@ public class DialogueManager : MonoBehaviour
         else {
             GameManager.Instance.pause = false;
             SceneManager.LoadScene("MainScene");
-        }  
+        }
     }
 
     private IEnumerator LoadBackGround(){
@@ -359,6 +362,7 @@ public class DialogueManager : MonoBehaviour
         ScaleDict.Add(8,new Vector3(8,8,0));
         ScaleDict.Add(9,new Vector3(1.3f,1.3f,0));
         ScaleDict.Add(11, new Vector3(1.3f,1.3f,0));
+        ScaleDict.Add(13, new Vector3(8,8,0));
         RectTransform transform = BackGround.GetComponent<RectTransform>();
         transform.localScale = ScaleDict[id];
     }
@@ -415,6 +419,8 @@ public class DialogueManager : MonoBehaviour
         ScaleDict.Add(11,new List<Vector3>());
         ScaleDict[11].Add(new Vector3(35,35,0));
         ScaleDict[11].Add(new Vector3(15,15,0));
+        ScaleDict.Add(13,new List<Vector3>());
+        ScaleDict[13].Add(new Vector3(10,10,0));
         RectTransform transform = Character.GetComponent<RectTransform>();
         transform.localScale = ScaleDict[id][characterID-1];
 

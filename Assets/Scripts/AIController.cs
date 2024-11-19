@@ -30,7 +30,7 @@ public class AIController : MonoBehaviour
         if(GameManager.Instance.getTime() > 60) {
             StartCoroutine(wait(1f));
         }
-        if (!(GameManager.Instance.pause)){ 
+        if (!(GameManager.Instance.pause)){
             Vector3 positionDiff = CarController.Instance.transform.position - transform.position;
             var enemySprite = GameObject.Find("ChasingEnemySprite").GetComponent<SpriteRenderer>();
             if(positionDiff.x == 0)
@@ -52,7 +52,7 @@ public class AIController : MonoBehaviour
                     transform.position += transform.right * MoveSpeed * Time.deltaTime;
                         //Here Call any function U want Like Shoot at here or something
                 }
-            
+
             }
         }
     }

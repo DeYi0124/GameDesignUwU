@@ -181,7 +181,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Objective:  Input two integer a and b, print the sum.
 
-    example: input:
+    Example: input:
     15 4, output: 19.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0161d805a3764c089bef00bfe00793f5, type: 2}
@@ -2438,6 +2438,7 @@ MonoBehaviour:
   inputField: {fileID: 1371054025}
   consoleGameObject: {fileID: 2117045408}
   exitButtonObject: {fileID: 1070032970}
+  submitButton: {fileID: 844359702}
   realCode: {fileID: 385908475}
 --- !u!1 &1634895570
 GameObject:

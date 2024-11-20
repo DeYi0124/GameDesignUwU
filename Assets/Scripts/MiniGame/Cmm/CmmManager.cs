@@ -15,6 +15,7 @@ public class CmmManager : MonoBehaviour
     public TMP_InputField inputField;
     public GameObject consoleGameObject;
     public GameObject exitButtonObject;
+    public GameObject submitButton;
     public GameObject realCode;
     private string submition;
     private bool submitted = false;
@@ -29,6 +30,7 @@ public class CmmManager : MonoBehaviour
     {
         inputField.ActivateInputField();
         consoleGameObject.SetActive(true);
+        submitButton.SetActive(true);
         realCode.SetActive(false);
         exitButtonObject.SetActive(false);
         submitted = false;
@@ -38,6 +40,7 @@ public class CmmManager : MonoBehaviour
         hints = new Dictionary<int,string>();
         consoleLog = new Dictionary<int,string>();
         lines = new List<string>();
+        hints.Add(-1, "Although being creative is quite impressive. In C-- we do not tolerate creativeity, FOLLOW THE FUCKING RULES AND LISTEN TO WHAT I SAID.");
         hints.Add(0,"Looks like you forgot to teach the code how to speak english, no wonder the code is not working. Try including english.h in the first line.");
         hints.Add(1,"In C--, using semicolon is a grave sin. Just looking at the ; makes me wanna throw up, try using the beautiful colon (:) instead.");
         hints.Add(2,"When variables and functions are declared in C--, they're always very excited, to express their excitement, an exclamation mark (!) is added after the declaration. For example: int! a = 0;");
@@ -47,6 +50,7 @@ public class CmmManager : MonoBehaviour
         hints.Add(6,"Oh did you forget your C classes, \"Home\" is a char array, so now the main function is not an int anymore. Try const char*! main(){ instead");
         hints.Add(7,"Oh my god, you did it!, you're now a C-- pro. Let's check if you code work by inputting two integer into the console, for example: 3 4");
         hints.Add(8,"Here is a very basic c code, now prove your worth by translating it into the glorious C-- language.");
+        consoleLog.Add(-1,"");
         consoleLog.Add(0,"");
         consoleLog.Add(1,"");
         consoleLog.Add(2,"");
@@ -71,8 +75,9 @@ public class CmmManager : MonoBehaviour
             if(success && realCodeTyped){
                 string[] nums = submition.Trim().Split(' ');
                 realCodeText.text = submition +'\n'+ (Int32.Parse(nums[0])+Int32.Parse(nums[1])).ToString();
-                hint.text = "Looks like your code is working, you can now leave with my bike and a invaluabe C-- skill.";
+                hint.text = "Looks like your code is working, you can now leave with my bike and invaluabe C-- skill.";
                 exitButtonObject.SetActive(true);
+                submitButton.SetActive(false);
             }
             if(errorID == 7)
                 success = true;
@@ -105,12 +110,13 @@ public class CmmManager : MonoBehaviour
             if(ans == getTemplate(i) && i >= errorID){
                 errorID = i;
             }
-        }
+        } 
         return ;
     }
 
     private string findLine(int ID){
         int lineNum = 0;
+        consoleLog[-1] = "幹，哪個腦麻亂動我的code，你他媽給我重來。";
         consoleLog[0] = "編譯錯誤:第1行，錯誤訊息: 幹我看不懂英文啦，include是三小意思";
         consoleLog[1] = "Compilation error: line lineNum, error message: What the fuck is this? why are you using the disgusting semicolon?";
         consoleLog[2] = "Compilation error: line lineNum, error message: Even amateur C-- programmers know that you need exclamation marks after declaration.";
@@ -120,7 +126,14 @@ public class CmmManager : MonoBehaviour
         consoleLog[6] = "Compilation error: line lineNum, error message: You are such a disgrace to the CSIE department and to yourself, you should be using const char*! main(){ instead";
         consoleLog[7] = "You finally did it!, you can press submit again to try out the code you just wrote.";
         if (ID == 0){
-            return consoleLog[0];
+            if(submition == getTemplate(0)){
+                hint.text = hints[0];
+                return consoleLog[0];
+            } else {
+                inputField.text = "#include<stdio.h>\nint main(){\n  int a = 0;\n  int b = 0;\n  int sum = 0;\n  scanf(\"%d %d\",&a,&b);\n  sum = a + b;\n  printf(\"%d\",sum);\n  return 0;\n}";
+                hint.text = hints[-1];
+                return consoleLog[-1];
+            }
         }
         else if(ID == 1){
             for(int i = 0;i < lines.Count;i++){
@@ -130,6 +143,12 @@ public class CmmManager : MonoBehaviour
                 }
             }
             consoleLog[1] = consoleLog[1].Replace("lineNum",lineNum.ToString());
+            if(lineNum == 0) {
+                consoleLog[ID] = "Something went wrong, you must have fucked something up, just like usual. But don't worry. We can start all over again, make sure you don't fuck up AGAIN.";
+                hint.text = hints[-1];
+                inputField.text = "#include<stdio.h>\nint main(){\n  int a = 0;\n  int b = 0;\n  int sum = 0;\n  scanf(\"%d %d\",&a,&b);\n  sum = a + b;\n  printf(\"%d\",sum);\n  return 0;\n}";
+                errorID = 0;
+            }
             return consoleLog[1];
         }
         else if (ID == 2){
@@ -140,6 +159,12 @@ public class CmmManager : MonoBehaviour
                 }
             }
             consoleLog[2] = consoleLog[2].Replace("lineNum",lineNum.ToString());
+            if(lineNum == 0) {
+                consoleLog[ID] = "Something went wrong, you must have fucked something up, just like usual. But don't worry. We can start all over again, make sure you don't fuck up AGAIN.";
+                hint.text = hints[-1];
+                inputField.text = "#include<stdio.h>\nint main(){\n  int a = 0;\n  int b = 0;\n  int sum = 0;\n  scanf(\"%d %d\",&a,&b);\n  sum = a + b;\n  printf(\"%d\",sum);\n  return 0;\n}";
+                errorID = 0;
+            }
             return consoleLog[2];
         }
         else if (ID == 3){
@@ -150,6 +175,12 @@ public class CmmManager : MonoBehaviour
                 }
             }
             consoleLog[3] = consoleLog[3].Replace("lineNum",lineNum.ToString());
+            if(lineNum == 0) {
+                consoleLog[ID] = "Something went wrong, you must have fucked something up, just like usual. But don't worry. We can start all over again, make sure you don't fuck up AGAIN.";
+                hint.text = hints[-1];
+                inputField.text = "#include<stdio.h>\nint main(){\n  int a = 0;\n  int b = 0;\n  int sum = 0;\n  scanf(\"%d %d\",&a,&b);\n  sum = a + b;\n  printf(\"%d\",sum);\n  return 0;\n}";
+                errorID = 0;
+            }
             return consoleLog[3];
         }
         else if (ID == 4){
@@ -160,6 +191,12 @@ public class CmmManager : MonoBehaviour
                 }
             }
             consoleLog[4] = consoleLog[4].Replace("lineNum",lineNum.ToString());
+            if(lineNum == 0) {
+                consoleLog[ID] = "Something went wrong, you must have fucked something up, just like usual. But don't worry. We can start all over again, make sure you don't fuck up AGAIN.";
+                hint.text = hints[-1];
+                inputField.text = "#include<stdio.h>\nint main(){\n  int a = 0;\n  int b = 0;\n  int sum = 0;\n  scanf(\"%d %d\",&a,&b);\n  sum = a + b;\n  printf(\"%d\",sum);\n  return 0;\n}";
+                errorID = 0;
+            }
             return consoleLog[4];
         }
         else if (ID == 5){
@@ -170,6 +207,12 @@ public class CmmManager : MonoBehaviour
                 }
             }
             consoleLog[5] = consoleLog[5].Replace("lineNum",lineNum.ToString());
+            if(lineNum == 0) {
+                consoleLog[ID] = "Something went wrong, you must have fucked something up, just like usual. But don't worry. We can start all over again, make sure you don't fuck up AGAIN.";
+                hint.text = hints[-1];
+                inputField.text = "#include<stdio.h>\nint main(){\n  int a = 0;\n  int b = 0;\n  int sum = 0;\n  scanf(\"%d %d\",&a,&b);\n  sum = a + b;\n  printf(\"%d\",sum);\n  return 0;\n}";
+                errorID = 0;
+            }
             return consoleLog[5];
         }
         else if (ID == 6){
@@ -180,6 +223,12 @@ public class CmmManager : MonoBehaviour
                 }
             }
             consoleLog[6] = consoleLog[6].Replace("lineNum",lineNum.ToString());
+            if(lineNum == 0) {
+                consoleLog[ID] = "Something went wrong, you must have fucked something up, just like usual. But don't worry. We can start all over again, make sure you don't fuck up AGAIN.";
+                hint.text = hints[-1];
+                inputField.text = "#include<stdio.h>\nint main(){\n  int a = 0;\n  int b = 0;\n  int sum = 0;\n  scanf(\"%d %d\",&a,&b);\n  sum = a + b;\n  printf(\"%d\",sum);\n  return 0;\n}";
+                errorID = 0;
+            }
             return consoleLog[6];
         }
         else if (ID == 7){

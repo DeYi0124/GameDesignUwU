@@ -5,6 +5,7 @@ using UnityEngine;
 public class CarController : MonoBehaviour
 {
     public static CarController Instance;
+    public GameObject car;
     [Header("Car Settings")]
     public float accelerate = 30.0f;
     public float turn = 3.5f;
@@ -64,6 +65,7 @@ public class CarController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(GameManager.Instance.pause) return;
         if(GameManager.Instance.PR >= 100){
             GameObject.FindWithTag("Car").transform.GetChild(0).GetChild(5).gameObject.SetActive(true);
             carAnimator.SetBool("isGlowing", true);
@@ -82,7 +84,7 @@ public class CarController : MonoBehaviour
             ApplyEngineForce();
             KillOrthogonalVelocity();
             ApplySteering();
-        }
+        } 
     }
 
     void ApplyEngineForce()
@@ -203,8 +205,7 @@ public class CarController : MonoBehaviour
 
     }
     public void resetMomentum(){
-
-        var carTransform= GameObject.FindWithTag("Car").GetComponent<Transform>();
+        SetInputVector(Vector2.zero);
         carRigidbody2D.drag = 0;
     }
 }

@@ -11,7 +11,7 @@ using UnityEngine.SceneManagement;
 
 public class DialogueManager : MonoBehaviour
 {
-
+    public GameObject Car;
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI dialogueText;
     public Animator dialogueBoxAnimator;
@@ -50,8 +50,9 @@ public class DialogueManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // id = checkPointGen.rng;
-        id = 14;
+        Car = GameObject.FindWithTag("Car");
+        id = checkPointGen.rng;
+        // id = 14;
         dialogue = new Dialogue();
         dialogue.content = new List<string>();
         dialogueContent = new List<string>();
@@ -83,6 +84,7 @@ public class DialogueManager : MonoBehaviour
         optionsContent = new Dictionary<string,string>();
         hasOption = false;
         GameManager.Instance.pause = true;
+        Car.SetActive(false);
         //StartCoroutine(LoadBackGround());
         charNum = new List<int>();
         charNum.Add(1);
@@ -320,6 +322,7 @@ public class DialogueManager : MonoBehaviour
     }
 
     void EndDialogue(){
+        Car.SetActive(true);
         dialogueBoxAnimator.SetBool("IsOpen", false);
         for (int i = 1;i< 7;i++){
             TalkingCurrentSpeaker(i,false);

@@ -23,7 +23,7 @@ public class carInputHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(GameManager.Instance.pause) return;
         Vector2 inputVector = Vector2.zero;
         inputVector.x = Input.GetAxis("Horizontal");
         inputVector.y = Input.GetAxis("Vertical");

@@ -7,6 +7,7 @@ public class minimap : MonoBehaviour
     public Transform car;
 
     void LateUpdate(){
+        if(GameManager.Instance.pause) return;
         var car = GameObject.FindWithTag("Car").GetComponent<Transform>().position;
         Vector3 newPosition = car;
         newPosition.z = transform.position.z;

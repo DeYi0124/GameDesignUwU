@@ -29,6 +29,7 @@ public class CarSoundHandler : MonoBehaviour
     {
         UpdateEngineSFX();
         UpdateScreechSFX();
+        if(GameManager.Instance.pause) return;
         if (Input.GetKey("space"))
         {
             //Debug.Log("space key was pressed");

@@ -87,7 +87,7 @@ public class checkPointHandler : MonoBehaviour
             }
         }
 
-        if(isWorking && CarController.Instance.bike < CarController.Instance.maxBike) {
+        if(!GameManager.Instance.pause && isWorking && CarController.Instance.bike < CarController.Instance.maxBike) {
             progress -= ((GameManager.Instance.skillLevel+1)*Time.deltaTime);
             progress = Mathf.Clamp01(progress);
             m_SpriteRenderer.color = new Color (1, 0, 0, progress);

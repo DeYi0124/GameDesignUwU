@@ -50,8 +50,8 @@ public class DialogueManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        id = checkPointGen.rng;
-        // id = 8;
+        // id = checkPointGen.rng;
+        id = 14;
         dialogue = new Dialogue();
         dialogue.content = new List<string>();
         dialogueContent = new List<string>();
@@ -93,6 +93,9 @@ public class DialogueManager : MonoBehaviour
         charNum.Add(1);
         charNum.Add(1);
         charNum.Add(2);
+        charNum.Add(1);
+        charNum.Add(0);
+        charNum.Add(1);
         CarController.Instance.resetMomentum();
         //LoadCharacters(charNum[id-1]);
         dialogueBoxAnimator.SetBool("IsOpen", false);
@@ -359,6 +362,7 @@ public class DialogueManager : MonoBehaviour
         ScaleDict.Add(8,new Vector3(8,8,0));
         ScaleDict.Add(9,new Vector3(1.3f,1.3f,0));
         ScaleDict.Add(11, new Vector3(1.3f,1.3f,0));
+        ScaleDict.Add(14, new Vector3(1.2f,1.2f,0));
         RectTransform transform = BackGround.GetComponent<RectTransform>();
         transform.localScale = ScaleDict[id];
     }
@@ -415,6 +419,8 @@ public class DialogueManager : MonoBehaviour
         ScaleDict.Add(11,new List<Vector3>());
         ScaleDict[11].Add(new Vector3(35,35,0));
         ScaleDict[11].Add(new Vector3(15,15,0));
+        ScaleDict.Add(14,new List<Vector3>());
+        ScaleDict[14].Add(new Vector3(45,45,0));
         RectTransform transform = Character.GetComponent<RectTransform>();
         transform.localScale = ScaleDict[id][characterID-1];
 

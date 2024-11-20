@@ -24,6 +24,9 @@ EditorBuildSettings:
     path: Assets/Scenes/miniGames/RPS game.unity
     guid: a4b1dd253d35730409e4782f7c1cf1b7
   - enabled: 1
+    path: Assets/Scenes/miniGames/Cmm.unity
+    guid: eb7cbb0c804b0fd45a088958d0c0fc9c
+  - enabled: 1
     path: Assets/Scenes/DeathReportScene.unity
     guid: 7c4aad01294207a48afc4bc3d944b812
   m_configObjects: {}

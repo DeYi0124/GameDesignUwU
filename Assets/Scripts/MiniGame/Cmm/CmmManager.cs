@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using System.Linq;
 using System;
+using UnityEngine.SceneManagement;
 
 public class CmmManager : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class CmmManager : MonoBehaviour
     public TMP_InputField realCodeText;
     public TMP_InputField inputField;
     public GameObject consoleGameObject;
+    public GameObject exitButtonObject;
     public GameObject realCode;
     private string submition;
     private bool submitted = false;
@@ -26,6 +28,9 @@ public class CmmManager : MonoBehaviour
     void Start()
     {
         inputField.ActivateInputField();
+        consoleGameObject.SetActive(true);
+        realCode.SetActive(false);
+        exitButtonObject.SetActive(false);
         submitted = false;
         success = false;
         realCodeTyped = false;
@@ -40,7 +45,7 @@ public class CmmManager : MonoBehaviour
         hints.Add(4,"In C--, because I'm a cute discord kitten, initialization value for every variable needs to be UwU. For example: int! a equals UwU");
         hints.Add(5,"In C--, everyone deserves a warm home, including the main function. Instead of 0, main function should return Home, try changing the 0 to \"Home\"");
         hints.Add(6,"Oh did you forget your C classes, \"Home\" is a char array, so now the main function is not an int anymore. Try const char*! main(){ instead");
-        hints.Add(7,"Oh my god, you did it!, you're now a C-- pro. I'll allow you to take my bike.");
+        hints.Add(7,"Oh my god, you did it!, you're now a C-- pro. Let's check if you code work by inputting two integer into the console, for example: 3 4");
         hints.Add(8,"Here is a very basic c code, now prove your worth by translating it into the glorious C-- language.");
         consoleLog.Add(0,"");
         consoleLog.Add(1,"");
@@ -66,7 +71,8 @@ public class CmmManager : MonoBehaviour
             if(success && realCodeTyped){
                 string[] nums = submition.Trim().Split(' ');
                 realCodeText.text = submition +'\n'+ (Int32.Parse(nums[0])+Int32.Parse(nums[1])).ToString();
-
+                hint.text = "Looks like your code is working, you can now leave with my bike and a invaluabe C-- skill.";
+                exitButtonObject.SetActive(true);
             }
             if(errorID == 7)
                 success = true;
@@ -89,6 +95,11 @@ public class CmmManager : MonoBehaviour
             consoleGameObject.SetActive(false);
         }
     }
+    public void exitButton(){
+        GameManager.Instance.pause = false;
+        SceneManager.LoadSceneAsync("MainScene");
+
+    }
     private void judge(string ans){
         for(int i = 7;i >= 0;i--){
             if(ans == getTemplate(i) && i >= errorID){
@@ -97,6 +108,7 @@ public class CmmManager : MonoBehaviour
         }
         return ;
     }
+
     private string findLine(int ID){
         int lineNum = 0;
         consoleLog[0] = "編譯錯誤:第1行，錯誤訊息: 幹我看不懂英文啦，include是三小意思";

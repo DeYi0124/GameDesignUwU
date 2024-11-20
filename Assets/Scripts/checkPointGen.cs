@@ -32,7 +32,7 @@ public class checkPointGen : MonoBehaviour
             textGameObject.SetActive(true);
             bikePerPointText = textGameObject.GetComponent<TextMeshPro>();
             bikePerPointText.text = tmpcph.getBikePerPoint().ToString();
-            
+
 
             tmpcph.id = tmpBike;
             tmpcph.OnReceiving += OnReceiving;
@@ -111,5 +111,5 @@ public class checkPointGen : MonoBehaviour
         }
 
     }
-    
+
 }

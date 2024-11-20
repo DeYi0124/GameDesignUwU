@@ -29,4 +29,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/DeathReportScene.unity
     guid: 7c4aad01294207a48afc4bc3d944b812
+  - enabled: 1
+    path: Assets/Scenes/miniGames/addtion game.unity
+    guid: 6956cd44984bf9847adfd467d28905f8
+    path: Assets/Scenes/miniGames/lockGame.unity
+    guid: 30449599aca58434c9ccb7f408088f4f
   m_configObjects: {}

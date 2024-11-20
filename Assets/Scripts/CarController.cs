@@ -34,7 +34,7 @@ public class CarController : MonoBehaviour
         if (Instance != null && Instance != this) {
             Destroy(gameObject);
         }
-        else 
+        else
             Instance = this;
         carRigidbody2D = GetComponent<Rigidbody2D>();
         bike = 0;
@@ -58,7 +58,7 @@ public class CarController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -73,7 +73,7 @@ public class CarController : MonoBehaviour
             carAnimator.SetBool("isGlowing", false);
         }
         //Debug.Log(transform.position);
-        //Debug.Log(transform.rotation);  
+        //Debug.Log(transform.rotation);
     }
 
     void FixedUpdate()
@@ -109,7 +109,7 @@ public class CarController : MonoBehaviour
         carRigidbody2D.AddForce(engineForceVector, ForceMode2D.Force);
     }
 
-    void ApplySteering() 
+    void ApplySteering()
     {
         if(GameManager.Instance.pause) {
             return;
@@ -120,7 +120,7 @@ public class CarController : MonoBehaviour
         carRigidbody2D.MoveRotation(rotatingAngle);
     }
 
-    void KillOrthogonalVelocity() 
+    void KillOrthogonalVelocity()
     {
         if(GameManager.Instance.pause) {
             return;
@@ -180,7 +180,7 @@ public class CarController : MonoBehaviour
         accInput = inputVector.y;
         if(accInput < 0) {
             steerInput = -steerInput;
-        } 
+        }
         if(onGrass) {
             //Debug.Log("GRASS!");
             steerInput *= 0.3f;
@@ -192,7 +192,7 @@ public class CarController : MonoBehaviour
             accInput *= 0;
         }
     }
-    
+
     public void reset(){
         Vector3 spawnPoint = new Vector3(-27,-2,0);
         var carTransform= GameObject.FindWithTag("Car").GetComponent<Transform>();

@@ -20,7 +20,7 @@ public class checkPointHandler : MonoBehaviour
     public int id;
     public Transform customPivot;
 
-    
+
     //private float timer = 0;
 
     void OnTriggerEnter2D(Collider2D collider2D) {
@@ -41,7 +41,7 @@ public class checkPointHandler : MonoBehaviour
     {
         m_SpriteRenderer = GetComponent<SpriteRenderer>();
         m_SpriteRenderer.color = new Color (1, 0, 0, progress);
-        GameObject tmp = this.gameObject.transform.GetChild(0).gameObject; 
+        GameObject tmp = this.gameObject.transform.GetChild(0).gameObject;
         tmp.SetActive(true);
         tmp.GetComponent<TextMeshPro>().text = bikePerPoint.ToString();
 
@@ -57,7 +57,7 @@ public class checkPointHandler : MonoBehaviour
             Vector3 positionDiff = CarController.Instance.transform.position - transform.position;
             var enemySprite = this.gameObject.GetComponent<SpriteRenderer>();
             GameObject textObject = this.gameObject.transform.GetChild(0).gameObject;
-            
+
             if (Vector3.Distance(transform.position, CarController.Instance.transform.position) < MinDist)
             {
                 if(positionDiff.x == 0)
@@ -75,7 +75,7 @@ public class checkPointHandler : MonoBehaviour
                     textObject.GetComponent<RectTransform>().localScale = scaleForRHS;
                 }
                 enemySprite.flipY = (positionDiff.x < 0);
-                
+
                 transform.right = positionDiff;
                 MoveSpeed = 1;
                 transform.position += transform.right * MoveSpeed * Time.deltaTime;
@@ -89,7 +89,7 @@ public class checkPointHandler : MonoBehaviour
 
         if(isWorking && CarController.Instance.bike < CarController.Instance.maxBike) {
             progress -= ((GameManager.Instance.skillLevel+1)*Time.deltaTime);
-            progress = Mathf.Clamp01(progress);  
+            progress = Mathf.Clamp01(progress);
             m_SpriteRenderer.color = new Color (1, 0, 0, progress);
             if (progress == 0) {
                 CarController.Instance.bike+= bikePerPoint;

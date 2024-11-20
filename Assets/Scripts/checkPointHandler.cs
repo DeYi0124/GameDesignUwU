@@ -24,12 +24,12 @@ public class checkPointHandler : MonoBehaviour
     //private float timer = 0;
 
     void OnTriggerEnter2D(Collider2D collider2D) {
-        if(progress != 0 && collider2D.CompareTag("Car"))
+        if(progress != 0 && collider2D.CompareTag("CarCollider"))
             isWorking = true;
     }
 
     void OnTriggerExit2D(Collider2D collider2D) {
-        if(progress != 0 && collider2D.CompareTag("Car"))
+        if(progress != 0 && collider2D.CompareTag("CarCollider"))
             isWorking = false;
     }
 

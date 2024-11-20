@@ -16,4 +16,4 @@ Well then, prove to me by converting the following code into the best programmin
 Player
 Which is?
 CSIE_dumbass
-A language I created. The one and only: C--
+A language I created. The one and only: C-- (C minus minus)

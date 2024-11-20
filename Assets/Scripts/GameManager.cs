@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
     public static Vector3 carPosition;
     public static int days = 0;
+    public GameObject Car;
     public GameState State;
     public int bike = 0;
     public int KPI = 5;
@@ -137,6 +138,9 @@ public class GameManager : MonoBehaviour
     }
 
     void Update() {
+        if(!pause){
+            Car.SetActive(true);
+        }
         GameStateHandle();
     }
 

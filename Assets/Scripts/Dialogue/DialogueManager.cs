@@ -322,14 +322,14 @@ public class DialogueManager : MonoBehaviour
     }
 
     void EndDialogue(){
-        Car.SetActive(true);
         dialogueBoxAnimator.SetBool("IsOpen", false);
         for (int i = 1;i< 7;i++){
             TalkingCurrentSpeaker(i,false);
             InSceneCurrentSpeaker(i,false);
         }
-        if(nextSceneDict.ContainsKey(id))
+        if(nextSceneDict.ContainsKey(id)){
             SceneManager.LoadScene(nextSceneDict[id]);
+        }
         else {
             GameManager.Instance.pause = false;
             SceneManager.LoadScene("MainScene");

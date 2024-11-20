@@ -29,6 +29,7 @@ public class CarController : MonoBehaviour
     void Awake()
     {
         CurrentBike[] currs = FindObjectsOfType<CurrentBike>();
+        car = GameObject.FindWithTag("Car");
         foreach (CurrentBike curr in currs) {
             curr.OnSave += OnSave;
         }
@@ -67,11 +68,11 @@ public class CarController : MonoBehaviour
     {
         if(GameManager.Instance.pause) return;
         if(GameManager.Instance.PR >= 100){
-            GameObject.FindWithTag("Car").transform.GetChild(0).GetChild(5).gameObject.SetActive(true);
+            car.transform.GetChild(0).GetChild(5).gameObject.SetActive(true);
             carAnimator.SetBool("isGlowing", true);
         }
         else{
-            GameObject.FindWithTag("Car").transform.GetChild(0).GetChild(5).gameObject.SetActive(false);
+            car.transform.GetChild(0).GetChild(5).gameObject.SetActive(false);
             carAnimator.SetBool("isGlowing", false);
         }
         //Debug.Log(transform.position);

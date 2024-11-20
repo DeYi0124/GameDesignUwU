@@ -9,6 +9,7 @@ TagManager:
   - Car
   - save
   - EnemySprite
+  - CarCollider
   layers:
   - Default
   - TransparentFX

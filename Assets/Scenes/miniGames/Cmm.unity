@@ -1531,7 +1531,7 @@ RectTransform:
   m_GameObject: {fileID: 1070032970}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.9311, y: 1.9311, z: 1.9311}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1906116577}
@@ -1539,7 +1539,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 40, y: 64}
+  m_AnchoredPosition: {x: 326, y: -159}
   m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1070032972
@@ -2434,6 +2434,7 @@ MonoBehaviour:
   answer: {fileID: 149357003}
   hint: {fileID: 1634895572}
   console: {fileID: 476746449}
+  submitText: {fileID: 551196690}
   realCodeText: {fileID: 385908476}
   inputField: {fileID: 1371054025}
   consoleGameObject: {fileID: 2117045408}

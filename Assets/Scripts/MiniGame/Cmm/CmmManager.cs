@@ -5,12 +5,14 @@ using TMPro;
 using System.Linq;
 using System;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class CmmManager : MonoBehaviour
 {
     public TextMeshProUGUI answer;
     public TextMeshProUGUI hint;
     public TextMeshProUGUI console;
+    public TextMeshProUGUI submitText;
     public TMP_InputField realCodeText;
     public TMP_InputField inputField;
     public GameObject consoleGameObject;
@@ -21,11 +23,22 @@ public class CmmManager : MonoBehaviour
     private bool submitted = false;
     private Dictionary<int,string> hints = new Dictionary<int,string>();
     private Dictionary<int,string> consoleLog = new Dictionary<int,string>();
+    private List<(int, int)> RedArray = new List<(int,int)>(){(55, 27), (101, 37), (87, 34), (108, 54), (122, 61), (43, 55), (118, 28), (106, 32), (58, 41), (33, 65)};
     private List<string> lines = new List<string>();
     private int errorID = 0;
     private bool success = false;
     private bool realCodeTyped = false;
     // Start is called before the first frame update
+    void makeItRed(int start, int size) {
+        if(size <= 0) return;
+        if(start < 0) return;
+        Debug.Log(hint.text);
+        //hint.text.Trim((char)8203);
+        Debug.Log(hint.textInfo.characterInfo.Count());
+        for(int i = 0; i < size; i++) {
+            hint.textInfo.characterInfo[i+start].color = Color.red;
+        }
+    }
     void Start()
     {
         inputField.ActivateInputField();
@@ -46,7 +59,7 @@ public class CmmManager : MonoBehaviour
         hints.Add(2,"When variables and functions are declared in C--, they're always very excited, to express their excitement, an exclamation mark (!) is added after the declaration. For example: int! a = 0;");
         hints.Add(3,"I designed C-- for everyone to learn, that's why we spell out all the operators in case someone forgets what they do. Try replacing the = with the word equals and + with the word plus.");
         hints.Add(4,"In C--, because I'm a cute discord kitten, initialization value for every variable needs to be UwU. For example: int! a equals UwU");
-        hints.Add(5,"In C--, everyone deserves a warm home, including the main function. Instead of 0, main function should return Home, try changing the 0 to \"Home\"");
+        hints.Add(5,"In C--, everyone deserves a warm home, including the main function. Instead of 0, main function should return \"Home\", try changing the 0 to \"Home\"");
         hints.Add(6,"Oh did you forget your C classes, \"Home\" is a char array, so now the main function is not an int anymore. Try const char*! main(){ instead");
         hints.Add(7,"Oh my god, you did it!, you're now a C-- pro. Let's check if you code work by inputting two integer into the console, for example: 3 4");
         hints.Add(8,"Here is a very basic c code, now prove your worth by translating it into the glorious C-- language.");
@@ -62,21 +75,37 @@ public class CmmManager : MonoBehaviour
         consoleLog.Add(8,"");
         hint.text = hints[8];
         console.text = consoleLog[8];
+        //makeItRed(RedArray[9].Item1, RedArray[9].Item2);
     }
     // Update is called once per frame
     void Update()
     {
         if (submitted){
-
-            judge(submition);
-
-            hint.text = hints[errorID];
-            console.text = findLine(errorID);
+            if(!success) {
+                judge(submition);
+                hint.text = hints[errorID];
+                console.text = findLine(errorID);
+            }
             if(success && realCodeTyped){
                 string[] nums = submition.Trim().Split(' ');
-                realCodeText.text = submition +'\n'+ (Int32.Parse(nums[0])+Int32.Parse(nums[1])).ToString();
+                Debug.Log(nums.Count());
+                if(nums.Count() != 2) {
+                    realCodeTyped = false;
+                    hint.text = "Are you stupid or something? Exactly 2 integers are required. 2! DOS!";
+                    return;
+                }
+                int finalAns = 0;
+                try {
+                    finalAns = Int32.Parse(nums[0])+Int32.Parse(nums[1]);
+                } catch (Exception e){
+                    realCodeTyped = false;
+                    hint.text = "You must input two integer, can't you read the objective sign above?";
+                    return;
+                }
+                realCodeText.text = submition +'\n'+ finalAns.ToString();
                 hint.text = "Looks like your code is working, you can now leave with my bike and invaluabe C-- skill.";
                 exitButtonObject.SetActive(true);
+                realCodeText.readOnly = true;
                 submitButton.SetActive(false);
             }
             if(errorID == 7)
@@ -128,10 +157,12 @@ public class CmmManager : MonoBehaviour
         if (ID == 0){
             if(submition == getTemplate(0)){
                 hint.text = hints[0];
+                //makeItRed(RedArray[1].Item1, RedArray[1].Item2);
                 return consoleLog[0];
             } else {
                 inputField.text = "#include<stdio.h>\nint main(){\n  int a = 0;\n  int b = 0;\n  int sum = 0;\n  scanf(\"%d %d\",&a,&b);\n  sum = a + b;\n  printf(\"%d\",sum);\n  return 0;\n}";
                 hint.text = hints[-1];
+                //makeItRed(RedArray[0].Item1, RedArray[0].Item2);
                 return consoleLog[-1];
             }
         }
@@ -232,6 +263,9 @@ public class CmmManager : MonoBehaviour
             return consoleLog[6];
         }
         else if (ID == 7){
+            inputField.readOnly = true;
+            submitButton.GetComponent<Image>().color = Color.green;
+            submitText.text = "test";
             return consoleLog[7];
 
         }

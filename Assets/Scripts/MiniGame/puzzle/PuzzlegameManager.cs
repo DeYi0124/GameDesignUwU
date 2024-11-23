@@ -82,8 +82,8 @@ public class PuzzlegameManager : MonoBehaviour
     orthoHeight -= pieceHeight;
     orthoWidth -= pieceWidth;
     foreach (Transform piece in pieces) {
-      float x = Random.Range(-orthoWidth, orthoWidth);
-      float y = Random.Range(-orthoHeight, orthoHeight);
+      float x = Random.Range(500-orthoWidth, 500+orthoWidth);
+      float y = Random.Range(500-orthoHeight, 500+orthoHeight);
       piece.position = new Vector3(x, y, -1);
     }
   }
@@ -146,7 +146,7 @@ public class PuzzlegameManager : MonoBehaviour
       pauseTime = true;
       Debug.Log("game lose");
       GameManager.Instance.ReasonText = "Your truck is now forever stuck in the NTUST. You are now fired.";
-      SceneManager.LoadScene("DeathReport");
+      SceneManager.LoadScene("DeathReportScene");
     }
     if (Input.GetMouseButtonDown(0)) {
       RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);

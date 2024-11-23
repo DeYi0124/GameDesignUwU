@@ -15,6 +15,9 @@ public class PuzzlegameManager : MonoBehaviour
   [SerializeField] private Transform piecePrefab;
   [SerializeField] private TextMeshProUGUI UwU;
   [SerializeField] private TextMeshProUGUI timeText;
+  [SerializeField] private TextMeshProUGUI CntText;
+  [SerializeField] private GameObject timu;
+  [SerializeField] private List<GameObject> gl;
   public GameObject exitButton;
 
 
@@ -32,8 +35,7 @@ public class PuzzlegameManager : MonoBehaviour
   private float timer = 60f;
   private bool pauseTime = false;
   void Awake(){
-        InvokeRepeating("updateTime",1f,1f);
-        pauseTime = false;
+        
     }
     void updateTime(){
         if(!pauseTime){
@@ -42,16 +44,27 @@ public class PuzzlegameManager : MonoBehaviour
         }
     }
   void Start() {
+    timu.SetActive(true);
+    gameHolder.gameObject.SetActive(false);
     int r = Random.Range(0, imageTextures.Count);
+    for(int i = 0; i < gl.Count; i++) {
+      if(i != r) {
+        gl[i].SetActive(false);
+      }
+    }
+    GameObject.Find("OK").GetComponent<Button>().onClick.AddListener(delegate { StartGame(imageTextures[r]); });
+  }
+
+  public void StartGame(Texture2D jigsawTexture) {
+    gameHolder.gameObject.SetActive(true);
+    InvokeRepeating("updateTime",1f,1f);
+    pauseTime = false;
+    timu.SetActive(false);
     difficulty = Random.Range(4, 7);
     timer *= (difficulty-1);
     timeText.text = (timer.ToString() + " sec");
     UwU.gameObject.SetActive(false);
     exitButton.SetActive(false);
-    StartGame(imageTextures[r]);
-  }
-
-  public void StartGame(Texture2D jigsawTexture) {
     pieces = new List<Transform>();
     dimensions = GetDimensions(jigsawTexture, difficulty);
     CreateJigsawPieces(jigsawTexture);
@@ -170,6 +183,7 @@ public class PuzzlegameManager : MonoBehaviour
       draggingPiece.GetComponent<BoxCollider2D>().enabled = false;
 
       piecesCorrect++;
+      CntText.text = (piecesCorrect.ToString() + " pcs");
       if (piecesCorrect == pieces.Count) {
         pauseTime = true;
         UwU.gameObject.SetActive(true);

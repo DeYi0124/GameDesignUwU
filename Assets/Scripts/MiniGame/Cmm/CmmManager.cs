@@ -49,7 +49,6 @@ public class CmmManager : MonoBehaviour
         submitted = false;
         success = false;
         realCodeTyped = false;
-        string submition = "";
         hints = new Dictionary<int,string>();
         consoleLog = new Dictionary<int,string>();
         lines = new List<string>();

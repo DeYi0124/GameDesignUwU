@@ -53,6 +53,10 @@ public class manager : MonoBehaviour
         }
         else{
             wrong.SetActive(true);
+            if(CarController.Instance.bike >= 3)
+                CarController.Instance.bike -= 3;
+            else
+                CarController.Instance.bike = 0;
             StartCoroutine(showAndWait());
             isCorrect = false;
 

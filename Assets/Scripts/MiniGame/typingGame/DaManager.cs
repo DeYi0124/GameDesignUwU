@@ -38,7 +38,6 @@ public class DaManager : MonoBehaviour
         for(int i = 0;i < 3;i++){
             hearts[i].SetBool("isHurt",false);
         }
-        string submission = "";
         hp = 0;
         startTime = Time.time;
         time = 30;
@@ -56,7 +55,6 @@ public class DaManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(hearts[0].GetBool("isHurt"));
         gameTime = Time.time - startTime;
         if (gameTime >= 20)
             interval = 2f;
@@ -88,7 +86,7 @@ public class DaManager : MonoBehaviour
         TextMeshProUGUI resultText = result.GetComponent<TextMeshProUGUI>();
         resultText.color = Color.red;
         resultText.text = "YOU FAILED";
-        GameManager.Instance.bike = 0;
+        CarController.Instance.bike = 0;
         StartCoroutine(waitAndChangeScene(1.5f));
     }
     private void passedGame(){

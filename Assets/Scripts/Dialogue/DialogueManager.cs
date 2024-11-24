@@ -51,8 +51,8 @@ public class DialogueManager : MonoBehaviour
     void Start()
     {
         Car = GameObject.FindWithTag("Car");
-        // id = checkPointGen.rng;
-        id = 16;
+        id = checkPointGen.rng;
+        // id = 7;
         dialogue = new Dialogue();
         dialogue.content = new List<string>();
         dialogueContent = new List<string>();
@@ -365,7 +365,7 @@ public class DialogueManager : MonoBehaviour
         ScaleDict.Add(1,new Vector3(5,5,0));
         ScaleDict.Add(2,new Vector3(8,8,0));
         ScaleDict.Add(3,new Vector3(9,9,0));
-        ScaleDict.Add(4,new Vector3(8,8,0));
+        ScaleDict.Add(4,new Vector3(6,6,0));
         ScaleDict.Add(5,new Vector3(8,8,0));
         ScaleDict.Add(6,new Vector3(8,8,0));
         ScaleDict.Add(7,new Vector3(8,8,0));
@@ -420,12 +420,12 @@ public class DialogueManager : MonoBehaviour
         ScaleDict.Add(4,new List<Vector3>());
         ScaleDict[4].Add(new Vector3(15,15,0));
         ScaleDict.Add(5,new List<Vector3>());
-        ScaleDict[5].Add(new Vector3(24,24,0));
+        ScaleDict[5].Add(new Vector3(28,28,0));
         ScaleDict[5].Add(new Vector3(15,15,0));
         ScaleDict.Add(6,new List<Vector3>());
-        ScaleDict[6].Add(new Vector3(24,24,0));
+        ScaleDict[6].Add(new Vector3(54,54,0));
         ScaleDict.Add(7,new List<Vector3>());
-        ScaleDict[7].Add(new Vector3(24,24,0));
+        ScaleDict[7].Add(new Vector3(54,54,0));
         ScaleDict.Add(8,new List<Vector3>());
         ScaleDict[8].Add(new Vector3(24,24,0));
         ScaleDict.Add(9,new List<Vector3>());
@@ -444,8 +444,8 @@ public class DialogueManager : MonoBehaviour
         ScaleDict[15].Add(new Vector3(45,45,0));
         ScaleDict[15].Add(new Vector3(45,45,0));
         ScaleDict.Add(16,new List<Vector3>());
-        ScaleDict[16].Add(new Vector3(7,7,0));
-        ScaleDict[16].Add(new Vector3(7,7,0));
+        ScaleDict[16].Add(new Vector3(45,45,0));
+        ScaleDict[16].Add(new Vector3(45,45,0));
         RectTransform transform = Character.GetComponent<RectTransform>();
         transform.localScale = ScaleDict[id][characterID-1];
 

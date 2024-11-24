@@ -68,12 +68,17 @@ public class checkPointGen : MonoBehaviour
             GameManager.Instance.pause = true;
             GameManager.carPosition = GameObject.FindWithTag("Car").GetComponent<Transform>().position;
             if(rng == 1) {
-                CarController.Instance.bike += 3;
+                CarController.Instance.bike = (CarController.Instance.bike + 5 > CarController.Instance.maxBike)? CarController.Instance.maxBike : CarController.Instance.bike + 5;
+            }else if(rng == 2) {
+                GameManager.Instance.PR = (GameManager.Instance.PR + 5 > GameManager.Instance.maxPR)? GameManager.Instance.maxPR : GameManager.Instance.PR + 5;
             }
             else if(rng == 4) {
                 CarController.Instance.bike -= 1;
+            }else if(rng == 5){
+                GameManager.Instance.PR = (GameManager.Instance.PR + 5 > GameManager.Instance.maxPR)? GameManager.Instance.maxPR : GameManager.Instance.PR + 5;
             }else if(rng == 6) {
                 CarController.Instance.bike = 0;
+                GameManager.Instance.PR = (GameManager.Instance.PR + 5 > GameManager.Instance.maxPR)? GameManager.Instance.maxPR : GameManager.Instance.PR + 10;
             }else if(rng == 7) {
                 GameManager.Instance.coins = 0;
             }else if(rng == 9) {

@@ -21,7 +21,6 @@ public class Enemy : MonoBehaviour
     private string wordText = "";
     private float speed = 0.1f;
     private bool didDamage = false;
-    private string cock = "";
     // Start is called before the first frame update
     void Start()
     {

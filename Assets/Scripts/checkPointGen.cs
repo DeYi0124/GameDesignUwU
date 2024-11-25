@@ -10,7 +10,7 @@ public class checkPointGen : MonoBehaviour
     public GameObject myPrefab;
     public GameObject[] bikePts;
     public static int rng;
-    public int rngUpperLimit = 10;
+    public int rngUpperLimit;
 
     private int time = 0;
     private int allBike = 0;
@@ -64,7 +64,7 @@ public class checkPointGen : MonoBehaviour
         rng = Random.Range(1, rngUpperLimit+1);
         Debug.Log(rng);
         // rng = 11;
-        if(rng <= 14 && rng != 10) {
+        if(rng <= 16 && rng != 10) {
             GameManager.Instance.pause = true;
             GameManager.carPosition = GameObject.FindWithTag("Car").GetComponent<Transform>().position;
             if(rng == 1) {

@@ -2,7 +2,7 @@ Shark You
 You
 Hello, strange little creature, who are you?
 Shark
-Oh yeah I'm a shark.
+Oh yeah I'm a Blahaj, or shark.
 You
 Hello, shark, how can I help you?
 Shark
@@ -15,3 +15,5 @@ Shark
 Ohhhh, yes, thank you stranger.
 You
 No problem.
+System
+(The shark will remember this, reputation is increased.)

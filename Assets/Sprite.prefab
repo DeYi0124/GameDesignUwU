@@ -108,8 +108,8 @@ SpriteRenderer:
   m_SortingLayerID: 358143005
   m_SortingLayer: 7
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: a17d5bebd6d78424794cbe152c928be1, type: 3}
-  m_Color: {r: 0.90943396, g: 0, b: 0, a: 0}
+  m_Sprite: {fileID: 21300000, guid: 3e015e0063f4a3d41a51af41cc37efa8, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -155,7 +155,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.89, y: 1.31}
+    oldSize: {x: 1.88, y: 1.27}
     newSize: {x: 0.8, y: 2}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -178,6 +178,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 0
   customPivot: {fileID: 7680665269816658718}
+  bikeSprite:
+  - {fileID: 21300000, guid: 5187dbcea509e9f41ad70140d0b8b86a, type: 3}
+  - {fileID: 21300000, guid: 3e015e0063f4a3d41a51af41cc37efa8, type: 3}
+  - {fileID: 21300000, guid: 5d40e21068edf6a449f1e2467b02c244, type: 3}
+  - {fileID: 21300000, guid: 5827af69bc0cefe4b85c8745a364d34a, type: 3}
 --- !u!1 &6861889841066867308
 GameObject:
   m_ObjectHideFlags: 0
@@ -205,14 +210,14 @@ RectTransform:
   m_GameObject: {fileID: 6861889841066867308}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.4, y: 0.4, z: 0}
+  m_LocalScale: {x: -0.4, y: -0.4, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1114973600988355784}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0.4000001, y: -1.82}
+  m_AnchoredPosition: {x: -0.2, y: 0.8}
   m_SizeDelta: {x: 5.6526, y: 5}
   m_Pivot: {x: 0, y: 0}
 --- !u!23 &606837517741051063

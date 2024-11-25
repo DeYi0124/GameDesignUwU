@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class audioManager : MonoBehaviour
+public class Music : MonoBehaviour
 {
     [SerializeField] AudioSource musicSource;
 
-    public AudioClip BGM;
+    public AudioClip GCOS;
+    public AudioClip defaultBGM;
 }

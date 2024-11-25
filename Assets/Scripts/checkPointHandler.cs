@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using TMPro;
+using Random = UnityEngine.Random;
 
 public class checkPointHandler : MonoBehaviour
 {
@@ -19,6 +20,7 @@ public class checkPointHandler : MonoBehaviour
     public event Action<checkPointHandler> OnReceiving;
     public int id;
     public Transform customPivot;
+    public Sprite[] bikeSprite;
 
 
     //private float timer = 0;
@@ -40,7 +42,9 @@ public class checkPointHandler : MonoBehaviour
     void Awake()
     {
         m_SpriteRenderer = GetComponent<SpriteRenderer>();
-        m_SpriteRenderer.color = new Color (1, 0, 0, progress);
+        int rng = Random.Range(0,bikeSprite.Length);
+        m_SpriteRenderer.sprite = bikeSprite[rng];
+        m_SpriteRenderer.color = new Color (255, 255, 255, progress);
         GameObject tmp = this.gameObject.transform.GetChild(0).gameObject;
         tmp.SetActive(true);
         tmp.GetComponent<TextMeshPro>().text = bikePerPoint.ToString();
@@ -62,9 +66,9 @@ public class checkPointHandler : MonoBehaviour
             {
                 if(positionDiff.x == 0)
                     return;
-                Vector3 positionForLHS = new Vector3(-0.4f,1.82f,0);
+                Vector3 positionForLHS = new Vector3(-0.2f,0.8f,0);
                 Vector3 scaleForLHS = new Vector3(-0.4f,-0.4f,0);
-                Vector3 positionForRHS = new Vector3(0.4f,-1.82f,0);
+                Vector3 positionForRHS = new Vector3(0.2f,-0.8f,0);
                 Vector3 scaleForRHS = new Vector3(0.4f,0.4f,0);
                 if (positionDiff.x < 0){
                     textObject.transform.localPosition = positionForLHS;
@@ -75,6 +79,7 @@ public class checkPointHandler : MonoBehaviour
                     textObject.GetComponent<RectTransform>().localScale = scaleForRHS;
                 }
                 enemySprite.flipY = (positionDiff.x < 0);
+                enemySprite.flipX = (positionDiff.x < 0);
 
                 transform.right = positionDiff;
                 MoveSpeed = 1;
@@ -90,7 +95,7 @@ public class checkPointHandler : MonoBehaviour
         if(!GameManager.Instance.pause && isWorking && CarController.Instance.bike < CarController.Instance.maxBike) {
             progress -= ((GameManager.Instance.skillLevel+1)*Time.deltaTime);
             progress = Mathf.Clamp01(progress);
-            m_SpriteRenderer.color = new Color (1, 0, 0, progress);
+            m_SpriteRenderer.color = new Color (255, 255, 255, progress);
             if (progress == 0) {
                 CarController.Instance.bike+= bikePerPoint;
                 progress = -1;

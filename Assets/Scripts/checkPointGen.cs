@@ -63,7 +63,7 @@ public class checkPointGen : MonoBehaviour
         alreadyFilled[cph.id] = false;
         rng = Random.Range(1, rngUpperLimit+1);
         Debug.Log(rng);
-        // rng = 11;
+        // rng = 3;
         if(rng <= 16 && rng != 10) {
             GameManager.Instance.pause = true;
             GameManager.carPosition = GameObject.FindWithTag("Car").GetComponent<Transform>().position;

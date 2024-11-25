@@ -1,0 +1,19 @@
+CSIE_dumbass
+Player
+Oh look, another bike for me to take, yum yum yum.
+CSIE_dumbass
+HALT, that's MY bike that you're taking.
+Player
+So?
+CSIE_dumbass
+As a proud student of the great CSIE department.
+CSIE_dumbass
+I simply cannot allow my bike to be taken by someone that doesn't know how to code.
+Player
+Who said that I don't code?
+CSIE_dumbass
+Well then, prove to me by converting the following code into the best programming language.
+Player
+Which is?
+CSIE_dumbass
+A language I created. The one and only: C-- (C minus minus)

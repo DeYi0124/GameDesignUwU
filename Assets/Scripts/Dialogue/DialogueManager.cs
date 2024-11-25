@@ -52,7 +52,7 @@ public class DialogueManager : MonoBehaviour
     {
         Car = GameObject.FindWithTag("Car");
         id = checkPointGen.rng;
-        // id = 7;
+        // id = 5;
         dialogue = new Dialogue();
         dialogue.content = new List<string>();
         dialogueContent = new List<string>();
@@ -460,7 +460,9 @@ public class DialogueManager : MonoBehaviour
         Sprite sprite = Sprite.Create(tex, new Rect(0.0f, 0.0f, tex.width, tex.height), pivot, 100.0f);
         return sprite;
     }
-
+    public int getID(){
+        return id;
+    }
     private void TalkingCurrentSpeaker(int currentSpeaker, bool flag){
         switch (currentSpeaker){
             case 1:

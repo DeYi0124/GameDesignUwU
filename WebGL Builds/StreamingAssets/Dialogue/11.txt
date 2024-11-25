@@ -1,0 +1,45 @@
+DiGoLiangFan You *
+You
+Hello, who are you?
+DiGoLiangFan
+I'm the biggest fan of DiGoLiang.
+You
+Ok, whatever. I'm here to take your bike.
+DigoLiangFan
+NOOOOO, although it saddens me to say goodbye to my bike,I'll humbly accept my fate like my idol DiGoLiang would.
+You
+ehh, actually, when I tried to take DiGoLiang's bike, he vanished into thin air along with his bike.
+You
+He did give me two tickets to his GuatiaShow though.
+DiGoLiangFan
+WHAT!! You have tickets to his GuatiaShow? PLSSSSS give me one and I'll tell everyone how great you are!
+You
+(Should I give him a ticket?)
+options || YES/NO/BURN IT
+A
+You
+Ok, I'll give you one.
+DiGoLiangFan
+THANK YOU SO MUCH! I'm so excited!!! AHHHH
+You
+(weirdo)
+B
+You
+Sorry, I can't really give you a ticket. I also want to go the the GuatiaShow with my friend.
+DiGoLiangFan
+It's okay, I understand. Who wouldn't want to go to the GuatiaShow?
+DiGoLiangFan
+Take my bike then. I have nothing else to lose.
+You
+....
+C
+
+You took out a lighter and burned the ticket in front of DiGoLiangFan's face.
+DiGoLiangFan
+NOOOOOOOO!!! Why would you do that?
+You
+Because that asshole DiGoLiang almost got me fired by refusing to give me his bike.
+You
+This is my REVENGE! I'll make his fan atone for what he did to me! SUFFER AS I HAVE.
+DiGoLiangFan
+NOOOOOOOOOOOOOOOOOOOOOOOOOO

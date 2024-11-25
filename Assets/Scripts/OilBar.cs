@@ -10,14 +10,13 @@ public class OilBar : MonoBehaviour
     public static OilBar Instance;
     public Slider slider;
     public Slider easeSlider;
-    public float oil;
     private float lerpSpeed = 0.01f;
     public TextMeshProUGUI myText;
 
     // Start is called before the first frame update
 
     void OnSave(CurrentBike currBike) {
-        oil = GameManager.Instance.maxOil;
+        GameManager.Instance.oil = GameManager.Instance.maxOil;
     }
 
     void Awake() {
@@ -48,27 +47,26 @@ public class OilBar : MonoBehaviour
 
     void Start()
     {
-        oil = GameManager.Instance.maxOil;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(slider.value != oil) {
-            slider.value = oil;
+        if(slider.value != GameManager.Instance.oil) {
+            slider.value = GameManager.Instance.oil;
         }
 
         if(slider.value != easeSlider.value) {
-            easeSlider.value = Mathf.Lerp(easeSlider.value, oil, lerpSpeed);
+            easeSlider.value = Mathf.Lerp(easeSlider.value, GameManager.Instance.oil, lerpSpeed);
         }
-        myText.text = "Oil: " + oil.ToString() + '/' + GameManager.Instance.maxOil.ToString();
+        myText.text = "Oil: " + GameManager.Instance.oil.ToString() + '/' + GameManager.Instance.maxOil.ToString();
     }
 
     void oilCut(float amount) {
-        if(!CarController.Instance.onBroken && oil >= 0)
-            oil -= amount;
-        if(oil < 0) {
-            oil = 0;
+        if(!CarController.Instance.onBroken && GameManager.Instance.oil >= 0)
+            GameManager.Instance.oil -= amount;
+        if(GameManager.Instance.oil < 0) {
+            GameManager.Instance.oil = 0;
             CarController.Instance.onBroken = true;
         }
     }

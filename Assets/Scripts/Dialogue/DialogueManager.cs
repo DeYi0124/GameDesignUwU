@@ -21,6 +21,9 @@ public class DialogueManager : MonoBehaviour
     public Animator character4Animator;
     public Animator character5Animator;
     public Animator character6Animator;
+    public Animator transition;
+    public float transitionTime = 3f;
+    public TextMeshProUGUI LoadText;
     public int id;
     public GameObject continueButton, optionA, optionB, optionC;
     public Dialogue dialogue;

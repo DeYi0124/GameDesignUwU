@@ -592,6 +592,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4846805019051289541, guid: 6d345b179bb016f4a855d059106bd037, type: 3}
+      propertyPath: m_text
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 5249520302943197737, guid: 6d345b179bb016f4a855d059106bd037, type: 3}
       propertyPath: m_LocalPosition.x
       value: -23.594145
@@ -680,6 +684,9 @@ MonoBehaviour:
   character4Animator: {fileID: 1210397997}
   character5Animator: {fileID: 345987406}
   character6Animator: {fileID: 139454983}
+  transition: {fileID: 0}
+  transitionTime: 3
+  LoadText: {fileID: 0}
   id: 0
   continueButton: {fileID: 1996925411}
   optionA: {fileID: 741784732}

@@ -7,6 +7,7 @@ using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using System.IO;
 using TMPro;
+using UnityEngine.Networking;
 
 public class GameManager : MonoBehaviour
 {
@@ -136,6 +137,7 @@ public class GameManager : MonoBehaviour
     
     void Start() {
         updateGameState(GameState.Morning);
+        StartCoroutine(preloadImages(17));
     }
 
     void Update() {
@@ -202,6 +204,50 @@ public class GameManager : MonoBehaviour
                 break;
         }
         //OnGameStateChanged(newState)?.Invoke();
+    }
+    private IEnumerator preloadImages(int maxID){
+        List<int> charNum = new List<int>();
+        charNum.Add(1);
+        charNum.Add(2);
+        charNum.Add(6);
+        charNum.Add(1);
+        charNum.Add(2);
+        charNum.Add(1);
+        charNum.Add(1);
+        charNum.Add(1);
+        charNum.Add(1);
+        charNum.Add(1);
+        charNum.Add(2);
+        charNum.Add(1);
+        charNum.Add(1);
+        charNum.Add(1);
+        charNum.Add(3);
+        charNum.Add(2);
+        for(int id = 1;id < maxID;id++){
+            for(int characterID = 1;characterID < charNum[id-1];characterID++){
+                Debug.Log("Loading..."+id.ToString()+" "+characterID.ToString());
+                string charPath = Application.streamingAssetsPath + "/Character/" + id.ToString() +'/'+ characterID.ToString() + ".png";
+                if (charPath.Contains("://") || charPath.Contains(":///"))
+                {
+                    byte[] imgData;
+                    Texture2D tex = new Texture2D(2, 2);
+                    UnityWebRequest www = UnityWebRequest.Get(charPath);
+                    yield return www.SendWebRequest();
+                    imgData = www.downloadHandler.data;
+                }
+                string bgPath = Application.streamingAssetsPath + "/BackGround/" + id.ToString() + ".png";
+                if (bgPath.Contains("://") || bgPath.Contains(":///"))
+                {
+                    byte[] imgData;
+                    Texture2D tex = new Texture2D(2, 2);
+                    UnityWebRequest www = UnityWebRequest.Get(bgPath);
+                    yield return www.SendWebRequest();
+                    imgData = www.downloadHandler.data;
+                }
+            }
+        }
+        Debug.Log("All loaded");
+
     }
 }
 

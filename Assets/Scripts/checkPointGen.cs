@@ -18,6 +18,10 @@ public class checkPointGen : MonoBehaviour
     private TextMeshPro bikePerPointText;
     private int bikePerPointInt;
 
+    public Animator transition;
+    public float transitionTime = 3f;
+    public TextMeshProUGUI LoadText;
+
 
     public void genBike() {
         int tmpBike = Random.Range(0, allBike);
@@ -46,8 +50,6 @@ public class checkPointGen : MonoBehaviour
                 alreadyFilled[i] = false;
             }
         }
-
-
     }
     void Awake() {
         InvokeRepeating("genBike", 1f, 1f);
@@ -56,6 +58,24 @@ public class checkPointGen : MonoBehaviour
         for(int i = 0; i < allBike; i++) {
             alreadyFilled[i] = false;
         }
+    }
+    
+    // void Update() {
+    //     if(GameManager.Instance.pause) return;
+    //     transition = GameObject.Find("CrossFade").GetComponent<Animator>();
+    //     LoadText = GameObject.Find("loadText").GetComponent<TextMeshProUGUI>();
+    // }
+
+     public void FadeIn() {
+        StartCoroutine(LoadFadeIn());
+    }
+
+     IEnumerator LoadFadeIn() {
+        LoadText.text = "Event Encountered!";
+        transition.SetTrigger("Start");
+        yield return new WaitForSecondsRealtime(transitionTime);
+        SceneManager.LoadScene("DialogueTemplate");
+        transition.SetTrigger("End");
     }
 
     void OnReceiving(checkPointHandler cph) {
@@ -84,7 +104,7 @@ public class checkPointGen : MonoBehaviour
             }else if(rng == 9) {
                 GameManager.Instance.guatiaShow += 2;
             }
-            SceneManager.LoadSceneAsync("DialogueTemplate");
+            FadeIn();
         }
     }
     public (int, int) getBikePerPointRange(int yieldLevel){

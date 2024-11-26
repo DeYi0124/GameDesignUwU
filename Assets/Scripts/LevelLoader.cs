@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class LevelLoader : MonoBehaviour
 {
@@ -35,6 +36,10 @@ public class LevelLoader : MonoBehaviour
         StartCoroutine(LoadLevel());
     }
 
+    public void FadeIn() {
+        StartCoroutine(LoadFadeIn());
+    }
+
     IEnumerator LoadLevel() {
         LoadText.text = "Loading...";
         GameManager.Instance.pause = true;
@@ -43,6 +48,14 @@ public class LevelLoader : MonoBehaviour
         //CarController.Instance.transform.position += new Vector3(-24, 4, 10);
         transition.SetTrigger("End");
         GameManager.Instance.pause = false;
+    }
+
+    IEnumerator LoadFadeIn() {
+        LoadText.text = "Loading...";
+        transition.SetTrigger("Start");
+        yield return new WaitForSecondsRealtime(3f);
+        SceneManager.LoadSceneAsync("MainScene");
+        Destroy(this);
     }
 
     // Update is called once per frame

@@ -52,7 +52,7 @@ public class DialogueManager : MonoBehaviour
     {
         Car = GameObject.FindWithTag("Car");
         id = checkPointGen.rng;
-        // id = 5;
+        // id = 15;
         dialogue = new Dialogue();
         dialogue.content = new List<string>();
         dialogueContent = new List<string>();
@@ -375,8 +375,8 @@ public class DialogueManager : MonoBehaviour
         ScaleDict.Add(14, new Vector3(1.2f,1.2f,0));
         ScaleDict.Add(13, new Vector3(8,8,0));
         ScaleDict.Add(12, new Vector3(1.3f,1.3f,0));
-        ScaleDict.Add(15, new Vector3(0.5f,0.5f,0));
-        ScaleDict.Add(16, new Vector3(0.5f,0.5f,0));
+        ScaleDict.Add(15, new Vector3(2,2,0));
+        ScaleDict.Add(16, new Vector3(2,2,0));
         RectTransform transform = BackGround.GetComponent<RectTransform>();
         transform.localScale = ScaleDict[id];
     }

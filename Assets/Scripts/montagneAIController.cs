@@ -7,7 +7,6 @@ public class montagneAIController : MonoBehaviour
     public Animator enemyAnimator;
     private int MoveSpeed = 4;
     private int outerDist = 15;
-    private int innerDist = 13;
     private bool inside = false;
     private int previousDay = 0;
     void Start()

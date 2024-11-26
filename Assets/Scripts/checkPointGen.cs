@@ -17,6 +17,7 @@ public class checkPointGen : MonoBehaviour
     private bool[] alreadyFilled;
     private TextMeshPro bikePerPointText;
     private int bikePerPointInt;
+    private bool metCmm = false;
 
     public Animator transition;
     public float transitionTime = 3f;
@@ -84,7 +85,11 @@ public class checkPointGen : MonoBehaviour
         rng = Random.Range(1, rngUpperLimit+1);
         Debug.Log(rng);
         // rng = 3;
-        if(rng <= 16 && rng != 10) {
+        if (rng == 16 && !metCmm)
+            metCmm = true;
+        else if(rng == 16 && metCmm)
+            return;
+        if(rng <= 16 && rng != 10 ){
             GameManager.Instance.pause = true;
             GameManager.carPosition = GameObject.FindWithTag("Car").GetComponent<Transform>().position;
             if(rng == 1) {

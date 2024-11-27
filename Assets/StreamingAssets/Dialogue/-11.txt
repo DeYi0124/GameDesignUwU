@@ -1,29 +1,29 @@
-DiGoLiangFan You *
-You
+DiGoLiangFan *
+Me
 Hello, who are you?
 DiGoLiangFan
 I'm the biggest fan of DiGoLiang.
-You
+Me
 Ok, whatever. I'm here to take your bike.
 DigoLiangFan
 NOOOOO, although it saddens me to say goodbye to my bike,I'll humbly accept my fate like my idol DiGoLiang would.
-You
+Me
 ehh, actually, when I tried to take DiGoLiang's bike, he vanished into thin air along with his bike.
-You
+Me
 He did give me two tickets to his GuatiaShow though.
 DiGoLiangFan
 WHAT!! You have tickets to his GuatiaShow? PLSSSSS give me one and I'll tell everyone how great you are!
-You
+Me
 (Should I give him a ticket?)
 options || YES/NO/BURN IT
 A
-You
+Me
 Welp here's the ticket... SIKE! I don't have one
 DigoLiangFan
 Ohh.... you are so mean.
 B
-You
+Me
 No can do, he is my hero.
 C
-You
+Me
 Welp EVEN IF I HAVE ONE, I WILL BURN IT!

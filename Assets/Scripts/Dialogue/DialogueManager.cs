@@ -55,7 +55,7 @@ public class DialogueManager : MonoBehaviour
     {
         Car = GameObject.FindWithTag("Car");
         id = checkPointGen.rng;
-        // id = 15;
+        // id = 16;
         dialogue = new Dialogue();
         dialogue.content = new List<string>();
         dialogueContent = new List<string>();
@@ -90,13 +90,16 @@ public class DialogueManager : MonoBehaviour
         hasOption = false;
         GameManager.Instance.pause = true;
         Car.SetActive(false);
-        //StartCoroutine(LoadBackGround());
         charNum = new List<int>();
         charNum.Add(1);
-        charNum.Add(2);
+        charNum.Add(1);
         charNum.Add(6);
         charNum.Add(1);
-        charNum.Add(2);
+        charNum.Add(1);
+        charNum.Add(1);
+        charNum.Add(1);
+        charNum.Add(1);
+        charNum.Add(1);
         charNum.Add(1);
         charNum.Add(1);
         charNum.Add(1);
@@ -104,12 +107,7 @@ public class DialogueManager : MonoBehaviour
         charNum.Add(1);
         charNum.Add(2);
         charNum.Add(1);
-        charNum.Add(1);
-        charNum.Add(1);
-        charNum.Add(3);
-        charNum.Add(2);
         CarController.Instance.resetMomentum();
-        //LoadCharacters(charNum[id-1]);
         dialogueBoxAnimator.SetBool("IsOpen", false);
         for(int i = 1;i<7;i++){
             TalkingCurrentSpeaker(i,false);
@@ -120,11 +118,9 @@ public class DialogueManager : MonoBehaviour
 
     IEnumerator PrepWork(){
         yield return StartCoroutine(LoadBackGround());
-        //Elsa
         if(id == 11) {
             if(GameManager.Instance.guatiaShow > 0) {
                 yield return StartCoroutine(ReadDialogueFile(id));
-                //UwU
             } else {
                 yield return StartCoroutine(ReadDialogueFile(-id));
             }
@@ -252,26 +248,27 @@ public class DialogueManager : MonoBehaviour
         currentOption = "A";
         DisplayNextSentence();
         continueButton.SetActive(true);
-        optionA.SetActive(false);
-        optionB.SetActive(false);
-        optionC.SetActive(false);
+        turnOffOption();
     }
     public void setToOptionB(){
         currentOption = "B";
         DisplayNextSentence();
         continueButton.SetActive(true);
-        optionA.SetActive(false);
-        optionB.SetActive(false);
-        optionC.SetActive(false);
+        turnOffOption();
     }
     public void setToOptionC(){
         currentOption = "C";
         DisplayNextSentence();
         continueButton.SetActive(true);
-        optionA.SetActive(false);
-        optionB.SetActive(false);
-        optionC.SetActive(false);
+        turnOffOption();
     }
+    private void turnOffOption(){
+        optionA.transform.parent.gameObject.SetActive(false);
+        optionB.transform.parent.gameObject.SetActive(false);
+        optionC.transform.parent.gameObject.SetActive(false);
+
+    }
+
     public void DisplayNextSentence(){
 
         if (sentencesDict[currentOption].Count == 0 || namesDict[currentOption].Count == 0){
@@ -283,7 +280,7 @@ public class DialogueManager : MonoBehaviour
             continueButton.SetActive(false);
             GameObject[] optionsButton = {optionA,optionB,optionC};
             for(int i = 0;i < optionsContent.Count;i++){
-                optionsButton[i].SetActive(true);
+                optionsButton[i].transform.parent.gameObject.SetActive(true);
                 optionsButton[i].GetComponentInChildren<TextMeshProUGUI>().text = optionsContent[options[i]];
             }
         }
@@ -373,11 +370,11 @@ public class DialogueManager : MonoBehaviour
         ScaleDict.Add(6,new Vector3(8,8,0));
         ScaleDict.Add(7,new Vector3(8,8,0));
         ScaleDict.Add(8,new Vector3(8,8,0));
-        ScaleDict.Add(9,new Vector3(1.3f,1.3f,0));
-        ScaleDict.Add(11, new Vector3(1.3f,1.3f,0));
+        ScaleDict.Add(9,new Vector3(1.4f,1.4f,0));
+        ScaleDict.Add(11, new Vector3(1.4f,1.4f,0));
         ScaleDict.Add(14, new Vector3(1.2f,1.2f,0));
-        ScaleDict.Add(13, new Vector3(8,8,0));
-        ScaleDict.Add(12, new Vector3(1.3f,1.3f,0));
+        ScaleDict.Add(13, new Vector3(2.5f,2.3f,0));
+        ScaleDict.Add(12, new Vector3(1.5f,0.9f,0));
         ScaleDict.Add(15, new Vector3(2,2,0));
         ScaleDict.Add(16, new Vector3(2,2,0));
         RectTransform transform = BackGround.GetComponent<RectTransform>();
@@ -411,44 +408,40 @@ public class DialogueManager : MonoBehaviour
         ScaleDict[1].Add(new Vector3(0,0,0));
         ScaleDict[1].Add(new Vector3(0,0,0));
         ScaleDict.Add(2,new List<Vector3>());
-        ScaleDict[2].Add(new Vector3(15,15,0));
-        ScaleDict[2].Add(new Vector3(15,15,0));
+        ScaleDict[2].Add(new Vector3(35,35,0));
+        ScaleDict[2].Add(new Vector3(35,35,0));
         ScaleDict.Add(3,new List<Vector3>());
-        ScaleDict[3].Add(new Vector3(15,15,0));
-        ScaleDict[3].Add(new Vector3(15,15,0));
-        ScaleDict[3].Add(new Vector3(15,15,0));
-        ScaleDict[3].Add(new Vector3(15,15,0));
-        ScaleDict[3].Add(new Vector3(30,30,0));
-        ScaleDict[3].Add(new Vector3(15,15,0));
+        ScaleDict[3].Add(new Vector3(35,35,0));
+        ScaleDict[3].Add(new Vector3(35,35,0));
+        ScaleDict[3].Add(new Vector3(35,35,0));
+        ScaleDict[3].Add(new Vector3(35,35,0));
+        ScaleDict[3].Add(new Vector3(70,70,0));
+        ScaleDict[3].Add(new Vector3(35,35,0));
         ScaleDict.Add(4,new List<Vector3>());
         ScaleDict[4].Add(new Vector3(15,15,0));
         ScaleDict.Add(5,new List<Vector3>());
-        ScaleDict[5].Add(new Vector3(28,28,0));
-        ScaleDict[5].Add(new Vector3(15,15,0));
+        ScaleDict[5].Add(new Vector3(80,80,0));
         ScaleDict.Add(6,new List<Vector3>());
-        ScaleDict[6].Add(new Vector3(54,54,0));
+        ScaleDict[6].Add(new Vector3(250,250,0));
         ScaleDict.Add(7,new List<Vector3>());
-        ScaleDict[7].Add(new Vector3(54,54,0));
+        ScaleDict[7].Add(new Vector3(125,125,0));
         ScaleDict.Add(8,new List<Vector3>());
-        ScaleDict[8].Add(new Vector3(24,24,0));
+        ScaleDict[8].Add(new Vector3(50,50,0));
         ScaleDict.Add(9,new List<Vector3>());
-        ScaleDict[9].Add(new Vector3(35,35,0));
+        ScaleDict[9].Add(new Vector3(80,80,0));
         ScaleDict.Add(11,new List<Vector3>());
-        ScaleDict[11].Add(new Vector3(35,35,0));
-        ScaleDict[11].Add(new Vector3(15,15,0));
+        ScaleDict[11].Add(new Vector3(80,80,0));
         ScaleDict.Add(14,new List<Vector3>());
-        ScaleDict[14].Add(new Vector3(45,45,0));
+        ScaleDict[14].Add(new Vector3(110,110,0));
         ScaleDict.Add(13,new List<Vector3>());
-        ScaleDict[13].Add(new Vector3(10,10,0));
+        ScaleDict[13].Add(new Vector3(50,50,0));
         ScaleDict.Add(12,new List<Vector3>());
         ScaleDict[12].Add(new Vector3(15,15,0));
         ScaleDict.Add(15,new List<Vector3>());
-        ScaleDict[15].Add(new Vector3(45,45,0));
-        ScaleDict[15].Add(new Vector3(45,45,0));
-        ScaleDict[15].Add(new Vector3(45,45,0));
+        ScaleDict[15].Add(new Vector3(100,100,0));
+        ScaleDict[15].Add(new Vector3(100,100,0));
         ScaleDict.Add(16,new List<Vector3>());
-        ScaleDict[16].Add(new Vector3(45,45,0));
-        ScaleDict[16].Add(new Vector3(45,45,0));
+        ScaleDict[16].Add(new Vector3(110,110,0));
         RectTransform transform = Character.GetComponent<RectTransform>();
         transform.localScale = ScaleDict[id][characterID-1];
 

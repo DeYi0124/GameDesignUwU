@@ -1,7 +1,7 @@
 Me
 Me
-Oh look, that's 3 bikes locked together parking illegally.
+Look, those three bikes are chained together.
 Me
-Looks like i will have 3 bikes with me now. :D
+Looks like I will have 3 bikes with me now :D
 System
 (number of Bikes increased by 3)

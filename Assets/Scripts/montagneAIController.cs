@@ -5,6 +5,7 @@ using UnityEngine;
 public class montagneAIController : MonoBehaviour
 {
     public Animator enemyAnimator;
+    public AudioSource oof;
     private int MoveSpeed = 4;
     private int outerDist = 15;
     private bool inside = false;
@@ -14,10 +15,15 @@ public class montagneAIController : MonoBehaviour
         enemyAnimator.SetBool("isWalking", false);
     }
 
+    void OnCollisionEnter2D(Collision2D collision2D) {
+        if(collision2D.gameObject.tag == "Car") {
+            oof.Play();
+        }
+    }
     void Update()
     {
         
-        if(GameManager.Instance.getTime() > 60){
+        if(GameManager.Instance.getTime() > GameManager.Instance.maxTime){
             // Debug.Log("Destroyed");
             StartCoroutine(wait(1f));
             // Debug.Log("bla");

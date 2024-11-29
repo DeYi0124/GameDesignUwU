@@ -54,9 +54,10 @@ public class DialogueManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Time.timeScale = 1f;
         Car = GameObject.FindWithTag("Car");
         id = checkPointGen.rng;
-        id = 15;
+        // id = 15;
         dialogue = new Dialogue();
         dialogue.content = new List<string>();
         dialogueContent = new List<string>();
@@ -91,6 +92,8 @@ public class DialogueManager : MonoBehaviour
         hasOption = false;
         GameManager.Instance.pause = true;
         Car.SetActive(false);
+        Car.transform.GetChild(0).GetChild(6).gameObject.SetActive(false);
+
         charNum = new List<int>();
         charNum.Add(1);
         charNum.Add(1);
@@ -115,6 +118,12 @@ public class DialogueManager : MonoBehaviour
             InSceneCurrentSpeaker(i,false);
         }
         StartCoroutine(PrepWork());
+    }
+
+    void Update(){
+        if(Input.GetKeyDown("space")){
+            DisplayNextSentence();
+        }
     }
 
     IEnumerator PrepWork(){

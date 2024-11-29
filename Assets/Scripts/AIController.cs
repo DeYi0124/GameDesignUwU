@@ -6,6 +6,7 @@ public class AIController : MonoBehaviour
 {
 
     public Animator enemyAnimator;
+    public AudioSource WAAAA;
     private int MoveSpeed = 4;
     private int MaxDist = 10;
     private int MinDist = 6;
@@ -21,13 +22,15 @@ public class AIController : MonoBehaviour
         }
     }
 
-    IEnumerator wait(float seconds = 0.5f) {
+    IEnumerator wait(float seconds = 1.5f) {
+        WAAAA.Play();
+        Debug.Log("Killed");
         yield return new WaitForSeconds(seconds);
         Destroy(this.gameObject);
     }
     void Update()
     {
-        if(GameManager.Instance.getTime() > 60) {
+        if(GameManager.Instance.getTime() > GameManager.Instance.maxTime) {
             StartCoroutine(wait(1f));
         }
         if (!(GameManager.Instance.pause)){

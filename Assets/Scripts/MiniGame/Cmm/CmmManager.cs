@@ -284,10 +284,8 @@ public class CmmManager : MonoBehaviour
     }
     private void setWordsToColorDict(){
         wordsToColorDict = new Dictionary<string, string> ();
-        wordsToColorDict.Add("0", "<color=#f3a025>0</color>");
         wordsToColorDict.Add("=", "<color=#38dacc>=</color>");
-        wordsToColorDict.Add("int! ", "<color=#f5c144>int! </color>");
-        wordsToColorDict.Add("int ", "<color=#f5c144>int </color>");
+        wordsToColorDict.Add("int!", "<color=#f5c144>int!</color>");
         wordsToColorDict.Add(":", "<color=#fe5cf5>:</color>");
         wordsToColorDict.Add("#include", "<color=#E058DA>#include</color>");
         wordsToColorDict.Add("main", "<color=#4482f5>main</color>");
@@ -305,8 +303,6 @@ public class CmmManager : MonoBehaviour
         wordsToColorDict.Add("return", "<color=#8d10c3>return</color>");
         wordsToColorDict.Add("const", "<color=#f5c114>const</color>");
         wordsToColorDict.Add("char*!", "<color=#f5c114>char*!</color>");
-        wordsToColorDict.Add("char*", "<color=#f5c114>char*</color>");
-        wordsToColorDict.Add("char", "<color=#f5c114>char</color>");
         colorList.Add("<color=#f5c114>");
         colorList.Add("<color=#E058DA>");
         colorList.Add("<color=#4482f5>");
@@ -328,12 +324,12 @@ public class CmmManager : MonoBehaviour
         fakeText.text = fakeText.text.Replace("</color>","");
         for(int i = 0;i< wordsToColorDict.Count;i++){
             if(fakeText.text.Contains(wordsToColorDict.ElementAt(i).Key)){
-                if(wordsToColorDict.ElementAt(i).Key == "="){
-                    fakeText.text = fakeText.text.Replace("=#","&&&&&");
-                    fakeText.text = fakeText.text.Replace(wordsToColorDict.ElementAt(i).Key,wordsToColorDict.ElementAt(i).Value);
-                    fakeText.text = fakeText.text.Replace("&&&&&","=#");
-                }else
-                    fakeText.text = fakeText.text.Replace(wordsToColorDict.ElementAt(i).Key,wordsToColorDict.ElementAt(i).Value);
+                // if(wordsToColorDict.ElementAt(i).Key == "="){
+                //     fakeText.text = fakeText.text.Replace("=#","&&&&&");
+                //     fakeText.text = fakeText.text.Replace(wordsToColorDict.ElementAt(i).Key,wordsToColorDict.ElementAt(i).Value);
+                //     fakeText.text = fakeText.text.Replace("&&&&&","=#");
+                // }else
+                fakeText.text = fakeText.text.Replace(wordsToColorDict.ElementAt(i).Key,wordsToColorDict.ElementAt(i).Value);
             }
         }
     }

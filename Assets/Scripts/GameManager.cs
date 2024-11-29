@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
     public int maxYield = 5;
     public int PR = 1;
     private static int time = 0;
+    public int maxTime = 60;
     public int skillLevel = 0;
     public int speedLevel = 0;
     public int oilLevel = 0;
@@ -58,10 +59,12 @@ public class GameManager : MonoBehaviour
             Instance = this;
         bike = 0;
         KPI = 10;
-        PR = 5;
+        PR = 100;
+        days = 0;
         coins = 0;
         credits = 0;
         maxEnt = 100;
+        maxTime = 60;
         //items
         guatiaShow = 0;
         carSpawn = CarController.Instance.GetPostion();
@@ -159,9 +162,9 @@ public class GameManager : MonoBehaviour
     }
 
     void GameStateHandle() {
-        if(time > 30 && State == GameState.Morning) {
+        if(time > (maxTime/2) && State == GameState.Morning) {
             updateGameState(GameState.Evening);
-        } else if(time > 60 && State == GameState.Evening) {
+        } else if(time > maxTime && State == GameState.Evening) {
             updateGameState(GameState.Night);
             if(bike >= KPI) {
                 updateMoney(bike*5, 0);
@@ -187,6 +190,7 @@ public class GameManager : MonoBehaviour
                 //Debug.Log("goodMorning");
                 KPI = 5+10*(days);
                 EnemyLimit = 4 + days;
+                maxTime = 60*((days / 3) + 1);
                 break;
             case GameState.Evening:
                 break;

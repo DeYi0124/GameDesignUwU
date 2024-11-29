@@ -8,7 +8,9 @@ using TMPro;
 public class checkPointGen : MonoBehaviour
 {
     public GameObject myPrefab;
+    public GameObject Car;
     public GameObject[] bikePts;
+    public GameObject mc;
     public static int rng;
     public int rngUpperLimit;
 
@@ -18,6 +20,7 @@ public class checkPointGen : MonoBehaviour
     private TextMeshPro bikePerPointText;
     private int bikePerPointInt;
     private bool metCmm = false;
+    private bool mcz = false;
 
     public Animator transition;
     public float transitionTime = 3f;
@@ -46,7 +49,7 @@ public class checkPointGen : MonoBehaviour
         } else {
             time ++;
         }
-        if(GameManager.Instance.getTime() >= 60){
+        if(GameManager.Instance.getTime() >= GameManager.Instance.maxTime){
             for(int i = 0; i < allBike; i++) {
                 alreadyFilled[i] = false;
             }
@@ -59,22 +62,31 @@ public class checkPointGen : MonoBehaviour
         for(int i = 0; i < allBike; i++) {
             alreadyFilled[i] = false;
         }
+        mcz = false;
     }
     
-    // void Update() {
-    //     if(GameManager.Instance.pause) return;
-    //     transition = GameObject.Find("CrossFade").GetComponent<Animator>();
-    //     LoadText = GameObject.Find("loadText").GetComponent<TextMeshProUGUI>();
-    // }
+    void Update() {
+        if(mcz) {
+            //UwU
+            mc = GameObject.Find("Da Main Camera");
+            float targetSize = 2f;
+            float zoomSpeed = 1.5f;
+            mc.GetComponent<Camera>().orthographicSize = Mathf.Lerp(mc.GetComponent<Camera>().orthographicSize, targetSize, Time.deltaTime * zoomSpeed);
+            // mc.GetComponent<Camera>().orthographicSize = 2f;
+        }
+    }
 
      public void FadeIn() {
         StartCoroutine(LoadFadeIn());
     }
 
      IEnumerator LoadFadeIn() {
+        yield return new WaitForSecondsRealtime(3.1415926583f);
         LoadText.text = "Event Encountered!";
         transition.SetTrigger("Start");
         yield return new WaitForSecondsRealtime(transitionTime);
+        mc.GetComponent<Follow_player>().cmc(false);
+        mcz = false;
         SceneManager.LoadScene("DialogueTemplate");
         transition.SetTrigger("End");
     }
@@ -91,6 +103,15 @@ public class checkPointGen : MonoBehaviour
             return;
         if(rng <= 16 && rng != 10 ){
             GameManager.Instance.pause = true;
+            Car.SetActive(false);
+            Car.SetActive(true);
+            Car.transform.GetChild(0).GetChild(6).gameObject.SetActive(true);
+            mcz = true;
+            mc = GameObject.Find("Da Main Camera");
+            mc.GetComponent<Follow_player>().cmc(true);
+            mc.transform.position -= new Vector3(0, 1.618f, 0);
+            // mc.Size = 2f;
+            // Time.timeScale = 0;
             GameManager.carPosition = GameObject.FindWithTag("Car").GetComponent<Transform>().position;
             if(rng == 1) {
                 CarController.Instance.bike = (CarController.Instance.bike + 5 > CarController.Instance.maxBike)? CarController.Instance.maxBike : CarController.Instance.bike + 5;

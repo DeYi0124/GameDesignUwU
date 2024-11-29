@@ -103,7 +103,7 @@ public class checkPointHandler : MonoBehaviour
                 Destroy(transform.gameObject);
             }
         }
-        if(GameManager.Instance.getTime() > 60) {
+        if(GameManager.Instance.getTime() > GameManager.Instance.maxTime) {
             StartCoroutine(wait(1));
         }
     }

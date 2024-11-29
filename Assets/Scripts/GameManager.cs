@@ -137,7 +137,7 @@ public class GameManager : MonoBehaviour
     
     void Start() {
         updateGameState(GameState.Morning);
-        StartCoroutine(preloadImages(17));
+        StartCoroutine(preloadImages(16));
     }
 
     void Update() {
@@ -208,10 +208,14 @@ public class GameManager : MonoBehaviour
     private IEnumerator preloadImages(int maxID){
         List<int> charNum = new List<int>();
         charNum.Add(1);
-        charNum.Add(2);
+        charNum.Add(1);
         charNum.Add(6);
         charNum.Add(1);
-        charNum.Add(2);
+        charNum.Add(1);
+        charNum.Add(1);
+        charNum.Add(1);
+        charNum.Add(1);
+        charNum.Add(1);
         charNum.Add(1);
         charNum.Add(1);
         charNum.Add(1);
@@ -219,11 +223,7 @@ public class GameManager : MonoBehaviour
         charNum.Add(1);
         charNum.Add(2);
         charNum.Add(1);
-        charNum.Add(1);
-        charNum.Add(1);
-        charNum.Add(3);
-        charNum.Add(2);
-        for(int id = 1;id < maxID;id++){
+        for(int id = 1;id <= maxID;id++){
             for(int characterID = 1;characterID < charNum[id-1];characterID++){
                 Debug.Log("Loading..."+id.ToString()+" "+characterID.ToString());
                 string charPath = Application.streamingAssetsPath + "/Character/" + id.ToString() +'/'+ characterID.ToString() + ".png";

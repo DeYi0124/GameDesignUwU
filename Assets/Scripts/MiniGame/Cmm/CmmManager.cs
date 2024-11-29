@@ -13,6 +13,7 @@ public class CmmManager : MonoBehaviour
     public TextMeshProUGUI hint;
     public TextMeshProUGUI console;
     public TextMeshProUGUI submitText;
+    public TextMeshProUGUI fakeText;
     public TMP_InputField realCodeText;
     public TMP_InputField inputField;
     public GameObject consoleGameObject;
@@ -28,6 +29,8 @@ public class CmmManager : MonoBehaviour
     private int errorID = 0;
     private bool success = false;
     private bool realCodeTyped = false;
+    private Dictionary<string,string> wordsToColorDict = new Dictionary<string,string>();
+    private List<string> colorList = new List<string>();
     // Start is called before the first frame update
     void makeItRed(int start, int size) {
         if(size <= 0) return;
@@ -42,6 +45,8 @@ public class CmmManager : MonoBehaviour
     void Start()
     {
         inputField.ActivateInputField();
+        inputField.customCaretColor = true;
+        inputField.caretColor = Color.white;
         consoleGameObject.SetActive(true);
         submitButton.SetActive(true);
         realCode.SetActive(false);
@@ -52,14 +57,15 @@ public class CmmManager : MonoBehaviour
         hints = new Dictionary<int,string>();
         consoleLog = new Dictionary<int,string>();
         lines = new List<string>();
+        setWordsToColorDict();
         hints.Add(-1, "Although being creative is quite impressive. In C-- we do not tolerate creativeity, FOLLOW THE FUCKING RULES AND LISTEN TO WHAT I SAID.");
-        hints.Add(0,"Looks like you forgot to teach the code how to speak english, no wonder the code is not working. Try including english.h in the first line.");
-        hints.Add(1,"In C--, using semicolon is a grave sin. Just looking at the ; makes me wanna throw up, try using the beautiful colon (:) instead.");
-        hints.Add(2,"When variables and functions are declared in C--, they're always very excited, to express their excitement, an exclamation mark (!) is added after the declaration. For example: int! a = 0;");
-        hints.Add(3,"I designed C-- for everyone to learn, that's why we spell out all the operators in case someone forgets what they do. Try replacing the = with the word equals and + with the word plus.");
-        hints.Add(4,"In C--, because I'm a cute discord kitten, initialization value for every variable needs to be UwU. For example: int! a equals UwU");
-        hints.Add(5,"In C--, everyone deserves a warm home, including the main function. Instead of 0, main function should return \"Home\", try changing the 0 to \"Home\"");
-        hints.Add(6,"Oh did you forget your C classes, \"Home\" is a char array, so now the main function is not an int anymore. Try const char*! main(){ instead");
+        hints.Add(0,"Looks like you forgot to teach the code how to speak english, no wonder the code is not working. Try including <color=#65da3f><english.h></color> in the first line.");
+        hints.Add(1,"In C--, using semicolon is a grave sin. Just looking at the <b>;</b> makes me wanna throw up, try using the beautiful colon <color=#fe5cf5><b>:</b></color> instead.");
+        hints.Add(2,"When variables and functions are declared in C--, they're always very excited, to express their excitement, an exclamation mark <color=#f5c144>!</color> is added after the declaration. For example: <color=#f5c144>int! </color>a <color=#38dacc>=</color> <color=#f3a025>0</color>:");
+        hints.Add(3,"I designed C-- for everyone to learn, that's why we spell out all the operators in case someone forgets what they do. Try replacing the <color=#38dacc> = </color>with the word <color=#38dacc>equals</color> and <color=#38dacc>+</color> with the word <color=#38dacc>plus</color>.");
+        hints.Add(4,"In C--, because I'm a cute discord kitten, initialization value for every variable needs to be <color=#f3a025>UwU</color>. For example: <color=#f5c144>int! </color>a <color=#38dacc>equals</color> <color=#f3a025>UwU</color>:");
+        hints.Add(5,"In C--, everyone deserves a warm home, including the main function. Instead of 0, main function should return <color=#65da3f>\"Home\"</color>, try changing the <color=#f3a025>0</color> to <color=#65da3f>\"Home\"</color>");
+        hints.Add(6,"Oh did you forget your C classes, <color=#65da3f>\"Home\"</color> is a char array, so now the main function is not an int anymore. Try <color=#f5c114>const</color> <color=#f5c114><color=#f5c114><color=#f5c114>char</color>*</color>!</color> <color=#4482f5>main</color>() instead");
         hints.Add(7,"Oh my god, you did it!, you're now a C-- pro. Let's check if you code work by inputting two integer into the console, for example: 3 4");
         hints.Add(8,"Here is a very basic c code, now prove your worth by translating it into the glorious C-- language.");
         consoleLog.Add(-1,"");
@@ -74,11 +80,13 @@ public class CmmManager : MonoBehaviour
         consoleLog.Add(8,"");
         hint.text = hints[8];
         console.text = consoleLog[8];
+        createFakeText();
         //makeItRed(RedArray[9].Item1, RedArray[9].Item2);
     }
     // Update is called once per frame
     void Update()
     {
+        // createFakeText();
         if (submitted){
             if(!success) {
                 judge(submition);
@@ -111,6 +119,10 @@ public class CmmManager : MonoBehaviour
                 success = true;
             submitted = false;
         }
+    }
+    public void presentFakeText(string bla){
+        fakeText.text = bla;
+        createFakeText();
     }
     public void readAnswer(string ans){
         lines = ans.Split("\n").ToList();
@@ -270,6 +282,62 @@ public class CmmManager : MonoBehaviour
         }
         return "";
     }
+    private void setWordsToColorDict(){
+        wordsToColorDict = new Dictionary<string, string> ();
+        wordsToColorDict.Add("0", "<color=#f3a025>0</color>");
+        wordsToColorDict.Add("=", "<color=#38dacc>=</color>");
+        wordsToColorDict.Add("int! ", "<color=#f5c144>int! </color>");
+        wordsToColorDict.Add("int ", "<color=#f5c144>int </color>");
+        wordsToColorDict.Add(":", "<color=#fe5cf5>:</color>");
+        wordsToColorDict.Add("#include", "<color=#E058DA>#include</color>");
+        wordsToColorDict.Add("main", "<color=#4482f5>main</color>");
+        wordsToColorDict.Add("<stdio.h>", "<color=#65da3f><stdio.h></color>");
+        wordsToColorDict.Add("<english.h>", "<color=#65da3f><english.h></color>");
+        wordsToColorDict.Add("+", "<color=#38dacc>+</color>");
+        wordsToColorDict.Add("equals", "<color=#38dacc>equals</color>");
+        wordsToColorDict.Add("plus", "<color=#38dacc>plus</color>");
+        wordsToColorDict.Add("UwU", "<color=#f3a025>UwU</color>");
+        wordsToColorDict.Add("\"Home\"", "<color=#65da3f>\"Home\"</color>");
+        wordsToColorDict.Add("\"", "<color=#65da3f>\"</color>");
+        wordsToColorDict.Add("%d", "<color=#65da3f>%d</color>");
+        wordsToColorDict.Add("scanf", "<color=#b9400a>scanf</color>");
+        wordsToColorDict.Add("printf", "<color=#b9400a>printf</color>");
+        wordsToColorDict.Add("return", "<color=#8d10c3>return</color>");
+        wordsToColorDict.Add("const", "<color=#f5c114>const</color>");
+        wordsToColorDict.Add("char*!", "<color=#f5c114>char*!</color>");
+        wordsToColorDict.Add("char*", "<color=#f5c114>char*</color>");
+        wordsToColorDict.Add("char", "<color=#f5c114>char</color>");
+        colorList.Add("<color=#f5c114>");
+        colorList.Add("<color=#E058DA>");
+        colorList.Add("<color=#4482f5>");
+        colorList.Add("<color=#65da3f>");
+        colorList.Add("<color=#38dacc>");
+        colorList.Add("<color=#f3a025>");
+        colorList.Add("<color=#b9400a>");
+        colorList.Add("<color=#8d10c3>");
+        colorList.Add("<color=#f5c144>");
+        colorList.Add("<color=#fe5cf5>");
+    }
+    private void createFakeText(){
+        if(fakeText.text == null) return;
+        for(int i = 0;i< colorList.Count;i++){
+            if(fakeText.text.Contains(colorList[i])){
+                fakeText.text = fakeText.text.Replace(colorList[i],"");
+            }
+        }
+        fakeText.text = fakeText.text.Replace("</color>","");
+        for(int i = 0;i< wordsToColorDict.Count;i++){
+            if(fakeText.text.Contains(wordsToColorDict.ElementAt(i).Key)){
+                if(wordsToColorDict.ElementAt(i).Key == "="){
+                    fakeText.text = fakeText.text.Replace("=#","&&&&&");
+                    fakeText.text = fakeText.text.Replace(wordsToColorDict.ElementAt(i).Key,wordsToColorDict.ElementAt(i).Value);
+                    fakeText.text = fakeText.text.Replace("&&&&&","=#");
+                }else
+                    fakeText.text = fakeText.text.Replace(wordsToColorDict.ElementAt(i).Key,wordsToColorDict.ElementAt(i).Value);
+            }
+        }
+    }
+    
     private string getTemplate(int version){
         switch (version){
             case 0:

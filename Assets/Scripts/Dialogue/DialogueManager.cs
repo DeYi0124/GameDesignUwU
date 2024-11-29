@@ -27,6 +27,7 @@ public class DialogueManager : MonoBehaviour
     public int id;
     public GameObject continueButton, optionA, optionB, optionC;
     public Dialogue dialogue;
+    public GameObject nameBG;
     private List<string> dialogueContent;
     private List<int> charNum;
     private Queue<string> sentences;
@@ -55,7 +56,7 @@ public class DialogueManager : MonoBehaviour
     {
         Car = GameObject.FindWithTag("Car");
         id = checkPointGen.rng;
-        // id = 16;
+        id = 15;
         dialogue = new Dialogue();
         dialogue.content = new List<string>();
         dialogueContent = new List<string>();
@@ -295,7 +296,10 @@ public class DialogueManager : MonoBehaviour
                 currentSpeaker = 0;
             }
         }
-
+        if(namesDict[currentOption].Peek() == " ")
+            nameBG.SetActive(false);
+        else 
+            nameBG.SetActive(true);
         nameText.text = namesDict[currentOption].Dequeue();
 
         if((currentSpeaker == 1 || currentSpeaker == 3|| currentSpeaker == 5)&& OddFirstPerson){

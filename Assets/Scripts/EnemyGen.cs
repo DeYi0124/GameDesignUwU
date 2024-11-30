@@ -8,6 +8,7 @@ public class EnemyGen : MonoBehaviour
 {
     public GameObject cp;
     public GameObject bp;
+    public GameObject rp;
     public GameObject[] ePts;
     public int rng;
 
@@ -20,12 +21,15 @@ public class EnemyGen : MonoBehaviour
         int tmpBike = Random.Range(0, allBike);
         //Debug.Log(tmpBike);
         if(time % 2 == 0 && !alreadyFilled[tmpBike] && !PauseMenu.isPaused && GameManager.Instance.EnemyCount < GameManager.Instance.EnemyLimit) {
-            int tmp = Random.Range(0, 2);
+            int tmp = Random.Range(0, 3);
             GameObject tmpgobj;
+            tmp = 2;
             if(tmp == 0) {
                 tmpgobj = Instantiate(cp, ePts[tmpBike].transform.position, Quaternion.identity, transform);
-            }else {
+            }else if(tmp == 1) {
                 tmpgobj = Instantiate(bp, ePts[tmpBike].transform.position, Quaternion.identity, transform);
+            }else {
+                tmpgobj = Instantiate(rp, ePts[tmpBike].transform.position, Quaternion.identity, transform);
             }
             time = 1;
             GameManager.Instance.EnemyCount++;

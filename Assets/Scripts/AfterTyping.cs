@@ -54,9 +54,40 @@ public class AfterTyping : MonoBehaviour
             yield return new WaitForSeconds(speed);
         }
     }
-    public void sumbit(){
+
+    IEnumerator HideText(){
+        submitButton.GetComponent<Button>().interactable = false;
+        inputField.GetComponent<TMP_InputField>().readOnly = true;
         submitted = true;
+        for (int i = fullText.Length-1; i >= 0; i--)
+        {
+            currentText = currentText.Substring(0,i);
+            thing.text = currentText;
+            yield return new WaitForSeconds(speed);
+        }
         whatsMyPurpose.GetComponent<whatsMyPurpose>().readPlayerNameFromScript();
+        fullText = "It is the story of";
+        for (int i = 0; i < fullText.Length; i++)
+        {
+            if(fullText[i] == '<') {
+                while(fullText[i] != '>') {
+                    currentText += fullText[i];
+                    i++;
+                }
+                currentText += fullText[i];
+            }
+            else currentText += fullText[i];
+            thing.text = currentText;
+            yield return new WaitForSeconds(speed);
+        }
+        yield return new WaitForSeconds(5f);
+        SceneManager.LoadScene("MainMenu");
+        // this.GetComponent<Animator>().SetTrigger("leave");
+    }
+
+    public void sumbit(){
+        if(playerName.Length == 0 || playerName.Length > 10) return;
+        StartCoroutine(HideText());
         audioSource.Play();
     }
     public void readName(string input){

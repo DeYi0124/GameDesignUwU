@@ -40,6 +40,10 @@ public class LevelLoader : MonoBehaviour
         StartCoroutine(LoadFadeIn());
     }
 
+    public void FadeInT() {
+        StartCoroutine(LoadFadeInT());
+    }
+
     IEnumerator LoadLevel() {
         LoadText.text = "Loading...";
         GameManager.Instance.pause = true;
@@ -55,6 +59,14 @@ public class LevelLoader : MonoBehaviour
         transition.SetTrigger("Start");
         yield return new WaitForSecondsRealtime(3f);
         SceneManager.LoadSceneAsync("MainScene");
+        Destroy(this);
+    }
+
+    IEnumerator LoadFadeInT() {
+        LoadText.text = "Guiding...";
+        transition.SetTrigger("Start");
+        yield return new WaitForSecondsRealtime(3f);
+        SceneManager.LoadSceneAsync("TutorialScene");
         Destroy(this);
     }
 

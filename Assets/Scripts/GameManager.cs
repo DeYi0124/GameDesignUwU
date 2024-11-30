@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     public static Vector3 carPosition;
     public static int days = 0;
     public GameObject Car;
+    public GameObject vb;
     public GameState State;
     public int bike = 0;
     public int KPI = 5;
@@ -51,6 +52,26 @@ public class GameManager : MonoBehaviour
     //items
     public int guatiaShow;
 
+    void OnEnable()
+    {
+        Debug.Log("OnEnable called");
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        //Debug.Log("OnSceneLoaded: " + scene.name);
+        //Debug.Log(mode);
+        if(scene.name == "MainScene") {
+            vb = GameObject.Find("VineBoom");
+            vb.SetActive(false);
+        }
+    }
+    void OnDisable()
+    {
+        Debug.Log("OnDisable");
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
     void Awake() {
         if (Instance != null && Instance != this) {
             Destroy(gameObject);
@@ -59,7 +80,7 @@ public class GameManager : MonoBehaviour
             Instance = this;
         bike = 0;
         KPI = 10;
-        PR = 100;
+        PR = 5;
         days = 0;
         coins = 0;
         credits = 0;

@@ -1,0 +1,49 @@
+DrunkenStarLakeGoddess You System Event *
+Event
+your bikes fall in the Drunken Star Lake.
+System
+(You lost one bike.)
+you
+Oh, no. My bike!
+DrunkenStarLakeGoddess
+what is this?
+you
+It is my hard working in one day, please give back to me.
+DrunkenStarLakeGoddess
+Do you know which bikes is your?
+you
+options || Gold/Sliver/Normal
+A
+you
+I want... I mean I thought I falled the golden one.
+DrunkenStarLakeGoddess
+You are a greedy guy. It is not a good attitude.
+DrunkenStarLakeGoddess
+If you still make speculation in you life, you will get into trouble sooner or later.
+DrunkenStarLakeGoddess
+That’s a piece of advice for you before leaving.
+DrunkenStarLakeGoddess
+(Diving into lake directly)
+B
+you
+I am sure... that I falled the silver one.
+DrunkenStarLakeGoddess
+Humble but ambitious... I like it.
+DrunkenStarLakeGoddess
+This silver bike is yours.
+System
+(The silver bike changes to three normal bikes.)
+(You get additional reputation.)
+you
+Oh, ya~
+C
+you
+I thought... that I just falled a normal bike like this.
+DrunkenStarLakeGoddess
+You think? Don't you know how it happen?
+DrunkenStarLakeGoddess
+Nobody is sure the bike come from. I will take it to lost and found.
+DrunkenStarLakeGoddess
+(Leaving without goodbye.)
+you
+Wait! My bike... My heart is broken.

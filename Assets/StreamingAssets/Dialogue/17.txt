@@ -1,0 +1,41 @@
+DrunkenMoonLakeGoddess You System *
+you
+(pleacefully drive around the Drunken Moon Lake.)
+DrunkenMoonLakeGoddess
+(Ermeging from lake.)
+DrunkenMoonLakeGoddess
+Are you from the shueiYuan civilization?
+you
+Uh? Yes, but what's going on?
+DrunkenMoonLakeGoddess
+Is this your bike?
+you
+options || Gold/Sliver/Normal/Wait, I don't fall any bike.
+A
+DrunkenMoonLakeGoddess
+OK, take it for yourself.
+System
+(The golden bike changes to five normal bikes.)
+(You get five bikes.)
+B
+DrunkenMoonLakeGoddess
+All right, here you go.
+System
+(The silver bike changes to three normal bikes.)
+(You get three bikes.)
+C
+DrunkenMoonLakeGoddess
+Take the strange thing and leave.
+System
+(You get one bike.)
+D
+DrunkenMoonLakeGoddess
+You said you are from the shueiYuan civilization, didn't you?
+you
+Ya, but I am just an ShueiYuan noob now.
+DrunkenMoonLakeGoddess
+So... this bike doesn't belong you? I saw it fall from a truck.
+DrunkenMoonLakeGoddess
+Well, scratch that. This bike and the strange statue are yours.
+System
+(The number of Your bike plus one.)

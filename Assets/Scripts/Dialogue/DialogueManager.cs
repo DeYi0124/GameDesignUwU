@@ -110,7 +110,6 @@ public class DialogueManager : MonoBehaviour
         charNum.Add(1);
         charNum.Add(1);
         charNum.Add(1);
-        charNum.Add(1);
         charNum.Add(2);
         charNum.Add(1);
         CarController.Instance.resetMomentum();

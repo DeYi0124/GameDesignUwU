@@ -13,6 +13,7 @@ public class memGameManager : MonoBehaviour
     public TextMeshProUGUI bullshitText;
     [SerializeField]
     List<Button> butt = new List<Button>();
+    public GameObject startGame;
     int[] res = new int[25];
 
     private int counter = 0;
@@ -20,8 +21,13 @@ public class memGameManager : MonoBehaviour
     private int pathIndex = 0;
     private string[] bullshits = {"As a ShueiYuan noob, you are quite impressive.", "Wow, you really ARE something.", "I am suprised that a person like you can reach this level.", "Wow, you are a very talented person.", "The fate of NTU is relied on you."};
     
-    void Start()
+    void Start () {
+        bullshitText.text = "Welcome to my memory puzzle, please press start to start.";
+    }
+
+    public void StartGame()
     {
+        startGame.SetActive(false);
         for (int i = 0; i < buttons.Length; i++)
         {
             buttons[i].SetBool("isGlowing",false);
@@ -29,7 +35,7 @@ public class memGameManager : MonoBehaviour
             butt[i].onClick.AddListener(() => ButtonClicked(cacheIndex));
         }
         time = 50;
-        counter = 1;
+        counter = 3;
         bullshitText.text = "Prove that you are capable to catch up the speed of god.";
         StartMemGame(counter);
         // SceneManager.LoadScene("MainScene");
@@ -111,16 +117,17 @@ public class memGameManager : MonoBehaviour
             if(counter <= 5) {
                 GameManager.Instance.ReasonText = "You failed to pass the test of the NTHU god and thus you are expelled from NTU";
                 SceneManager.LoadScene("DeathReportScene");
-            }
-            CarController.Instance.bike += counter;
-            SceneManager.LoadScene("MainScene");
+                GameManager.Instance.pause = false;
+            }else {
+                CarController.Instance.bike += counter;
+                SceneManager.LoadScene("MainScene");
+                GameManager.Instance.pause = false;
+            }    
         }
         pathIndex++;
-        butt[index].interactable = false;
         buttons[index].SetBool("isGlowing",true);
         yield return new WaitForSeconds(seconds);
         buttons[index].SetBool("isGlowing",false);
-        butt[index].interactable = true; 
         if(pathIndex == counter){
             Debug.Log(pathIndex + "=" + counter);
             for(int i = 0; i < 25; i++) {
@@ -133,16 +140,18 @@ public class memGameManager : MonoBehaviour
                 StartCoroutine(Victory());
             }else
                 StartMemGame(counter);
-        }
-        for(int i = 0; i < 25; i++) {
-            butt[i].interactable = true;
-        }
+        }else {
+            for(int i = 0; i < 25; i++) {
+                butt[i].interactable = true;
+            }
+        } 
     }
     IEnumerator Victory(){
         StartCoroutine(ShowText("You've passed my test, congratulations!"));
         yield return new WaitForSeconds(3f);
         CarController.Instance.bike += 20;
         SceneManager.LoadScene("MainScene");
+        GameManager.Instance.pause = false;
     }
         
     void ButtonClicked(int index)

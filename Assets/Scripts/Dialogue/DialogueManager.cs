@@ -56,8 +56,8 @@ public class DialogueManager : MonoBehaviour
     {
         Time.timeScale = 1f;
         Car = GameObject.FindWithTag("Car");
-        id = checkPointGen.rng;
-        // id = 15;
+        // id = checkPointGen.rng;
+        id = 15;
         dialogue = new Dialogue();
         dialogue.content = new List<string>();
         dialogueContent = new List<string>();

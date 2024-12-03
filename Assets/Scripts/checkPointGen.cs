@@ -101,7 +101,7 @@ public class checkPointGen : MonoBehaviour
             metCmm = true;
         else if(rng == 16 && metCmm)
             return;
-        if(rng <= 16 && rng != 10 ){
+        if(rng <= 16){
             GameManager.Instance.pause = true;
             Car.SetActive(false);
             Car.SetActive(true);

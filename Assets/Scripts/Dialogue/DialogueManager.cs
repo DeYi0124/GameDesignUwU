@@ -57,7 +57,7 @@ public class DialogueManager : MonoBehaviour
         Time.timeScale = 1f;
         Car = GameObject.FindWithTag("Car");
         id = checkPointGen.rng;
-        // id = 15;
+        id = 10;
         dialogue = new Dialogue();
         dialogue.content = new List<string>();
         dialogueContent = new List<string>();
@@ -72,8 +72,9 @@ public class DialogueManager : MonoBehaviour
         speakerID = new string[7];
         nextSceneDict = new Dictionary<int,string>();
         nextSceneDict.Add(3,"RPS game");
-        nextSceneDict.Add(13,"addtion game");
+        nextSceneDict.Add(10,"memGame");
         nextSceneDict.Add(12,"lockGame");
+        nextSceneDict.Add(13,"addtion game");
         nextSceneDict.Add(14,"Cmm");
         nextSceneDict.Add(15,"typingGame");
         nextSceneDict.Add(16, "puzzleGame");
@@ -98,6 +99,7 @@ public class DialogueManager : MonoBehaviour
         charNum.Add(1);
         charNum.Add(1);
         charNum.Add(6);
+        charNum.Add(1);
         charNum.Add(1);
         charNum.Add(1);
         charNum.Add(1);
@@ -329,10 +331,18 @@ public class DialogueManager : MonoBehaviour
         StartCoroutine(TypeSentence(sentence));
 
     }
-    IEnumerator TypeSentence (string sentence){
+    IEnumerator TypeSentence (string fullText){
         dialogueText.text = "";
-        foreach(char letter in sentence.ToCharArray()){
-            dialogueText.text += letter;
+        for (int i = 0; i < fullText.Length; i++)
+        {
+            if(fullText[i] == '<') {
+                while(fullText[i] != '>') {
+                    dialogueText.text += fullText[i];
+                    i++;
+                }
+                dialogueText.text += fullText[i];
+            }
+            else dialogueText.text += fullText[i];
             yield return new WaitForSeconds(dialogueSpeed);
         }
 
@@ -384,6 +394,7 @@ public class DialogueManager : MonoBehaviour
         ScaleDict.Add(7,new Vector3(8,8,0));
         ScaleDict.Add(8,new Vector3(8,8,0));
         ScaleDict.Add(9,new Vector3(1.4f,1.4f,0));
+        ScaleDict.Add(10, new Vector3(1.4f,1.4f,0));
         ScaleDict.Add(11, new Vector3(1.4f,1.4f,0));
         ScaleDict.Add(14, new Vector3(1.2f,1.2f,0));
         ScaleDict.Add(13, new Vector3(2.5f,2.3f,0));
@@ -442,6 +453,8 @@ public class DialogueManager : MonoBehaviour
         ScaleDict[8].Add(new Vector3(50,50,0));
         ScaleDict.Add(9,new List<Vector3>());
         ScaleDict[9].Add(new Vector3(80,80,0));
+        ScaleDict.Add(10,new List<Vector3>());
+        ScaleDict[10].Add(new Vector3(250,250,0));
         ScaleDict.Add(11,new List<Vector3>());
         ScaleDict[11].Add(new Vector3(80,80,0));
         ScaleDict.Add(14,new List<Vector3>());

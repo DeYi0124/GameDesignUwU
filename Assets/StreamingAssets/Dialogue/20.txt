@@ -1,0 +1,56 @@
+DrunkenNoomLakeGoddess You System Event *
+Event
+your bikes fall in the Drunken Noom Lake.
+System
+(You lost one bike.)
+you
+Oh, no. My bike!
+DrunkenNoomLakeGoddess
+what is this?
+you
+It is my hard working in one day, please give back to me.
+DrunkenNoomLakeGoddess
+Do you know which bikes is your?
+you
+options || Gold/Sliver/Normal
+A
+you
+I want... I mean I thought I falled the golden one.
+DrunkenNoomLakeGoddess
+Have you checked the clunker you driving on?
+DrunkenNoomLakeGoddess
+Does it look like that the old truck can load the golden bike?
+Who do you think you are?
+DrunkenNoomLakeGoddess
+lying through your teeth, how greedy person!
+DrunkenNoomLakeGoddess
+(quickly disappearing in the water, without forgetting to taking the bike with)
+B
+you
+I thought... that I falled the silver one.
+DrunkenNoomLakeGoddess
+Silver? Are you sure you the bike made by silver?
+DrunkenNoomLakeGoddess
+Let's do an experiment. Give me another bike.
+you
+(take a bike from your truck and give it to goddess)
+DrunkenNoomLakeGoddess
+(put the bike in a suddenly appearing boat)
+(measure the how deep the boat sinks)
+DrunkenNoomLakeGoddess
+OK... your bike is not made by sliver! Thus, the sliver bike is not yours. Q.E.D.
+DrunkenNoomLakeGoddess
+(submerging into the water and leaving the bike you just borrow her)
+C
+you
+Sorry, I just falled a normal bike like this.
+DrunkenNoomLakeGoddess
+(Smile)
+You are the honestest person I have met.
+DrunkenNoomLakeGoddess
+This normal bike is yours, actually. And you get something simple but important.
+System
+(You push the normal bike to your truck.)
+(You get additional reputation, very much.)
+you
+Keep going!

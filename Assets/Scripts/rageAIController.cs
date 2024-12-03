@@ -31,7 +31,7 @@ public class rageAIController : MonoBehaviour
         }
     }
 
-    IEnumerator wait(float seconds = 1.5f) {
+    IEnumerator wait(float seconds = 0.5f) {
         vb.SetActive(true);
         yield return new WaitForSeconds(seconds);
         vb.SetActive(false);

@@ -152,10 +152,16 @@ public class diezYMediaManager : MonoBehaviour
             if(lost){
                 result.color = Color.red;
                 result.text = "YOU LOST";
+                GameManager.Instance.pause = false;
+                yield return new WaitForSeconds(2f);
+                SceneManager.LoadScene("MainScene");
             }
             else{
                 result.color = Color.green;
                 result.text = "YOU WON";
+                GameManager.Instance.pause = false;
+                yield return new WaitForSeconds(2f);
+                SceneManager.LoadScene("MainScene");
             }
         }
 

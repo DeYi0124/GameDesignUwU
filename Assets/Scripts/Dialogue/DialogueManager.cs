@@ -29,7 +29,7 @@ public class DialogueManager : MonoBehaviour
     public Dialogue dialogue;
     public GameObject nameBG;
     private List<string> dialogueContent;
-    private List<int> charNum;
+    private Dictionary<int,int> charNum;
     private Queue<string> sentences;
     private Queue<string> sentencesOptionA;
     private Queue<string> sentencesOptionB;
@@ -56,13 +56,8 @@ public class DialogueManager : MonoBehaviour
     {
         Time.timeScale = 1f;
         Car = GameObject.FindWithTag("Car");
-<<<<<<< HEAD
-        // id = checkPointGen.rng;
-        id = 15;
-=======
         id = checkPointGen.rng;
         id = 10;
->>>>>>> origin/main
         dialogue = new Dialogue();
         dialogue.content = new List<string>();
         dialogueContent = new List<string>();
@@ -83,6 +78,7 @@ public class DialogueManager : MonoBehaviour
         nextSceneDict.Add(14,"Cmm");
         nextSceneDict.Add(15,"typingGame");
         nextSceneDict.Add(16, "puzzleGame");
+        nextSceneDict.Add(21, "blackJack");
         namesDict = new Dictionary<string,Queue<string>>();
         namesDict.Add("default",names);
         namesDict.Add("A",namesOptionA);
@@ -99,24 +95,25 @@ public class DialogueManager : MonoBehaviour
         GameManager.Instance.pause = true;
         Car.SetActive(false);
         Car.transform.GetChild(0).GetChild(6).gameObject.SetActive(false);
+        charNum = new Dictionary<int,int>();
+        charNum.Add(1,1);
+        charNum.Add(2,1);
+        charNum.Add(3,6);
+        charNum.Add(4,1);
+        charNum.Add(5,1);
+        charNum.Add(6,1);
+        charNum.Add(7,1);
+        charNum.Add(8,1);
+        charNum.Add(9,1);
+        charNum.Add(10,1);
+        charNum.Add(11,1);
+        charNum.Add(12,1);
+        charNum.Add(13,1);
+        charNum.Add(14,1);
+        charNum.Add(15,2);
+        charNum.Add(16,1);
+        charNum.Add(21,1);
 
-        charNum = new List<int>();
-        charNum.Add(1);
-        charNum.Add(1);
-        charNum.Add(6);
-        charNum.Add(1);
-        charNum.Add(1);
-        charNum.Add(1);
-        charNum.Add(1);
-        charNum.Add(1);
-        charNum.Add(1);
-        charNum.Add(1);
-        charNum.Add(1);
-        charNum.Add(1);
-        charNum.Add(1);
-        charNum.Add(1);
-        charNum.Add(2);
-        charNum.Add(1);
         CarController.Instance.resetMomentum();
         dialogueBoxAnimator.SetBool("IsOpen", false);
         for(int i = 1;i<7;i++){

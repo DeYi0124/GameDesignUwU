@@ -1,0 +1,48 @@
+DrunkenSunLakeGoddess You System Event *
+Event
+your bikes fall in the Drunken Sun Lake.
+System
+(You lost one bike.)
+you
+Oh, no. My bike!
+DrunkenSunLakeGoddess
+what is this?
+you
+It is my hard working in one day, please give back to me.
+DrunkenSunLakeGoddess
+Do you know which bikes is your?
+you
+options || Gold/Sliver/Normal
+A
+you
+I thought... I falled the golden one.
+DrunkenSunLakeGoddess
+Oh, you are a ambitious guy who I likes to.
+DrunkenSunLakeGoddess
+This golden bike is yours.
+System
+(The golden bike changes to five normal bikes.)
+you
+Lucky~
+B
+you
+I thought... that I falled the silver one.
+DrunkenSunLakeGoddess
+(She stared at you with a suspicious look in her eyes.)
+DrunkenSunLakeGoddess
+You fail to hide your eager faces of golden bike.
+DrunkenSunLakeGoddess
+Stop your wishful thinking. You will get nothing.
+DrunkenSunLakeGoddess
+(Swimimg and leaving directly)
+C
+you
+I thought... that I just falled a normal bike like this.
+DrunkenSunLakeGoddess
+(She looked at you with unbelieving eyes.)
+DrunkenSunLakeGoddess
+Have you desired the money, the power, or something luxurious?
+DrunkenSunLakeGoddess
+How unmotivated nowadays young man are!
+DrunkenSunLakeGoddess
+(tossing the bike behind her into the lake like it’s trash and sinking the lake with disappointment in face)

@@ -48,6 +48,7 @@ public class GameManager : MonoBehaviour
     public float transitionTime = 3f;
     public TextMeshProUGUI LoadText;
     private Vector2 carSpawn;  
+    private bool isTutor = false; 
     
     //items
     public int guatiaShow;
@@ -59,11 +60,12 @@ public class GameManager : MonoBehaviour
     }
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        //Debug.Log("OnSceneLoaded: " + scene.name);
-        //Debug.Log(mode);
-        if(scene.name == "MainScene") {
+        if(scene.name == "MainScene" || scene.name == "TutorialScene") {
             vb = GameObject.Find("VineBoom");
             vb.SetActive(false);
+        }
+        if(scene.name == "TutorialScene") {
+            isTutor = true;
         }
     }
     void OnDisable()
@@ -86,7 +88,6 @@ public class GameManager : MonoBehaviour
         credits = 0;
         maxEnt = 100;
         maxTime = 60;
-        //items
         guatiaShow = 0;
         carSpawn = CarController.Instance.GetPostion();
         //CarController.Instance.SetPosition(carSpawn);
@@ -143,13 +144,17 @@ public class GameManager : MonoBehaviour
             // if(tmpEnt <= 50) {
             //     Debug.Log("event occurs, ID: " + tmpEnt.ToString());
             // }
-            if(PR <= 0) {
+            if(PR <= 0) { 
                 pause = true;
                 time = 0;
                 days = 0;
                 coins = 0;
                 PR = 5;
                 ReasonText = "You have been jailed for being a criminal";
+                if(isTutor) {
+                    SceneManager.LoadScene("MainMenu");
+                    return;
+                }
                 SceneManager.LoadSceneAsync("DeathReportScene");
             }
         }   
@@ -187,6 +192,10 @@ public class GameManager : MonoBehaviour
             updateGameState(GameState.Evening);
         } else if(time > maxTime && State == GameState.Evening) {
             updateGameState(GameState.Night);
+            if(isTutor) {
+                SceneManager.LoadScene("MainMenu");
+                return;
+            }
             if(bike >= KPI) {
                 updateMoney(bike*5, 0);
                 PR += (bike - KPI);

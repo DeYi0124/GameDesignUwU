@@ -25,7 +25,21 @@ public class checkPointGen : MonoBehaviour
     public Animator transition;
     public float transitionTime = 3f;
     public TextMeshProUGUI LoadText;
-
+    public bool isTutor = false;
+    void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if(scene.name == "TutorialScene") {
+            isTutor = true;
+        }
+    }
+    void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
 
     public void genBike() {
         int tmpBike = Random.Range(0, allBike);
@@ -63,6 +77,7 @@ public class checkPointGen : MonoBehaviour
             alreadyFilled[i] = false;
         }
         mcz = false;
+        isTutor = false;
     }
     
     void Update() {
@@ -92,11 +107,12 @@ public class checkPointGen : MonoBehaviour
     }
 
     void OnReceiving(checkPointHandler cph) {
-        //Debug.Log(cph.id);
+        Debug.Log(isTutor);
         alreadyFilled[cph.id] = false;
         rng = Random.Range(1, rngUpperLimit+1);
         Debug.Log(rng);
         // rng = 3;
+        if(isTutor) return;
         if (rng == 16 && !metCmm)
             metCmm = true;
         else if(rng == 16 && metCmm)

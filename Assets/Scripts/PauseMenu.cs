@@ -17,7 +17,7 @@ public class PauseMenu : MonoBehaviour
     {
         //Debug.Log("OnSceneLoaded: " + scene.name);
         //Debug.Log(mode);
-        if(scene.name == "MainScene") {
+        if(scene.name == "MainScene" || scene.name == "TutorialScene") {
             pauseMenu = GameObject.Find("PauseMenu");
             pauseMenu.SetActive(false);
         }

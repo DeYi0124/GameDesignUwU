@@ -57,7 +57,7 @@ public class DialogueManager : MonoBehaviour
         Time.timeScale = 1f;
         Car = GameObject.FindWithTag("Car");
         id = checkPointGen.rng;
-        id = 10;
+        id = 1;
         dialogue = new Dialogue();
         dialogue.content = new List<string>();
         dialogueContent = new List<string>();
@@ -140,7 +140,7 @@ public class DialogueManager : MonoBehaviour
         }else {
             yield return StartCoroutine(ReadDialogueFile(id));
         }
-        for(int i = 1;i <= charNum[id-1];i++){
+        for(int i = 1;i <= charNum[id];i++){
             yield return StartCoroutine(LoadCharacter(i));
         }
         TriggerDialogue();

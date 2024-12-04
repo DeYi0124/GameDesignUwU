@@ -23,7 +23,7 @@ public class EnemyGen : MonoBehaviour
         if(time % 2 == 0 && !alreadyFilled[tmpBike] && !PauseMenu.isPaused && GameManager.Instance.EnemyCount < GameManager.Instance.EnemyLimit) {
             int tmp = Random.Range(0, 3);
             GameObject tmpgobj;
-            tmp = 2;
+            // tmp = 2;
             if(tmp == 0) {
                 tmpgobj = Instantiate(cp, ePts[tmpBike].transform.position, Quaternion.identity, transform);
             }else if(tmp == 1) {

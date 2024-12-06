@@ -27,21 +27,35 @@ public class IntroManager : MonoBehaviour
     public Transform[] outerPoints;
     public Transform[] unclePoint;
     public Transform[] studentPoints;
+    public GameObject sayMyName;
+    public SpriteRenderer[] sayMyNameSprite;
+    public Image penButton;
+    public TMP_InputField sayMyNameInputField;
+    public GameObject dialogueBox;
+    public Image[] dialogueImages;
+    public TextMeshProUGUI skip;
+    public sayMyNameManager sayMyNameManager;
+    public GameObject blackScreenObject;
     private List<string> content;
     private int sceneCount;
     private int bgmCount;
-
+    private bool skipped = false;
+    private IEnumerator process;
     void Start(){
         resetSprites();
+        process = wholeScene();
         bgmCount = 0;
         sceneCount = 0;
         content = prologue.text.Split('\n').ToList();
         // StartCoroutine(keepCallingGen(outerPoints,studentPoints,10f,1f));
-        StartCoroutine(wholeScene());
+        StartCoroutine(process);
+        
 
     }
     void Update(){
         timer.text = Time.time.ToString("F2");
+        // if(skipped)
+        //     StopCoroutine(process);
     }
     IEnumerator wholeScene(){
         bgm[0].Play();
@@ -130,19 +144,29 @@ public class IntroManager : MonoBehaviour
             StartCoroutine(fadeOut(students[i],1.3f));
         yield return StartCoroutine(deleteSentence(2f,0.02f));
         yield return StartCoroutine(TypeSentence(content[18]));
-
         yield return StartCoroutine(deleteSentence(2f,0.02f));
         yield return StartCoroutine(TypeSentence(content[19],0.09f));
         yield return StartCoroutine(deleteSentence(2f,0.02f));
         yield return StartCoroutine(TypeSentence(content[20],0.15f));
+        StartCoroutine(transition(backGrounds[sceneCount],backGrounds[sceneCount+1],2f));
         yield return StartCoroutine(deleteSentence(2f,0.02f));
+        StartCoroutine(ImageFadeOut(dialogueImages[0],2.1f));
+        StartCoroutine(textFadeOut(skip,1.2f));
+        for(int i = 1;i<dialogueImages.Count();i++){
+            StartCoroutine(ImageFadeOut(dialogueImages[i],1.2f));
+        }
+        StartCoroutine(MusicFadeOut(bgm[bgmCount], 4f));
+        yield return new WaitForSeconds(0f);
+        StartCoroutine(MusicFadeIn(bgm[bgmCount], 6f));
+        yield return new WaitForSeconds(0f);
+        yield return StartCoroutine(startSayMyName());
     }
     IEnumerator transition(Sprite first,Sprite second,float time){
         prior.sprite = first;
         next.sprite = second;
         prior.color = new Color(1f,1f,1f,1f);
         next.color = new Color(1f,1f,1f,0f);
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(2.3f);
         float interval = time/Time.deltaTime;
         for(int i = 0;i<interval;i++){
             prior.color = new Color(prior.color.r,prior.color.g,prior.color.b,1f-i/interval);
@@ -150,27 +174,95 @@ public class IntroManager : MonoBehaviour
             yield return new WaitForSeconds(Time.deltaTime);
         }
         sceneCount++;
-        Debug.Log(sceneCount);
+    }
+    IEnumerator startSayMyName(){
+        sayMyName.SetActive(true);
+        yield return new WaitForSeconds(2.5f);
+        StartCoroutine(fadeIn(sayMyNameSprite[0],2.3f));
+        StartCoroutine(ImageFadeIn(penButton,1.5f,0.8f));
+        yield return new WaitForSeconds(1.5f);
+        sayMyNameManager.inSayMyName();
+        sayMyNameInputField.ActivateInputField();
+        // if(skipped)
+        //     StopAllCoroutines();
+    }
+    public void skipFunction(){
+        StopAllCoroutines();
+        dialogueImages[0].color = new Color(dialogueImages[0].color.r,dialogueImages[0].color.g,dialogueImages[0].color.b,0f);
+        skip.color = new Color(skip.color.r,skip.color.g,skip.color.b,0f);
+        for(int i = 1;i<dialogueImages.Count();i++){
+            dialogueImages[i].color = new Color(dialogueImages[i].color.r,dialogueImages[i].color.g,dialogueImages[i].color.b,0f);
+        } 
+        narration.text = "";
+        uncle.color = new Color(1f,1f,1f,0f);
+        aura.color = new Color(1f,1f,1f,0f);
+        auraAnimator.SetBool("isGlowing",false);
+        prior.color = new Color(1f,1f,1f,1f);
+        next.color = new Color(1f,1f,1f,0f);
+        for(int i = 0;i<students.Length;i++)
+            students[i].color = new Color(1f,1f,1f,0f);
+        prior.sprite = backGrounds[10];
+        for(int i = 0;i<bgm.Count();i++){
+            Debug.Log(bgm[i].name);
+            bgm[i].volume = 0f;
+        }
+        bgm[5].Play();
+        bgm[5].volume = 1f;
+        StartCoroutine(startSayMyName());
+        skipped = true;
     }
     IEnumerator fadeIn(SpriteRenderer spriteRenderer,float time, float delay = 0f){
         yield return new WaitForSeconds(delay);
-        spriteRenderer.color = new Color(1f,1f,1f,0f);
+        spriteRenderer.color = new Color(spriteRenderer.color.r,spriteRenderer.color.g,spriteRenderer.color.b,0f);
         float interval = time/Time.deltaTime;
         for(int i = 0;i<interval;i++){
-            spriteRenderer.color = new Color(next.color.r,next.color.g,next.color.b,i/interval);
+            spriteRenderer.color = new Color(spriteRenderer.color.r,spriteRenderer.color.g,spriteRenderer.color.b,i/interval);
             yield return new WaitForSeconds(Time.deltaTime);
         }
     }
     IEnumerator fadeOut(SpriteRenderer spriteRenderer,float time, float delay = 0f){
         yield return new WaitForSeconds(delay);
-        spriteRenderer.color = new Color(1f,1f,1f,1f);
+        spriteRenderer.color = new Color(spriteRenderer.color.r,spriteRenderer.color.g,spriteRenderer.color.b,1f);
         float interval = time/Time.deltaTime;
         for(int i = 0;i<interval;i++){
-            spriteRenderer.color = new Color(next.color.r,next.color.g,next.color.b,1f-i/interval);
+            spriteRenderer.color = new Color(spriteRenderer.color.r,spriteRenderer.color.g,spriteRenderer.color.b,1f-i/interval);
+            yield return new WaitForSeconds(Time.deltaTime);
+        }
+    }
+    IEnumerator ImageFadeOut(Image image,float time, float delay = 0f){
+        image.color = new Color(image.color.r,image.color.g,image.color.b,image.color.a);
+        yield return new WaitForSeconds(delay);
+        float originalAlpha = image.color.a;
+        float interval = time/Time.deltaTime;
+        for(int i = 0;i<interval;i++){
+            image.color = new Color(image.color.r,image.color.g,image.color.b,originalAlpha-(i/interval*originalAlpha));
+            yield return new WaitForSeconds(Time.deltaTime);
+        }
+    }
+
+    IEnumerator ImageFadeIn(Image image,float time, float delay = 0f){
+        yield return new WaitForSeconds(delay);
+        image.color = new Color(image.color.r,image.color.g,image.color.b,0f);
+        float interval = time/Time.deltaTime;
+        for(int i = 0;i<interval;i++){
+            image.color = new Color(image.color.r,image.color.g,image.color.b,i/interval);
+            yield return new WaitForSeconds(Time.deltaTime);
+        }
+
+    }
+    IEnumerator textFadeOut(TextMeshProUGUI textMeshPro,float time, float delay = 0f){
+        yield return new WaitForSeconds(delay);
+        textMeshPro.color = new Color(textMeshPro.color.r,textMeshPro.color.g,textMeshPro.color.b,1f);
+        float interval = time/Time.deltaTime;
+        for(int i = 0;i<interval;i++){
+            textMeshPro.color = new Color(textMeshPro.color.r,textMeshPro.color.g,textMeshPro.color.b,1f-i/interval);
             yield return new WaitForSeconds(Time.deltaTime);
         }
     }
     private void resetSprites(){
+        blackScreenObject.SetActive(false);
+        dialogueBox.SetActive(true);
+        sayMyName.SetActive(false);
         for(int i = 0;i<students.Length;i++){
             students[i].color = new Color(1f,1f,1f,0f);
         }
@@ -181,6 +273,10 @@ public class IntroManager : MonoBehaviour
         prior.color = new Color(1f,1f,1f,1f);
         next.sprite = backGrounds[1];
         next.color = new Color(1f,1f,1f,0f);
+        for(int i = 0;i< sayMyNameSprite.Count();i++){
+            sayMyNameSprite[i].color = new Color(1f,1f,1f,0f);
+        }
+        penButton.color = new Color(1f,1f,1f,0f);
     }
     IEnumerator TypeSentence (string fullText, float dialogueSpeed = 0.015f){
         narration.text = "";
@@ -198,7 +294,6 @@ public class IntroManager : MonoBehaviour
         }
     }
     IEnumerator deleteSentence(float delay,float speed = 0.02f){
-        // Debug.Log("starts deleting");
         yield return new WaitForSeconds(delay);
         for(int i =0; i< narration.text.Length;i++){
             if(narration.text[i] == '<') {
@@ -212,7 +307,6 @@ public class IntroManager : MonoBehaviour
                 narration.text = narration.text.Remove(i,1).Insert(i," ");
             yield return new WaitForSeconds(speed);
         }
-        Debug.Log("Sentence deleted");
     }
     IEnumerator keepCallingGen(Transform[] goals,Transform[] spawns,float duration,float frequency = 1f,float delay = 0f){
         yield return new WaitForSeconds(delay);

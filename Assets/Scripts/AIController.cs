@@ -24,7 +24,7 @@ public class AIController : MonoBehaviour
 
     IEnumerator wait(float seconds = 1.5f) {
         WAAAA.Play();
-        Debug.Log("Killed");
+        // Debug.Log("Killed");
         yield return new WaitForSeconds(seconds);
         Destroy(this.gameObject);
     }

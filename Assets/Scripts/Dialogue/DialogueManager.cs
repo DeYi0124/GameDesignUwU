@@ -56,8 +56,8 @@ public class DialogueManager : MonoBehaviour
     {
         Time.timeScale = 1f;
         Car = GameObject.FindWithTag("Car");
-        id = checkPointGen.rng;
-        id = 1;
+        // id = checkPointGen.rng;
+        id = 21;
         dialogue = new Dialogue();
         dialogue.content = new List<string>();
         dialogueContent = new List<string>();
@@ -112,7 +112,7 @@ public class DialogueManager : MonoBehaviour
         charNum.Add(14,1);
         charNum.Add(15,2);
         charNum.Add(16,1);
-        charNum.Add(21,1);
+        charNum.Add(21,4);
 
         CarController.Instance.resetMomentum();
         dialogueBoxAnimator.SetBool("IsOpen", false);
@@ -402,6 +402,7 @@ public class DialogueManager : MonoBehaviour
         ScaleDict.Add(12, new Vector3(1.5f,0.9f,0));
         ScaleDict.Add(15, new Vector3(2,2,0));
         ScaleDict.Add(16, new Vector3(2,2,0));
+        ScaleDict.Add(21, new Vector3(2,2,0));
         RectTransform transform = BackGround.GetComponent<RectTransform>();
         transform.localScale = ScaleDict[id];
     }
@@ -469,6 +470,11 @@ public class DialogueManager : MonoBehaviour
         ScaleDict[15].Add(new Vector3(100,100,0));
         ScaleDict.Add(16,new List<Vector3>());
         ScaleDict[16].Add(new Vector3(110,110,0));
+        ScaleDict.Add(21,new List<Vector3>());
+        ScaleDict[21].Add(new Vector3(110,110,0));
+        ScaleDict[21].Add(new Vector3(110,110,0));
+        ScaleDict[21].Add(new Vector3(110,110,0));
+        ScaleDict[21].Add(new Vector3(110,110,0));
         RectTransform transform = Character.GetComponent<RectTransform>();
         transform.localScale = ScaleDict[id][characterID-1];
 

@@ -10,7 +10,7 @@ public class PauseMenu : MonoBehaviour
     // Start is called before the first frame update
     void OnEnable()
     {
-        Debug.Log("OnEnable called");
+        // Debug.Log("OnEnable called");
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -31,7 +31,7 @@ public class PauseMenu : MonoBehaviour
     }
     void OnDisable()
     {
-        Debug.Log("OnDisable");
+        // Debug.Log("OnDisable");
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 

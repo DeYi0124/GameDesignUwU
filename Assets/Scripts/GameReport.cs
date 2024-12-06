@@ -39,8 +39,8 @@ public class GameReport : MonoBehaviour
         LoadText.text = "Next day...";
         transition.SetTrigger("Start");
         yield return new WaitForSecondsRealtime(transitionTime);
-        SceneManager.LoadScene("MainScene");   
         GameManager.Instance.reset();
+        SceneManager.LoadScene("MainScene");   
     }
     public void ContinueGame() {
         // LoadingScreen();

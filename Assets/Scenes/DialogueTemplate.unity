@@ -2119,9 +2119,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: The moment I understood the weakness of my flesh, it disgusted me. I crave
-    for the strength and certainty of steel, I aspire to the purity of the blessed
-    machine. Your kind cling to your flesh as if it would not decay and fail you.
+  m_text: "\u4E2D"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6bbfb2ddabeea2b448558ceb04ab84ed, type: 2}
   m_sharedMaterial: {fileID: -6999420033459616077, guid: 6bbfb2ddabeea2b448558ceb04ab84ed, type: 2}

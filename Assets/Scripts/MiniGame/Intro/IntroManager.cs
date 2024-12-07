@@ -156,6 +156,7 @@ public class IntroManager : MonoBehaviour
             StartCoroutine(ImageFadeOut(dialogueImages[i],1.2f));
         }
         StartCoroutine(MusicFadeOut(bgm[bgmCount], 4f));
+        bgmCount++;
         yield return new WaitForSeconds(0f);
         StartCoroutine(MusicFadeIn(bgm[bgmCount], 6f));
         yield return new WaitForSeconds(0f);
@@ -175,9 +176,12 @@ public class IntroManager : MonoBehaviour
         }
         sceneCount++;
     }
-    IEnumerator startSayMyName(){
+    IEnumerator startSayMyName(bool skipped = false){
         sayMyName.SetActive(true);
-        yield return new WaitForSeconds(2.5f);
+        if(skipped)
+            yield return new WaitForSeconds(1f);
+        else
+            yield return new WaitForSeconds(2.5f);
         StartCoroutine(fadeIn(sayMyNameSprite[0],2.3f));
         StartCoroutine(ImageFadeIn(penButton,1.5f,0.8f));
         yield return new WaitForSeconds(1.5f);

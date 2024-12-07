@@ -153,15 +153,18 @@ public class diezYMediaManager : MonoBehaviour
             if(lost){
                 result.color = Color.red;
                 result.text = "YOU LOST";
-                GameManager.Instance.pause = false;
                 yield return new WaitForSeconds(2f);
+                GameManager.Instance.pause = false;
+                GameManager.Instance.coins = 0;
                 SceneManager.LoadScene("MainScene");
             }
             else{
                 result.color = Color.green;
                 result.text = "YOU WON";
-                GameManager.Instance.pause = false;
                 yield return new WaitForSeconds(2f);
+                GameManager.Instance.pause = false;
+                GameManager.Instance.coins *= 2;
+                GameManager.Instance.coins += 10;
                 SceneManager.LoadScene("MainScene");
             }
         }
@@ -175,6 +178,6 @@ public class diezYMediaManager : MonoBehaviour
             card.transform.Translate(direction / 300f);
             yield return new WaitForSeconds(ETA/300f);
         }
-        Debug.Log(Time.time);
+        // Debug.Log(Time.time);
     }
 }

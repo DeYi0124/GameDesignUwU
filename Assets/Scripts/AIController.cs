@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 using UnityEngine.UI;
 public class AIController : MonoBehaviour
 {
@@ -10,13 +11,19 @@ public class AIController : MonoBehaviour
     private int MoveSpeed = 4;
     private int MaxDist = 10;
     private int MinDist = 6;
+    private bool hit = false;
     void Start()
     {
         enemyAnimator.SetBool("isWalking", false);
     }
     void OnCollisionEnter2D(Collision2D collision2D) {
-        if(collision2D.gameObject.tag == "Car") {
-            GameManager.Instance.PR -= 1;
+        if(!hit && collision2D.gameObject.tag == "Car") {
+            hit = true;
+            GameManager.Instance.kills += 1;
+            if(GameManager.Instance.PR < GameManager.Instance.maxPR)
+                GameManager.Instance.PR -= GameManager.Instance.PRfanumTax[0];
+            else
+                GameManager.Instance.PR -= GameManager.Instance.PRfanumTax[GameManager.Instance.PRlevel];
             GameManager.Instance.EnemyCount -= 1;
             StartCoroutine(wait());
         }

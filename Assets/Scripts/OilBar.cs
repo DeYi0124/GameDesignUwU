@@ -7,7 +7,7 @@ using TMPro;
 
 public class OilBar : MonoBehaviour
 {
-    public static OilBar Instance;
+    // public static OilBar Instance;
     public Slider slider;
     public Slider easeSlider;
     private float lerpSpeed = 0.01f;
@@ -21,11 +21,13 @@ public class OilBar : MonoBehaviour
 
     void Awake() {
         //Debug.Log(GameManager.OnTimeUpdated);
-        if (Instance != null && Instance != this) {
-            Destroy(gameObject);
-        }
-        else 
-            Instance = this;
+        // if (Instance != null && Instance != this) {
+        //     Destroy(gameObject);
+        // }
+        // else 
+        //     Instance = this;
+        slider.maxValue = GameManager.Instance.maxOil;
+        easeSlider.maxValue = GameManager.Instance.maxOil;
         CurrentBike[] currs = FindObjectsOfType<CurrentBike>();
         foreach (CurrentBike curr in currs) {
             curr.OnSave += OnSave;
@@ -38,7 +40,7 @@ public class OilBar : MonoBehaviour
         //Debug.Log(CarController.Instance.GetVelocityMagnitude());
         if(GameManager.Instance.pause)
             return;
-        float uwu = (int)Mathf.Round(2 * CarController.Instance.GetVelocityMagnitude() / CarController.Instance.maxSpeed);
+        float uwu = (int)Mathf.Round(2 * CarController.Instance.GetVelocityMagnitude() / CarController.Instance.maxSpeed * (1 + 0.1f*CarController.Instance.bike));
         if(CarController.Instance.onGrass) {
             uwu *= 3;
         }

@@ -111,13 +111,12 @@ public class checkPointGen : MonoBehaviour
         alreadyFilled[cph.id] = false;
         rng = Random.Range(1, rngUpperLimit+1);
         Debug.Log(rng);
-        // rng = 3;
+        if(GameManager.Instance.events[rng]) return;
+        if(GameManager.Instance.PR == GameManager.Instance.maxPR) return;
+        rng = 22;
+        GameManager.Instance.events[rng] = true;
         if(isTutor) return;
-        if (rng == 16 && !metCmm)
-            metCmm = true;
-        else if(rng == 16 && metCmm)
-            return;
-        if(rng <= 16){
+        if(rng <= 22){
             GameManager.Instance.pause = true;
             Car.SetActive(false);
             Car.SetActive(true);
@@ -145,6 +144,9 @@ public class checkPointGen : MonoBehaviour
                 GameManager.Instance.coins = 0;
             }else if(rng == 9) {
                 GameManager.Instance.guatiaShow += 2;
+            }else if(rng == 22) {
+                int tr = Random.Range(1, 10);
+                CarController.Instance.bike = (CarController.Instance.bike + tr > CarController.Instance.maxBike)? CarController.Instance.maxBike : CarController.Instance.bike + tr;
             }
             FadeIn();
         }

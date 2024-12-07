@@ -17,7 +17,7 @@ public class montagneAIController : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision2D) {
         if(collision2D.gameObject.tag == "Car") {
-            oof.Play();
+            oof.Play(); 
         }
     }
     void Update()

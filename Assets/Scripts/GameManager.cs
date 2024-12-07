@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
     public static Vector3 carPosition;
     public int days = 0;
+    public int totalPlaytime = 0;
     public GameObject Car;
     public GameObject vb;
     public GameState State;
@@ -22,6 +23,11 @@ public class GameManager : MonoBehaviour
     public float oil = 0;
     public float maxOil = 100f;
     public int maxPR = 5;
+    public int PRlevel = 0;
+    public float[] PRspeed = {0.2f, 0.4f, 1.6f, 10.8f, 174.8f};
+    public int[] PRaura = {3, 9, 22, 45, 1000};
+    public int[] PRrizz = {5, 4, 3, 2, 1};
+    public int[] PRfanumTax = {1, 4, 9, 16, 25};
     public int maxYield = 5;
     public int PR = 1;
     private static int time = 0;
@@ -35,7 +41,9 @@ public class GameManager : MonoBehaviour
     public int TimeScale = 20;
     public int EnemyLimit = 4;
     public int EnemyCount = 0;
+    public int kills = 0;
     public String ReasonText;
+    public bool[] events = new bool[100];
 
     public int coins = 0;
     private int credits = 0;
@@ -87,10 +95,15 @@ public class GameManager : MonoBehaviour
         PR = 5;
         days = 0;
         coins = 0;
+        kills = 0;
         credits = 0;
         maxEnt = 100;
         maxTime = 60;
+        PRlevel = -1;
         guatiaShow = 0;
+        for(int i = 0; i < 100; i++) {
+            events[i] = false;
+        }
         carSpawn = CarController.Instance.GetPostion();
         //CarController.Instance.SetPosition(carSpawn);
         InvokeRepeating("UpdateTime", 1f, 1f);
@@ -127,6 +140,7 @@ public class GameManager : MonoBehaviour
         days ++;
         updateGameState(GameState.Morning);
         bike = 0;
+        kills = 0;
         State = GameState.Morning;
     }
 
@@ -200,7 +214,11 @@ public class GameManager : MonoBehaviour
             }
             if(bike >= KPI) {
                 updateMoney(bike*5, 0);
-                PR += (bike - KPI);
+                updateMoney(-KPI*kills, 0);
+                if(PRlevel == -1)
+                    PR += (bike - KPI)/5*PRrizz[0];
+                else
+                    PR += (bike - KPI)/5*PRrizz[PRlevel];
                 SceneManager.LoadScene("GameReportScene");  
             } else {
                 days = 0;
@@ -218,6 +236,7 @@ public class GameManager : MonoBehaviour
             case GameState.Morning:
                 pause = false;
                 time = 0;
+                kills = 0;
                 oil = maxOil;
                 // bike = 99999;
                 //Debug.Log("goodMorning");
@@ -226,6 +245,12 @@ public class GameManager : MonoBehaviour
                 // KPI = 0;
                 EnemyLimit = 4 + days;
                 maxTime = 60*((days / 3) + 1);
+                for(int i = 0; i < 100; i++) {
+                    events[i] = false;
+                }
+                // if(PR > maxPR) {
+                //     PR = maxPR;
+                // }
                 break;
             case GameState.Evening:
                 break;

@@ -12,14 +12,14 @@ public class clockHandler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        slider.maxValue = GameManager.Instance.maxTime;
     }
 
     // Update is called once per frame
     void Update()
     {
         slider.value = GameManager.Instance.getTime() - startingTime;
-        if(GameManager.Instance.getTime() < 30) {
+        if(GameManager.Instance.getTime() < GameManager.Instance.maxTime/2) {
             myText.text = "MORNING";
         }else {// if(GameManager.Instance.getTime() < 40) {
             myText.text = "EVENING";

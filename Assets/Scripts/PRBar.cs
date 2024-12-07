@@ -27,9 +27,9 @@ public class PRBar : MonoBehaviour
     {
         oil = (GameManager.Instance.PR%100);
         GameManager.Instance.PRlevel = GameManager.Instance.PR/100 - 1;
-        // if(GameManager.Instance.PRlevel >= 5) {
-        //     GameManager.Instance.PRlevel = 4;
-        // }
+        if(GameManager.Instance.PRlevel >= 5) {
+            GameManager.Instance.PRlevel = 4;
+        }
         slider.GetComponentInChildren<Image>().color = levelColors[GameManager.Instance.PRlevel+1];
         if(slider.value != oil) {
             slider.value = oil;

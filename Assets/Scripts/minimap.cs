@@ -13,7 +13,4 @@ public class minimap : MonoBehaviour
         newPosition.z = transform.position.z;
         transform.position = newPosition;
     }
-
-
-
 }

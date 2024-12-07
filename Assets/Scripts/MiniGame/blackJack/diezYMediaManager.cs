@@ -76,10 +76,11 @@ public class diezYMediaManager : MonoBehaviour
     }
     public void pass(){
         totalCard[1].GetComponent<Card>().rotateCard();
-        StartCoroutine(houseTurn());
         isHouseTurn = true;
+        StartCoroutine(houseTurn());
     }
     private IEnumerator houseTurn(){
+        StartCoroutine(judge());
         for(int i = 0;i<4;i++){
             if(calculatePoint(playerTwoCard)<17){
                 generateCard(2,playerTwoPosition[cardCountPlayerTwo]);
@@ -148,7 +149,7 @@ public class diezYMediaManager : MonoBehaviour
         playerTwoPoint.text = "?";
         if(isHouseTurn)
             playerTwoPoint.text = pointPlayerTwo.ToString();
-                if(lost || won){
+        if(lost || won){
             if(lost){
                 result.color = Color.red;
                 result.text = "YOU LOST";
@@ -164,9 +165,7 @@ public class diezYMediaManager : MonoBehaviour
                 SceneManager.LoadScene("MainScene");
             }
         }
-
-
-
+        
     }
     IEnumerator moveCardWithoutFlipping(GameObject card, Transform destination){
         Vector3 direction = destination.position - card.transform.position;

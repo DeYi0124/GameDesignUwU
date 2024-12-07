@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     public static Vector3 carPosition;
-    public static int days = 0;
+    public int days = 0;
     public GameObject Car;
     public GameObject vb;
     public GameState State;
@@ -48,32 +48,36 @@ public class GameManager : MonoBehaviour
     public float transitionTime = 3f;
     public TextMeshProUGUI LoadText;
     private Vector2 carSpawn;  
+    private bool isTutor = false; 
     
     //items
     public int guatiaShow;
 
     void OnEnable()
     {
-        Debug.Log("OnEnable called");
+        // Debug.Log("OnEnable called");
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        //Debug.Log("OnSceneLoaded: " + scene.name);
-        //Debug.Log(mode);
-        if(scene.name == "MainScene") {
+        if(scene.name == "MainScene" || scene.name == "TutorialScene") {
             vb = GameObject.Find("VineBoom");
             vb.SetActive(false);
+        }
+        if(scene.name == "TutorialScene") {
+            isTutor = true;
         }
     }
     void OnDisable()
     {
-        Debug.Log("OnDisable");
+        // Debug.Log("OnDisable");
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
     void Awake() {
+        Debug.Log("state: " + (Instance == null) + (Instance == this));
         if (Instance != null && Instance != this) {
+            Debug.Log("destroying duplicate game manager");
             Destroy(gameObject);
         }
         else 
@@ -86,7 +90,6 @@ public class GameManager : MonoBehaviour
         credits = 0;
         maxEnt = 100;
         maxTime = 60;
-        //items
         guatiaShow = 0;
         carSpawn = CarController.Instance.GetPostion();
         //CarController.Instance.SetPosition(carSpawn);
@@ -107,9 +110,9 @@ public class GameManager : MonoBehaviour
     }
 
     void OnSave(CurrentBike currBike) {
-        Debug.Log("user saving");
+        // Debug.Log("user saving");
         bike += CarController.Instance.bike;
-        time = (time < 54)? time + 5 : 59;
+        time = (time < maxTime - 5)? time + 5 : maxTime - 1;
         CarController.Instance.bike = 0;
         CarController.Instance.SetPosition(carSpawn);
     }
@@ -143,13 +146,17 @@ public class GameManager : MonoBehaviour
             // if(tmpEnt <= 50) {
             //     Debug.Log("event occurs, ID: " + tmpEnt.ToString());
             // }
-            if(PR <= 0) {
+            if(PR <= 0) { 
                 pause = true;
                 time = 0;
                 days = 0;
                 coins = 0;
                 PR = 5;
                 ReasonText = "You have been jailed for being a criminal";
+                if(isTutor) {
+                    SceneManager.LoadScene("MainMenu");
+                    return;
+                }
                 SceneManager.LoadSceneAsync("DeathReportScene");
             }
         }   
@@ -187,6 +194,10 @@ public class GameManager : MonoBehaviour
             updateGameState(GameState.Evening);
         } else if(time > maxTime && State == GameState.Evening) {
             updateGameState(GameState.Night);
+            if(isTutor) {
+                SceneManager.LoadScene("MainMenu");
+                return;
+            }
             if(bike >= KPI) {
                 updateMoney(bike*5, 0);
                 PR += (bike - KPI);
@@ -208,8 +219,11 @@ public class GameManager : MonoBehaviour
                 pause = false;
                 time = 0;
                 oil = maxOil;
+                // bike = 99999;
                 //Debug.Log("goodMorning");
                 KPI = 5+10*(days);
+                // Debug.Log(days);
+                // KPI = 0;
                 EnemyLimit = 4 + days;
                 maxTime = 60*((days / 3) + 1);
                 break;
@@ -218,6 +232,8 @@ public class GameManager : MonoBehaviour
             case GameState.Night:
                 //Debug.Log("NIGHT");
                 pause = true;
+                vb.SetActive(false);
+                // Debug.Log(days);
                 break;
             case GameState.Shop:
                 break;
@@ -225,7 +241,7 @@ public class GameManager : MonoBehaviour
                 break;
             default:
                 // throw new ArgumentOutOfRangeException(nameof(newState), newState, null);
-                Debug.Log("UwU");
+                // Debug.Log("UwU");
                 break;
         }
         //OnGameStateChanged(newState)?.Invoke();
@@ -250,7 +266,7 @@ public class GameManager : MonoBehaviour
         charNum.Add(1);
         for(int id = 1;id <= maxID;id++){
             for(int characterID = 1;characterID < charNum[id-1];characterID++){
-                Debug.Log("Loading..."+id.ToString()+" "+characterID.ToString());
+                // Debug.Log("Loading..."+id.ToString()+" "+characterID.ToString());
                 string charPath = Application.streamingAssetsPath + "/Character/" + id.ToString() +'/'+ characterID.ToString() + ".png";
                 if (charPath.Contains("://") || charPath.Contains(":///"))
                 {
@@ -271,7 +287,7 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
-        Debug.Log("All loaded");
+        // Debug.Log("All loaded");
 
     }
 }

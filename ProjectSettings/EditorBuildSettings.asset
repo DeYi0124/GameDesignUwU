@@ -21,6 +21,9 @@ EditorBuildSettings:
     path: Assets/Scenes/DialogueTemplate.unity
     guid: 7d552ee88e28f1f4b9d1a398ef7c9e23
   - enabled: 1
+    path: Assets/Scenes/miniGames/10.30.unity
+    guid: 026fe54fe4e39c540b5ac542d15fb74f
+  - enabled: 1
     path: Assets/Scenes/miniGames/typingGame.unity
     guid: ba11cfaabc5de28498a8810ae6168659
   - enabled: 1

@@ -10,14 +10,14 @@ public class PauseMenu : MonoBehaviour
     // Start is called before the first frame update
     void OnEnable()
     {
-        Debug.Log("OnEnable called");
+        // Debug.Log("OnEnable called");
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         //Debug.Log("OnSceneLoaded: " + scene.name);
         //Debug.Log(mode);
-        if(scene.name == "MainScene") {
+        if(scene.name == "MainScene" || scene.name == "TutorialScene") {
             pauseMenu = GameObject.Find("PauseMenu");
             pauseMenu.SetActive(false);
         }
@@ -31,7 +31,7 @@ public class PauseMenu : MonoBehaviour
     }
     void OnDisable()
     {
-        Debug.Log("OnDisable");
+        // Debug.Log("OnDisable");
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 

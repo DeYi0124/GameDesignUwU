@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4045661967427406801}
   - component: {fileID: 295846140070909306}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: avocado
   m_TagString: Untagged
   m_Icon: {fileID: 0}

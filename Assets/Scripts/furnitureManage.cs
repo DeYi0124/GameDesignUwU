@@ -33,6 +33,10 @@ public class furnitureManage : MonoBehaviour
     private int currentPage = 0;
     private int iconsPerPage = 5; 
     private Stack<GameObject> placedFurnitureStack = new Stack<GameObject>();
+    //前後層
+    public GameObject furniturePanel;
+    public GameObject currentLayerText;
+
 
     void Awake()
     {
@@ -57,6 +61,19 @@ public class furnitureManage : MonoBehaviour
     {
         
         HandleFurnitureDragging();
+        if (currentFurniture!=null){
+            if (Input.GetKeyDown(KeyCode.W))
+            {
+                ChangeFurnitureLayer(currentFurniture, 1);
+                Debug.Log("W");
+            }
+            if (Input.GetKeyDown(KeyCode.S))
+            {
+                ChangeFurnitureLayer(currentFurniture, -1);
+                Debug.Log("S");
+            }
+        }
+        
     }
 
     // 更新背包顯示
@@ -72,7 +89,7 @@ public class furnitureManage : MonoBehaviour
         // 計算當前頁面的圖標範圍
         int startIndex = currentPage * iconsPerPage;
         int endIndex = Mathf.Min(startIndex + iconsPerPage, furnitureDataList.Count);
-
+        
         // 動態生成當前頁面的圖標
         for (int i = startIndex; i < endIndex; i++)
         {
@@ -96,7 +113,6 @@ public class furnitureManage : MonoBehaviour
                 button.onClick.AddListener(() =>
                 {
                     SelectFurniture(index);
-                    Debug.Log(index);
                 });
             }
 
@@ -164,6 +180,8 @@ public class furnitureManage : MonoBehaviour
         {
             Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             currentFurniture = Instantiate(selectedFurniturePrefab, mousePosition, Quaternion.identity);
+            currentFurniture.transform.SetParent(furniturePanel.transform, false);
+
             // 確保生成家具有 FurnitureIdentifier 並正確設置 prefab
             var identifier = currentFurniture.GetComponent<FurnitureIdentifier>();
             if (identifier == null)
@@ -186,8 +204,8 @@ public class furnitureManage : MonoBehaviour
                 placedFurnitureStack.Push(currentFurniture); // 記錄放置的家具
                 currentFurniture = null; // 放置完成，清空拖動家具
                 var selectedData = furnitureDataList.Find(f => f.prefab == selectedFurniturePrefab);
-                Debug.Log(selectedFurniturePrefab);
-                Debug.Log(selectedData.count);
+                // Debug.Log(selectedFurniturePrefab);
+                // Debug.Log(selectedData.count);
                 if (selectedData != null && selectedData.count > 0)
                     {
                         selectedData.count--;
@@ -197,6 +215,29 @@ public class furnitureManage : MonoBehaviour
             }
         }
 }
+
+
+    // 改變家具的層級
+    void ChangeFurnitureLayer(GameObject furniture, int direction)
+    {
+        SpriteRenderer sr = furniture.GetComponent<SpriteRenderer>();
+        if (sr != null)
+        {
+            sr.sortingOrder += direction;  // 調整層級
+            Debug.Log("layer change");
+            var currentLayerDisplay = currentLayerText.GetComponentInChildren<TextMeshProUGUI>();
+            if (currentLayerDisplay != null)
+            {
+                currentLayerDisplay.text = $"{sr.sortingOrder}";
+            }
+            else{
+                Debug.Log("no display");
+            }
+        }
+    }
+
+
+
 
  // 回復上一個動作
     public void UndoLastPlacement()

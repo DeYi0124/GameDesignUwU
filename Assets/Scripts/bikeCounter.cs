@@ -10,5 +10,10 @@ public class bikeCounter : MonoBehaviour
     void Update()
     {
         myText.text = "Bike Counter: " + GameManager.Instance.bike.ToString() + "/" + GameManager.Instance.KPI.ToString();
+        if(GameManager.Instance.bike >= GameManager.Instance.KPI) {
+            myText.color = Color.green;
+        }else {
+            myText.color = Color.red;
+        }
     }
 }

@@ -31,6 +31,7 @@ public class DialogueManager : MonoBehaviour
     private List<string> dialogueContent;
     private Dictionary<int,int> charNum;
     private Queue<string> sentences;
+    private string sentence = "";
     private Queue<string> sentencesOptionA;
     private Queue<string> sentencesOptionB;
     private Queue<string> sentencesOptionC;
@@ -50,14 +51,16 @@ public class DialogueManager : MonoBehaviour
     private Dictionary<string,Queue<string>> sentencesDict;
     private string currentOption;
     private Dictionary<string,string> optionsContent;
+    private bool isTyping = false;
 
     // Start is called before the first frame update
     void Start()
     {
         Time.timeScale = 1f;
         Car = GameObject.FindWithTag("Car");
-        // id = checkPointGen.rng;
-        id = 21;
+        isTyping = false;
+        id = checkPointGen.rng;
+        // id = 11;
         dialogue = new Dialogue();
         dialogue.content = new List<string>();
         dialogueContent = new List<string>();
@@ -78,7 +81,7 @@ public class DialogueManager : MonoBehaviour
         nextSceneDict.Add(14,"Cmm");
         nextSceneDict.Add(15,"typingGame");
         nextSceneDict.Add(16, "puzzleGame");
-        nextSceneDict.Add(21, "blackJack");
+        nextSceneDict.Add(21, "10.30");
         namesDict = new Dictionary<string,Queue<string>>();
         namesDict.Add("default",names);
         namesDict.Add("A",namesOptionA);
@@ -113,6 +116,7 @@ public class DialogueManager : MonoBehaviour
         charNum.Add(15,2);
         charNum.Add(16,1);
         charNum.Add(21,4);
+        charNum.Add(22,1);
 
         CarController.Instance.resetMomentum();
         dialogueBoxAnimator.SetBool("IsOpen", false);
@@ -125,7 +129,15 @@ public class DialogueManager : MonoBehaviour
 
     void Update(){
         if(Input.GetKeyDown("space")){
-            DisplayNextSentence();
+            if(isTyping) {
+                StopAllCoroutines();
+                isTyping = false;
+                dialogueText.text = sentence;
+            } else {
+                if(continueButton.activeSelf){
+                    DisplayNextSentence();
+                }
+            }
         }
     }
 
@@ -327,12 +339,13 @@ public class DialogueManager : MonoBehaviour
         InSceneCurrentSpeaker(currentSpeaker,true);
         TalkingCurrentSpeaker(previousSpeaker,false);
         TalkingCurrentSpeaker(currentSpeaker,true);
-        string sentence = sentencesDict[currentOption].Dequeue();
+        sentence = sentencesDict[currentOption].Dequeue();
         StopAllCoroutines();
         StartCoroutine(TypeSentence(sentence));
 
     }
     IEnumerator TypeSentence (string fullText){
+        isTyping = true;
         dialogueText.text = "";
         for (int i = 0; i < fullText.Length; i++)
         {
@@ -346,7 +359,7 @@ public class DialogueManager : MonoBehaviour
             else dialogueText.text += fullText[i];
             yield return new WaitForSeconds(dialogueSpeed);
         }
-
+        isTyping = false;
     }
 
     void EndDialogue(){
@@ -403,6 +416,7 @@ public class DialogueManager : MonoBehaviour
         ScaleDict.Add(15, new Vector3(2,2,0));
         ScaleDict.Add(16, new Vector3(2,2,0));
         ScaleDict.Add(21, new Vector3(2,2,0));
+        ScaleDict.Add(22, new Vector3(2,2,0));
         RectTransform transform = BackGround.GetComponent<RectTransform>();
         transform.localScale = ScaleDict[id];
     }
@@ -473,8 +487,10 @@ public class DialogueManager : MonoBehaviour
         ScaleDict.Add(21,new List<Vector3>());
         ScaleDict[21].Add(new Vector3(110,110,0));
         ScaleDict[21].Add(new Vector3(110,110,0));
+        ScaleDict[21].Add(new Vector3(150,150,0));
         ScaleDict[21].Add(new Vector3(110,110,0));
-        ScaleDict[21].Add(new Vector3(110,110,0));
+        ScaleDict.Add(22,new List<Vector3>());
+        ScaleDict[22].Add(new Vector3(100,100,0));
         RectTransform transform = Character.GetComponent<RectTransform>();
         transform.localScale = ScaleDict[id][characterID-1];
 

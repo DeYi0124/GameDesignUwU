@@ -12,6 +12,8 @@ public class PRBar : MonoBehaviour
     public float oil;
     private float lerpSpeed = 0.01f;
     public TextMeshProUGUI myText;
+    // private Color32[] levelColors = new Color32[6] {Color.cyan. Color.magenta, Color.green, Color.yellow, Color.green, Color.orange, Color.red};
+    private Color[] levelColors = new Color[6] {Color.cyan, Color.blue, Color.green, Color.yellow, Color.magenta, Color.red};
 
     // Start is called before the first frame update
 
@@ -23,7 +25,12 @@ public class PRBar : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        oil = GameManager.Instance.PR;
+        oil = (GameManager.Instance.PR%100);
+        GameManager.Instance.PRlevel = GameManager.Instance.PR/100 - 1;
+        // if(GameManager.Instance.PRlevel >= 5) {
+        //     GameManager.Instance.PRlevel = 4;
+        // }
+        slider.GetComponentInChildren<Image>().color = levelColors[GameManager.Instance.PRlevel+1];
         if(slider.value != oil) {
             slider.value = oil;
         }

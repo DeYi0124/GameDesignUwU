@@ -12,7 +12,7 @@ public class checkPointHandler : MonoBehaviour
     private SpriteRenderer m_SpriteRenderer;
     private TextMeshPro m_TextMeshPro;
     private int bikePerPoint;
-    private int MoveSpeed = 4;
+    private float MoveSpeed = 4f;
     private int MaxDist = 0;
     private int MinDist = 11;
 
@@ -54,10 +54,9 @@ public class checkPointHandler : MonoBehaviour
 
     void Update()
     {
-        // Gradually increase the red paint height
-        //timer += Time.deltaTime;
-　　    //Debug.Log(timer);
         if(GameManager.Instance.PR >= 100 && !GameManager.Instance.pause) {
+            MinDist = GameManager.Instance.PRaura[GameManager.Instance.PRlevel];
+            MoveSpeed = GameManager.Instance.PRspeed[GameManager.Instance.PRlevel];
             Vector3 positionDiff = CarController.Instance.transform.position - transform.position;
             var enemySprite = this.gameObject.GetComponent<SpriteRenderer>();
             GameObject textObject = this.gameObject.transform.GetChild(0).gameObject;
@@ -82,13 +81,12 @@ public class checkPointHandler : MonoBehaviour
                 enemySprite.flipX = (positionDiff.x < 0);
 
                 transform.right = positionDiff;
-                MoveSpeed = 1;
                 transform.position += transform.right * MoveSpeed * Time.deltaTime;
-                if (Vector3.Distance(transform.position, CarController.Instance.transform.position) > MaxDist)
-                {
-                    MoveSpeed = 2;// - Vector3.Distance(transform.position, CarController.Instance.transform.position);
-                    transform.position += transform.right * MoveSpeed * Time.deltaTime;
-                }
+                // if (Vector3.Distance(transform.position, CarController.Instance.transform.position) > MaxDist)
+                // {
+                //     MoveSpeed = 2;// - Vector3.Distance(transform.position, CarController.Instance.transform.position);
+                //     transform.position += transform.right * MoveSpeed * Time.deltaTime;
+                // }
             }
         }
 

@@ -2,21 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class PauseMenu : MonoBehaviour
 {
     public GameObject pauseMenu;
+    public TextMeshProUGUI timeText;
     public static bool isPaused;
     // Start is called before the first frame update
     void OnEnable()
     {
-        // Debug.Log("OnEnable called");
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        //Debug.Log("OnSceneLoaded: " + scene.name);
-        //Debug.Log(mode);
+        timeText = GameObject.FindWithTag("TimeText").GetComponent<TextMeshProUGUI>();
         if(scene.name == "MainScene" || scene.name == "TutorialScene") {
             pauseMenu = GameObject.Find("PauseMenu");
             pauseMenu.SetActive(false);
@@ -38,6 +38,9 @@ public class PauseMenu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        int sec = (int)Time.time%60;
+        int min = (int)Time.time/60;
+        timeText.text = "Time Played: " + string.Format("{0:00}:{1:00}", min, sec);
         if(Input.GetKeyDown(KeyCode.Escape)) {
             if(isPaused) {
                 ResumeGame();

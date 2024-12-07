@@ -11,9 +11,11 @@ public class GameReport : MonoBehaviour
     public TextMeshProUGUI LoadText;
     public TextMeshProUGUI bikes;
     public TextMeshProUGUI coinsEarned;
+    public TextMeshProUGUI killCntText;
 
     private int bikesCnt = 0;
     private int coinsCnt = 0;
+    private int killCnt = 0;
 
     void LoadingScreen() {
         StartCoroutine(LoadLevel());
@@ -25,11 +27,17 @@ public class GameReport : MonoBehaviour
             bikes.text += ("(extra bike: " + (bikesCnt - GameManager.Instance.KPI) +")");
         }
         coinsEarned.text = coinsCnt.ToString();
+        killCntText.text = killCnt.ToString();
+        if(killCnt > 0) {
+           killCntText.text += ("(insurence payment: " + (killCnt * GameManager.Instance.KPI) +")");
+        }
+
     }
     void Start(){
         UpdateData();
         bikesCnt = GameManager.Instance.bike;
-        coinsCnt = (GameManager.Instance.bike * 5);
+        coinsCnt = (GameManager.Instance.bike * 5 - killCnt * GameManager.Instance.KPI);
+        killCnt = GameManager.Instance.kills;
     }
     void Update() {
         UpdateData();

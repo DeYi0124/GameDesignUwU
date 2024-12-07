@@ -13,6 +13,7 @@ public class rageAIController : MonoBehaviour
     private int MaxDist = 10;
     private int MinDist = 20;
     private bool isRaged = false;
+    private bool hit = false;
  
     void Start()
     {
@@ -21,12 +22,17 @@ public class rageAIController : MonoBehaviour
         isRaged = false;
     }
     void OnCollisionEnter2D(Collision2D collision2D) {
-        if(collision2D.gameObject.tag == "Car") {
-            GameManager.Instance.PR -= 1;
+        if(!hit && collision2D.gameObject.tag == "Car") {
             GameManager.Instance.EnemyCount -= 1;
             if(CarController.Instance.bike > 0) {
                 CarController.Instance.bike -= 1;
             }
+            if(GameManager.Instance.PR < GameManager.Instance.maxPR)
+                GameManager.Instance.PR -= GameManager.Instance.PRfanumTax[0];
+            else
+                GameManager.Instance.PR -= GameManager.Instance.PRfanumTax[GameManager.Instance.PRlevel];
+
+            GameManager.Instance.kills += 1;
             StartCoroutine(wait());
         }
     }

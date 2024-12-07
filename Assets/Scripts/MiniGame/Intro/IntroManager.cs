@@ -179,7 +179,7 @@ public class IntroManager : MonoBehaviour
     IEnumerator startSayMyName(bool skipped = false){
         sayMyName.SetActive(true);
         if(skipped)
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(0.6f);
         else
             yield return new WaitForSeconds(2.5f);
         StartCoroutine(fadeIn(sayMyNameSprite[0],2.3f));
@@ -207,12 +207,11 @@ public class IntroManager : MonoBehaviour
             students[i].color = new Color(1f,1f,1f,0f);
         prior.sprite = backGrounds[10];
         for(int i = 0;i<bgm.Count();i++){
-            Debug.Log(bgm[i].name);
             bgm[i].volume = 0f;
         }
         bgm[5].Play();
         bgm[5].volume = 1f;
-        StartCoroutine(startSayMyName());
+        StartCoroutine(startSayMyName(true));
         skipped = true;
     }
     IEnumerator fadeIn(SpriteRenderer spriteRenderer,float time, float delay = 0f){
@@ -344,6 +343,9 @@ public class IntroManager : MonoBehaviour
             audioSource.volume = j/intervalMusic;
             yield return new WaitForSeconds(0.002f);
         }
+    }
+    public void turnOffLastBGM(){
+        StartCoroutine(MusicFadeOut(bgm[bgm.Count()-1],5f));
     }
 
 }

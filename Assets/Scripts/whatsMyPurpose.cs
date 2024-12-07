@@ -30,7 +30,7 @@ public class whatsMyPurpose : MonoBehaviour
             DontDestroyOnLoad(gameObject);
     }
     public void readPlayerNameFromScript(){
-        playerName = AfterTyping.playerName;
+        playerName = sayMyNameManager.playerName;
         Debug.Log(playerName);
     }
     public string getPlayerName(){

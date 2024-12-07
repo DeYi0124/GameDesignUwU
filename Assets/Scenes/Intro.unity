@@ -3652,6 +3652,7 @@ MonoBehaviour:
   speechBubble: {fileID: 457525865}
   blackScreen: {fileID: 1884332044}
   introManager: {fileID: 277795195}
+  whatsMyPurposeScript: {fileID: 763169250}
 --- !u!4 &1211492959
 Transform:
   m_ObjectHideFlags: 0

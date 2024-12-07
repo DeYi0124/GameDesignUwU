@@ -33,12 +33,13 @@ public class rageAIController : MonoBehaviour
                 GameManager.Instance.PR -= GameManager.Instance.PRfanumTax[GameManager.Instance.PRlevel];
 
             GameManager.Instance.kills += 1;
-            StartCoroutine(wait());
+            StartCoroutine(wait(0.5f,true));
         }
     }
 
-    IEnumerator wait(float seconds = 0.5f) {
-        vb.SetActive(true);
+    IEnumerator wait(float seconds = 0.5f, bool killed = false) {
+        if(killed)
+            vb.SetActive(true);
         yield return new WaitForSeconds(seconds);
         vb.SetActive(false);
         Destroy(this.gameObject);
@@ -58,7 +59,7 @@ public class rageAIController : MonoBehaviour
             vb = GameManager.Instance.vb;
         }
         if(GameManager.Instance.getTime() > GameManager.Instance.maxTime) {
-            StartCoroutine(wait(1f));
+            StartCoroutine(wait(1f,false));
         }
         if (!(GameManager.Instance.pause)){
             Vector3 positionDiff = CarController.Instance.transform.position - transform.position;

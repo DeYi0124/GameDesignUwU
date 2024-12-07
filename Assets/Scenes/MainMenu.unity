@@ -416,7 +416,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.00046539307, y: -78}
+  m_AnchoredPosition: {x: 0.00045776367, y: -78}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &75374741
@@ -1390,6 +1390,7 @@ GameObject:
   - component: {fileID: 713964655}
   - component: {fileID: 713964654}
   - component: {fileID: 713964653}
+  - component: {fileID: 713964657}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1483,6 +1484,23 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &713964657
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 713964652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!1 &1017041773
 GameObject:
   m_ObjectHideFlags: 0
@@ -1725,7 +1743,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 1871515.5, y: 1221457.8}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1221364816
@@ -1741,7 +1759,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1984,26 +2002,32 @@ MonoBehaviour:
   furnitureUI: {fileID: 1987878405}
   isPlacementMode: 0
   furnitureDataList:
-  - prefab: {fileID: 5813334907961218420, guid: 3997395249f054e40bc8c766acb95ddb, type: 3}
+  - prefab: {fileID: 809222298779550360, guid: 3997395249f054e40bc8c766acb95ddb, type: 3}
     icon: {fileID: 21300000, guid: 28548c908ff1cc94693ac551afc21a2d, type: 3}
     count: 1
-  - prefab: {fileID: 3790384517088252925, guid: 2e4752bca72e43e4aa70b2a2027dacbe, type: 3}
+  - prefab: {fileID: 8317855010589390927, guid: 2e4752bca72e43e4aa70b2a2027dacbe, type: 3}
     icon: {fileID: 21300000, guid: f0f9657794fb4374b8d9c10dd1b79dd9, type: 3}
     count: 1
-  - prefab: {fileID: 6619379102327460482, guid: 0b3648eee44dc984590ba23d06aeb093, type: 3}
+  - prefab: {fileID: 272363121880747324, guid: 0b3648eee44dc984590ba23d06aeb093, type: 3}
     icon: {fileID: 21300000, guid: c27ba14f268c51147aa2077871842c5c, type: 3}
     count: 2
-  - prefab: {fileID: 7725057147527976432, guid: 5de2a2c34589afe4f90b199e2efcdfbe, type: 3}
+  - prefab: {fileID: 7985218794160710931, guid: 5de2a2c34589afe4f90b199e2efcdfbe, type: 3}
     icon: {fileID: 21300000, guid: 8185a06b27be01a45b5c94d131cd28b5, type: 3}
     count: 3
-  - prefab: {fileID: 2948119989778302579, guid: 59adc4a5f578ccd41b9ea0ebc129db59, type: 3}
+  - prefab: {fileID: 7007975101431594429, guid: 59adc4a5f578ccd41b9ea0ebc129db59, type: 3}
     icon: {fileID: 21300000, guid: fa2067fbd1605e5408a95892760d74c0, type: 3}
     count: 3
-  - prefab: {fileID: 8787798858390995485, guid: 6d72b220874a37043845116cd996a548, type: 3}
+  - prefab: {fileID: 980622853832409039, guid: e54ff6870818ba74395c08768be74736, type: 3}
     icon: {fileID: 21300000, guid: 7dfeadb5a0e36a341974c960ea3ece77, type: 3}
     count: 1
-  - prefab: {fileID: 642585741486329920, guid: 39099833de71f784083778def3b5c3f5, type: 3}
+  - prefab: {fileID: 1571221628946076543, guid: 39099833de71f784083778def3b5c3f5, type: 3}
     icon: {fileID: 21300000, guid: e21209e247ac1e440b11c2d92f6118b9, type: 3}
+    count: 1
+  - prefab: {fileID: 7539312621420776911, guid: e911534cd46a47249af3639434927d88, type: 3}
+    icon: {fileID: 21300000, guid: 546b931f1d37b654b95396553cd1ca07, type: 3}
+    count: 1
+  - prefab: {fileID: 4700488785914511716, guid: 7a93f39b5dfe28248961f7be2c1cc83d, type: 3}
+    icon: {fileID: 21300000, guid: 158f990a2c5504c4fa41e00bd1b7de43, type: 3}
     count: 1
   backpackSlotPrefab: {fileID: 8229966016166027482, guid: f3a5cffd7dd6cd54786e2ea40b7cab90, type: 3}
   backpackGrid: {fileID: 1456282424}

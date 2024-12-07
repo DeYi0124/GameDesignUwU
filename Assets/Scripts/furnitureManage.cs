@@ -179,8 +179,9 @@ public class furnitureManage : MonoBehaviour
         if (selectedFurniturePrefab != null && currentFurniture == null)
         {
             Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            currentFurniture = Instantiate(selectedFurniturePrefab, mousePosition, Quaternion.identity);
-            currentFurniture.transform.SetParent(furniturePanel.transform, false);
+            currentFurniture = Instantiate(selectedFurniturePrefab, furniturePanel.transform);
+            currentFurniture.transform.localPosition = GetMousePositionInUI();
+
 
             // 確保生成家具有 FurnitureIdentifier 並正確設置 prefab
             var identifier = currentFurniture.GetComponent<FurnitureIdentifier>();
@@ -196,45 +197,68 @@ public class furnitureManage : MonoBehaviour
         // 拖動中的家具跟隨滑鼠移動
         if (currentFurniture != null)
         {
-            Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            currentFurniture.transform.position = new Vector3(mousePosition.x, mousePosition.y, 0);
-            // 左鍵放置家具
+            currentFurniture.transform.localPosition = GetMousePositionInUI();
             if (Input.GetMouseButtonDown(0))
             {
-                placedFurnitureStack.Push(currentFurniture); // 記錄放置的家具
+                placedFurnitureStack.Push(currentFurniture);
                 currentFurniture = null; // 放置完成，清空拖動家具
                 var selectedData = furnitureDataList.Find(f => f.prefab == selectedFurniturePrefab);
-                // Debug.Log(selectedFurniturePrefab);
-                // Debug.Log(selectedData.count);
                 if (selectedData != null && selectedData.count > 0)
-                    {
-                        selectedData.count--;
-                        PopulateBackpack();
-                    }
+                {
+                    selectedData.count--;
+                    PopulateBackpack();
+                }
                 selectedFurniturePrefab = null;
             }
         }
+
+}
+
+private Vector2 GetMousePositionInUI()
+{
+    RectTransformUtility.ScreenPointToLocalPointInRectangle(
+        furniturePanel.GetComponent<RectTransform>(),
+        Input.mousePosition,
+        null, // Screen Space - Overlay 不需要 Camera
+        out Vector2 localPoint);
+    return localPoint;
 }
 
 
-    // 改變家具的層級
-    void ChangeFurnitureLayer(GameObject furniture, int direction)
+
+void ChangeFurnitureLayer(GameObject furniture, int direction)
+{
+    RectTransform rectTransform = furniture.GetComponent<RectTransform>();
+    if (rectTransform != null)
     {
-        SpriteRenderer sr = furniture.GetComponent<SpriteRenderer>();
-        if (sr != null)
+        // 獲取目前的索引
+        int currentIndex = rectTransform.GetSiblingIndex();
+
+        // 計算新索引
+        int newIndex = Mathf.Clamp(currentIndex + direction, 0, furniturePanel.transform.childCount - 1);
+
+        // 設定新的索引
+        rectTransform.SetSiblingIndex(newIndex);
+
+        Debug.Log($"家具的層級變更為：{newIndex}");
+
+        // 更新顯示層級文字
+        var currentLayerDisplay = currentLayerText.GetComponentInChildren<TextMeshProUGUI>();
+        if (currentLayerDisplay != null)
         {
-            sr.sortingOrder += direction;  // 調整層級
-            Debug.Log("layer change");
-            var currentLayerDisplay = currentLayerText.GetComponentInChildren<TextMeshProUGUI>();
-            if (currentLayerDisplay != null)
-            {
-                currentLayerDisplay.text = $"{sr.sortingOrder}";
-            }
-            else{
-                Debug.Log("no display");
-            }
+            currentLayerDisplay.text = $"{newIndex}";
+        }
+        else
+        {
+            Debug.LogWarning("找不到層級顯示文字的組件！");
         }
     }
+    else
+    {
+        Debug.LogWarning("家具物件缺少 RectTransform 組件，無法更改層級！");
+    }
+}
+
 
 
 

@@ -113,10 +113,10 @@ public class checkPointGen : MonoBehaviour
         Debug.Log(rng);
         if(GameManager.Instance.events[rng]) return;
         if(GameManager.Instance.PR == GameManager.Instance.maxPR) return;
-        rng = 22;
+        rng = 24;
         GameManager.Instance.events[rng] = true;
         if(isTutor) return;
-        if(rng <= 22){
+        if(rng <= 24){
             GameManager.Instance.pause = true;
             Car.SetActive(false);
             Car.SetActive(true);
@@ -147,6 +147,11 @@ public class checkPointGen : MonoBehaviour
             }else if(rng == 22) {
                 int tr = Random.Range(1, 10);
                 CarController.Instance.bike = (CarController.Instance.bike + tr > CarController.Instance.maxBike)? CarController.Instance.maxBike : CarController.Instance.bike + tr;
+            }else if(rng == 23) {
+                GameManager.Instance.PR = (GameManager.Instance.PR + 5 > GameManager.Instance.maxPR)? GameManager.Instance.maxPR : GameManager.Instance.PR + 5;
+                GameManager.Instance.coins += 10;
+            }else if(rng == 24) {
+                GameManager.Instance.bike = GameManager.Instance.KPI;
             }
             FadeIn();
         }

@@ -17,6 +17,7 @@ public class sayMyNameManager : MonoBehaviour
     public GameObject speechBubble;
     public SpriteRenderer blackScreen;
     public IntroManager introManager;
+    public whatsMyPurpose whatsMyPurposeScript;
     private bool submitted = false;
     private bool enteredName = false;
     private string currentText = "";
@@ -32,7 +33,7 @@ public class sayMyNameManager : MonoBehaviour
         blackScreen.color = new Color(0,0,0,0);
     }
     void Update(){
-        if(Regex.IsMatch(playerName, @"^[a-zA-Z0-9_+=/!?-`' ]+$") && playerName.Length > 0 && playerName.Length <= 10) validName = true;
+        if(Regex.IsMatch(playerName, @"^[a-zA-Z0-9_+=/!?-`' ]+$") && playerName.Length > 0 && playerName.Length <= 12) validName = true;
         else validName = false;
         if(errorID != 1 && !Regex.IsMatch(playerName, @"^[a-zA-Z0-9_+=/!?-`' ]+$") && playerName.Length > 0){
             StartCoroutine(changeText("English only, thank you.",walterText));
@@ -41,8 +42,8 @@ public class sayMyNameManager : MonoBehaviour
             changed = true;
             return;
         }
-        if(playerName.Length > 10 && errorID != 2){
-            StartCoroutine(changeText("Keep your name under 10 characters please.",walterText));
+        if(playerName.Length > 13 && errorID != 2){
+            StartCoroutine(changeText("Keep your name under 12 characters please.",walterText));
             errorID = 2;
             validName = false;
             changed = true;
@@ -57,7 +58,9 @@ public class sayMyNameManager : MonoBehaviour
         if(validName && submitted && !enteredName){
             enteredName = true;
             inputText.color = Color.red;
+            inputField.GetComponent<TMP_InputField>().readOnly = true;
             youAreGoddamnRight.Play();
+            whatsMyPurposeScript.readPlayerNameFromScript();
             StartCoroutine(textFadeOut(walterText,1f));
             StartCoroutine(fadeOut(speechBubble.GetComponent<SpriteRenderer>(),0.8f,0.8f));
             StartCoroutine(fadeIn(blackScreen,5f,2f));
@@ -66,11 +69,12 @@ public class sayMyNameManager : MonoBehaviour
     }
 
     public void sumbit(){
+        if(playerName.Length == 0) return;
         submitted = true;
     }
     public void readName(string input){
-        playerName = input;
-        submitted = true;
+        // playerName = input;
+        // submitted = true;
     }
     public void onValueChanged(string cock){
         playerName = cock;
@@ -88,6 +92,7 @@ public class sayMyNameManager : MonoBehaviour
         yield return StartCoroutine(textFadeIn(walterText,1.2f,1f));
     }
     IEnumerator changeScene(){
+        introManager.turnOffLastBGM();
         yield return new WaitForSeconds(3);
         SceneManager.LoadScene("MainMenu");
     }

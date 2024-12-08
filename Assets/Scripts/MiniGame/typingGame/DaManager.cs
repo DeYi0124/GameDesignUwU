@@ -35,6 +35,7 @@ public class DaManager : MonoBehaviour
         setWords();
         result.SetActive(false);
         inputField.ActivateInputField();
+        inputField.text = "";
         for(int i = 0;i < 3;i++){
             hearts[i].SetBool("isHurt",false);
         }

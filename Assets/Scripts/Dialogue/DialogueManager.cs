@@ -322,11 +322,19 @@ public class DialogueManager : MonoBehaviour
                 currentSpeaker = 0;
             }
         }
-        if(namesDict[currentOption].Peek() == " ")
+        if(namesDict[currentOption].Peek() == " "){
             nameBG.SetActive(false);
-        else 
+            nameText.text = namesDict[currentOption].Dequeue();
+        }
+        else if(namesDict[currentOption].Peek() == "Me"){
+            nameText.text = whatsMyPurpose.Instance.getPlayerName();
             nameBG.SetActive(true);
-        nameText.text = namesDict[currentOption].Dequeue();
+            namesDict[currentOption].Dequeue();
+        }
+        else{
+            nameBG.SetActive(true);
+            nameText.text = namesDict[currentOption].Dequeue();
+        }
 
         if((currentSpeaker == 1 || currentSpeaker == 3|| currentSpeaker == 5)&& OddFirstPerson){
             InSceneCurrentSpeaker(currentSpeaker,true);

@@ -25,12 +25,13 @@ public class AIController : MonoBehaviour
             else
                 GameManager.Instance.PR -= GameManager.Instance.PRfanumTax[GameManager.Instance.PRlevel];
             GameManager.Instance.EnemyCount -= 1;
-            StartCoroutine(wait());
+            StartCoroutine(wait(true,1.5f));
         }
     }
 
-    IEnumerator wait(float seconds = 1.5f) {
-        WAAAA.Play();
+    IEnumerator wait(bool killed = false,float seconds = 1.5f) {
+        if(killed)
+            WAAAA.Play();
         // Debug.Log("Killed");
         yield return new WaitForSeconds(seconds);
         Destroy(this.gameObject);
@@ -38,7 +39,7 @@ public class AIController : MonoBehaviour
     void Update()
     {
         if(GameManager.Instance.getTime() > GameManager.Instance.maxTime) {
-            StartCoroutine(wait(1f));
+            StartCoroutine(wait(false,1f));
         }
         if (!(GameManager.Instance.pause)){
             Vector3 positionDiff = CarController.Instance.transform.position - transform.position;

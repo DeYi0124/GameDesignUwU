@@ -3,5 +3,5 @@ Me
 Look, those three bikes are chained together.
 Me
 Looks like I will have 3 bikes with me now :D
-System
+ 
 (number of Bikes increased by 3)

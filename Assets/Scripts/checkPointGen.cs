@@ -116,7 +116,7 @@ public class checkPointGen : MonoBehaviour
         Debug.Log(rng);
         if(GameManager.Instance.events[rng]) return;
         if(GameManager.Instance.PR == GameManager.Instance.maxPR) return;
-        // rng = 23;
+        rng = 2;
         GameManager.Instance.events[rng] = true;
         if(isTutor) return;
         if(rng <= 24){
@@ -135,80 +135,37 @@ public class checkPointGen : MonoBehaviour
                 CarController.Instance.bike = (CarController.Instance.bike + 5 > CarController.Instance.maxBike)? CarController.Instance.maxBike : CarController.Instance.bike + 5;
             }else if(rng == 2) {
                 GameManager.Instance.PR = (GameManager.Instance.PR + 5 > GameManager.Instance.maxPR)? GameManager.Instance.maxPR : GameManager.Instance.PR + 5;
-                string furnitureName = "shark";
-                GameObject prefab = Resources.Load<GameObject>("Prefabs/shark");
-                Sprite icon = Resources.Load<Sprite>("Icons/shark");
-                inventory.AddOrUpdateFurniture(furnitureName, prefab, icon);
+                addFurniture("shark");
             }else if(rng == 3) {
-                string furnitureName = "littlecabinet1";
-                GameObject prefab = Resources.Load<GameObject>("Prefabs/littlecabinet1");
-                Sprite icon = Resources.Load<Sprite>("Icons/littlecabinet1");
-                inventory.AddOrUpdateFurniture(furnitureName, prefab, icon);
-                furnitureName = "record";
-                prefab = Resources.Load<GameObject>("Prefabs/record");
-                icon = Resources.Load<Sprite>("Icons/record");
-                inventory.AddOrUpdateFurniture(furnitureName, prefab, icon);
+                addFurniture("littlecabinet1");
+                addFurniture("record");
             }else if(rng == 4) {
                 CarController.Instance.bike -= 1;
             }else if(rng == 5){
                 GameManager.Instance.PR = (GameManager.Instance.PR + 5 > GameManager.Instance.maxPR)? GameManager.Instance.maxPR : GameManager.Instance.PR + 5;
-                string furnitureName = "NTU";
-                GameObject prefab = Resources.Load<GameObject>("Prefabs/NTU");
-                Sprite icon = Resources.Load<Sprite>("Icons/NTU");
-                inventory.AddOrUpdateFurniture(furnitureName, prefab, icon);
+                addFurniture("NTU");
             }else if(rng == 6) {
                 CarController.Instance.bike = 0;
                 GameManager.Instance.PR = (GameManager.Instance.PR + 5 > GameManager.Instance.maxPR)? GameManager.Instance.maxPR : GameManager.Instance.PR + 10;
-                string furnitureName = "hat";
-                GameObject prefab = Resources.Load<GameObject>("Prefabs/hat");
-                Sprite icon = Resources.Load<Sprite>("Icons/hat");
-                inventory.AddOrUpdateFurniture(furnitureName, prefab, icon);
             }else if(rng == 7) {
                 GameManager.Instance.coins = 0;
-                string furnitureName = "avocado";
-                GameObject prefab = Resources.Load<GameObject>("Prefabs/avocado");
-                Sprite icon = Resources.Load<Sprite>("Icons/avocado");
-                inventory.AddOrUpdateFurniture(furnitureName, prefab, icon);
+                addFurniture("avocado");
             }else if(rng == 8) {
-                string furnitureName = "clock1";
-                GameObject prefab = Resources.Load<GameObject>("Prefabs/clock1");
-                Sprite icon = Resources.Load<Sprite>("Icons/clock1");
-                inventory.AddOrUpdateFurniture(furnitureName, prefab, icon);
-                furnitureName = "clock0";
-                prefab = Resources.Load<GameObject>("Prefabs/clock0");
-                icon = Resources.Load<Sprite>("Icons/clock0");
-                inventory.AddOrUpdateFurniture(furnitureName, prefab, icon);
+                addFurniture("clock0");
+                addFurniture("clock1");
             }else if(rng == 9) {
                 GameManager.Instance.guatiaShow += 2;
             }else if(rng == 10) {
-                string furnitureName = "bed1";
-                GameObject prefab = Resources.Load<GameObject>("Prefabs/bed1");
-                Sprite icon = Resources.Load<Sprite>("Icons/bed1");
-                inventory.AddOrUpdateFurniture(furnitureName, prefab, icon);
-                furnitureName = "bed0";
-                prefab = Resources.Load<GameObject>("Prefabs/bed0");
-                icon = Resources.Load<Sprite>("Icons/bed0");
-                inventory.AddOrUpdateFurniture(furnitureName, prefab, icon);
+                addFurniture("bed1");
+                addFurniture("bed0");
             }else if(rng == 13) {
-                string furnitureName = "calculus";
-                GameObject prefab = Resources.Load<GameObject>("Prefabs/calculus");
-                Sprite icon = Resources.Load<Sprite>("Icons/calculus");
-                inventory.AddOrUpdateFurniture(furnitureName, prefab, icon);
+                addFurniture("calculus");
             }else if(rng == 14) {
-                string furnitureName = "cmm_cup";
-                GameObject prefab = Resources.Load<GameObject>("Prefabs/cmm_cup");
-                Sprite icon = Resources.Load<Sprite>("Icons/cmm_cup");
-                inventory.AddOrUpdateFurniture(furnitureName, prefab, icon);
+                addFurniture("cmm_cup");
             }else if(rng == 15) {
-                string furnitureName = "type_cup";
-                GameObject prefab = Resources.Load<GameObject>("Prefabs/type_cup");
-                Sprite icon = Resources.Load<Sprite>("Icons/type_cup");
-                inventory.AddOrUpdateFurniture(furnitureName, prefab, icon);
+                addFurniture("type_cup");
             }else if(rng == 17) {
-                string furnitureName = "statue";
-                GameObject prefab = Resources.Load<GameObject>("Prefabs/statue");
-                Sprite icon = Resources.Load<Sprite>("Icons/statue");
-                inventory.AddOrUpdateFurniture(furnitureName, prefab, icon);
+                addFurniture("statue");
             }else if(rng == 22) {
                 int tr = Random.Range(1, 10);
                 CarController.Instance.bike = (CarController.Instance.bike + tr > CarController.Instance.maxBike)? CarController.Instance.maxBike : CarController.Instance.bike + tr;
@@ -220,6 +177,12 @@ public class checkPointGen : MonoBehaviour
             }
             FadeIn();
         }
+    }
+    private void addFurniture(string furnitureName) {
+        GameObject prefab = Resources.Load<GameObject>("Prefabs/" + furnitureName);
+        Sprite icon = Resources.Load<Sprite>("Icons/" + furnitureName);
+        whatsMyPurpose.Instance.AddOrUpdateFurniture(furnitureName, prefab, icon);
+
     }
     public (int, int) getBikePerPointRange(int yieldLevel){
         switch(yieldLevel){

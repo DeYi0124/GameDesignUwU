@@ -83,9 +83,9 @@ public class GameManager : MonoBehaviour
     }
 
     void Awake() {
-        Debug.Log("state: " + (Instance == null) + (Instance == this));
+        //Debug.Log("state: " + (Instance == null) + (Instance == this));
         if (Instance != null && Instance != this) {
-            Debug.Log("destroying duplicate game manager");
+            //Debug.Log("destroying duplicate game manager");
             Destroy(gameObject);
         }
         else 

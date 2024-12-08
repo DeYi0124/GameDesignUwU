@@ -38,10 +38,11 @@ public class rageAIController : MonoBehaviour
     }
 
     IEnumerator wait(float seconds = 0.5f, bool killed = false) {
-        if(killed)
-            vb.SetActive(true);
+        if(killed)
+            vb.SetActive(true);
         yield return new WaitForSeconds(seconds);
-        vb.SetActive(false);
+        if(vb != null)
+            vb.SetActive(false);
         Destroy(this.gameObject);
     }
 

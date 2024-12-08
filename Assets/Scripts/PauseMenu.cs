@@ -16,8 +16,8 @@ public class PauseMenu : MonoBehaviour
     }
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        timeText = GameObject.FindWithTag("TimeText").GetComponent<TextMeshProUGUI>();
         if(scene.name == "MainScene" || scene.name == "TutorialScene") {
+            timeText = GameObject.FindWithTag("TimeText").GetComponent<TextMeshProUGUI>();
             pauseMenu = GameObject.Find("PauseMenu");
             pauseMenu.SetActive(false);
         }

@@ -6,7 +6,7 @@ public class FurnitureInventory : MonoBehaviour
 {
     public List<furnitureData> furnitureList = new List<furnitureData>(); // 儲存所有家具的列表
 
-    public event Action OnInventoryChanged;
+    public event Action OnInventoryChange;
 
     // 添加或更新家具的方法
     public void AddOrUpdateFurniture(string furnitureName, GameObject prefab, Sprite icon)
@@ -45,7 +45,7 @@ public class FurnitureInventory : MonoBehaviour
         }
 
         // 觸發庫存改變事件
-        OnInventoryChanged?.Invoke();
+        OnInventoryChange?.Invoke();
     }
 
     // 獲取家具清單的方法

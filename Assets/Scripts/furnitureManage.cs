@@ -31,23 +31,32 @@ public class furnitureManage : MonoBehaviour
 
     public FurnitureInventory inventory;
     private void OnEnable()
-        {
-            // 訂閱事件
-            if (inventory != null)
-            {
-                inventory.OnInventoryChanged += PopulateBackpack;
-                furnitureDataList = inventory.furnitureList;
+    {
+        // 訂閱事件
+        whatsMyPurpose.Instance.OnInventoryChanged += PopulateBackpack;
+        furnitureDataList = whatsMyPurpose.Instance.furnitureList;
+        if(whatsMyPurpose.Instance.transform.childCount > 0){
+            for(int i = 0;i < whatsMyPurpose.Instance.transform.childCount;i++){
+                GameObject tmp = Instantiate(whatsMyPurpose.Instance.transform.GetChild(i).gameObject);
+                tmp.transform.SetParent(furniturePanel.transform);
+                tmp.transform.localPosition = whatsMyPurpose.Instance.transform.GetChild(i).localPosition;
+                tmp.transform.localRotation = whatsMyPurpose.Instance.transform.GetChild(i).localRotation;
+                tmp.transform.localScale = whatsMyPurpose.Instance.transform.GetChild(i).localScale;
             }
         }
+
+    }
 
     private void OnDisable()
     {
         // 取消訂閱事件
-        if (inventory != null)
-        {
-            inventory.OnInventoryChanged -= PopulateBackpack;
-            furnitureDataList = inventory.furnitureList;
-        }
+        whatsMyPurpose.Instance.OnInventoryChanged -= PopulateBackpack;
+        furnitureDataList = whatsMyPurpose.Instance.furnitureList;
+        // for(int i = 0;i < furniturePanel.transform.childCount;i++){
+        //     GameObject tmp = furniturePanel.transform.GetChild(i).gameObject;
+        //     whatsMyPurpose.Instance.addPlacedFurniture(tmp,tmp.transform.GetSiblingIndex(),tmp.GetComponent<RectTransform>());
+        // }
+
     }
 
 
@@ -56,25 +65,23 @@ public class furnitureManage : MonoBehaviour
         furnitureUI.SetActive(isPlacementMode);
         PopulateBackpack();
         // UpdateArrowButtons();
+        //Debug.Log("Furniture list count: " + whatsMyPurpose.Instance.furnitureList.Count);
         if (furnitureDataList == null || furnitureDataList.Count == 0)
         {
-            Debug.Log("No furniture available in furnitureDataList.");
+            //Debug.Log("No furniture available in furnitureDataList.");
             return;
         }
         else{
             initialFurnitureDataList = new List<furnitureData>();
-            if (initialFurnitureDataList != null || initialFurnitureDataList.Count != 0)
+            foreach (var furnitureData in furnitureDataList)
             {
-                foreach (var furnitureData in furnitureDataList)
+                // 深拷貝數據，確保是獨立的對象
+                initialFurnitureDataList.Add(new furnitureData
                 {
-                    // 深拷貝數據，確保是獨立的對象
-                    initialFurnitureDataList.Add(new furnitureData
-                    {
-                        prefab = furnitureData.prefab,
-                        icon = furnitureData.icon,
-                        count = furnitureData.count
-                    });
-                }
+                    prefab = furnitureData.prefab,
+                    icon = furnitureData.icon,
+                    count = furnitureData.count
+                });
             }
         }
          
@@ -90,22 +97,22 @@ public class furnitureManage : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.W))
             {
                 ChangeFurnitureLayer(currentFurniture, 1);
-                Debug.Log("W");
+                //Debug.Log("W");
             }
             if (Input.GetKeyDown(KeyCode.S))
             {
                 ChangeFurnitureLayer(currentFurniture, -1);
-                Debug.Log("S");
+                //Debug.Log("S");
             }
             if (Input.GetKeyDown(KeyCode.E))
             {
                 RotateUDFurniture(currentFurniture);
-                Debug.Log("E");
+                //Debug.Log("E");
             }
             if (Input.GetKeyDown(KeyCode.Q))
             {
                 RotateRLFurniture(currentFurniture);
-                Debug.Log("Q");
+                //Debug.Log("Q");
             }
       
 
@@ -118,11 +125,11 @@ public class furnitureManage : MonoBehaviour
     // 更新背包顯示
     void PopulateBackpack()
     {
-         if (furnitureDataList == null || furnitureDataList.Count == 0)
-    {
-        Debug.Log("No furniture available in furnitureDataList.");
-        return;
-    }
+        if (furnitureDataList == null || furnitureDataList.Count == 0)
+        {
+            // //Debug.Log("No furniture available in furnitureDataList.");
+            return;
+        }
 
         // 清空當前的Grid
         foreach (Transform child in backpackGrid)
@@ -189,12 +196,12 @@ public class furnitureManage : MonoBehaviour
         if (furniture.count > 0) // 檢查是否還有剩餘家具
         {
             selectedFurniturePrefab = furniture.prefab;
-            Debug.Log($"選中了家具：{furniture.prefab.name}");
+            // //Debug.Log($"選中了家具：{furniture.prefab.name}");
         }
         else
         {
             selectedFurniturePrefab = null;
-            Debug.Log("該家具數量不足！");
+            // //Debug.Log("該家具數量不足！");
         }
     }
 
@@ -253,6 +260,7 @@ public class furnitureManage : MonoBehaviour
             if (Input.GetMouseButtonDown(0))
             {
                 placedFurnitureStack.Push(currentFurniture);
+                // currentFurniture.GetComponent<FurnitureIdentifier>().place();
                 currentFurniture = null; // 放置完成，清空拖動家具
                 var selectedData = furnitureDataList.Find(f => f.prefab == selectedFurniturePrefab);
                 if (selectedData != null && selectedData.count > 0)
@@ -292,7 +300,7 @@ void ChangeFurnitureLayer(GameObject furniture, int direction)
         // 設定新的索引
         rectTransform.SetSiblingIndex(newIndex);
 
-        Debug.Log($"家具的層級變更為：{newIndex}");
+        // //Debug.Log($"家具的層級變更為：{newIndex}");
 
         // 更新顯示層級文字
         var currentLayerDisplay = currentLayerText.GetComponentInChildren<TextMeshProUGUI>();
@@ -302,12 +310,12 @@ void ChangeFurnitureLayer(GameObject furniture, int direction)
         }
         else
         {
-            Debug.LogWarning("找不到層級顯示文字的組件！");
+            // //Debug.LogWarning("找不到層級顯示文字的組件！");
         }
     }
     else
     {
-        Debug.LogWarning("家具物件缺少 RectTransform 組件，無法更改層級！");
+        //Debug.LogWarning("家具物件缺少 RectTransform 組件，無法更改層級！");
     }
 }
 
@@ -320,24 +328,24 @@ void ChangeFurnitureLayer(GameObject furniture, int direction)
     {
         if (furnitureDataList == null || furnitureDataList.Count == 0)
         {
-            Debug.Log("No furniture available in furnitureDataList.");
+            //Debug.Log("No furniture available in furnitureDataList.");
             return;
         }
 
-        Debug.Log($"堆疊狀態：{placedFurnitureStack.Count} 個家具物件");
+        //Debug.Log($"堆疊狀態：{placedFurnitureStack.Count} 個家具物件");
         if (placedFurnitureStack.Count > 0)
         {
             GameObject lastPlacedFurniture = placedFurnitureStack.Pop(); // 取出最後放置的家具
             if (lastPlacedFurniture == null)
             {
-                Debug.LogWarning("最後放置的家具為 null，無法回復！");
+                //Debug.LogWarning("最後放置的家具為 null，無法回復！");
                 return;
             }
 
             var identifier = lastPlacedFurniture.GetComponent<FurnitureIdentifier>();
             if (identifier == null)
             {
-                Debug.LogWarning("家具缺少 FurnitureIdentifier 組件，無法更新數量！");
+                //Debug.LogWarning("家具缺少 FurnitureIdentifier 組件，無法更新數量！");
             }
             else
             {
@@ -353,7 +361,7 @@ void ChangeFurnitureLayer(GameObject furniture, int direction)
                 }
                 else
                 {
-                    Debug.LogWarning("FurnitureIdentifier.prefab 為 null，無法更新數量！");
+                    //Debug.LogWarning("FurnitureIdentifier.prefab 為 null，無法更新數量！");
                 }
             }
 
@@ -365,7 +373,7 @@ void ChangeFurnitureLayer(GameObject furniture, int direction)
             }
             else
             {
-                Debug.Log("沒有可以回復的動作！");
+                //Debug.Log("沒有可以回復的動作！");
             }
         }
     // 全部收回
@@ -373,7 +381,7 @@ void ChangeFurnitureLayer(GameObject furniture, int direction)
     {
         if (furnitureDataList == null || furnitureDataList.Count == 0)
         {
-            Debug.Log("No furniture available in furnitureDataList.");
+            //Debug.Log("No furniture available in furnitureDataList.");
             return;
         }
         while (placedFurnitureStack.Count > 0)
@@ -389,7 +397,7 @@ void ChangeFurnitureLayer(GameObject furniture, int direction)
         }
 
         PopulateBackpack();
-        Debug.Log("全部家具已收回！");
+        //Debug.Log("全部家具已收回！");
     }
 
 
@@ -435,5 +443,24 @@ public void RotateUDFurniture(GameObject furniture)
 
 }
 
+    public void  assignPlacedFurniture(){
+        for(int i = 0;i < furniturePanel.transform.childCount;i++){
+            GameObject tmp = furniturePanel.transform.GetChild(i).gameObject;
+            whatsMyPurpose.Instance.addPlacedFurniture(tmp,tmp.transform.GetSiblingIndex(),tmp.GetComponent<RectTransform>());
+        }
+    }
+    public void getbug()
+    {
+        //Debug.Log("bug");
+        string furnitureName = "bug";
+        GameObject prefab = Resources.Load<GameObject>("Prefabs/bug");
+        Sprite icon = Resources.Load<Sprite>("Icons/bug");
+        if (inventory == null)
+        {
+            //Debug.LogError("FurnitureInventory is not assigned to testfurniture.");
+            return;
+        }
+        whatsMyPurpose.Instance.AddOrUpdateFurniture(furnitureName, prefab, icon);
+    }
 
 }

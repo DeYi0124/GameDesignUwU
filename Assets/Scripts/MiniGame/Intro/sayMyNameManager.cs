@@ -33,7 +33,7 @@ public class sayMyNameManager : MonoBehaviour
         blackScreen.color = new Color(0,0,0,0);
     }
     void Update(){
-        if(Regex.IsMatch(playerName, @"^[a-zA-Z0-9_+=/!?-`' ]+$") && playerName.Length > 0 && playerName.Length <= 12) validName = true;
+        if(Regex.IsMatch(playerName, @"^[a-zA-Z0-9_+=/!?-`' ]+$") && playerName.Length > 0 && playerName.Length <= 13) validName = true;
         else validName = false;
         if(errorID != 1 && !Regex.IsMatch(playerName, @"^[a-zA-Z0-9_+=/!?-`' ]+$") && playerName.Length > 0){
             StartCoroutine(changeText("English only, thank you.",walterText));
@@ -61,7 +61,7 @@ public class sayMyNameManager : MonoBehaviour
             inputField.GetComponent<TMP_InputField>().readOnly = true;
             youAreGoddamnRight.Play();
             whatsMyPurposeScript.readPlayerNameFromScript();
-            StartCoroutine(textFadeOut(walterText,1f));
+            StartCoroutine(textFadeOut(walterText,1.3f,0.5f));
             StartCoroutine(fadeOut(speechBubble.GetComponent<SpriteRenderer>(),0.8f,0.8f));
             StartCoroutine(fadeIn(blackScreen,5f,2f));
             StartCoroutine(changeScene());

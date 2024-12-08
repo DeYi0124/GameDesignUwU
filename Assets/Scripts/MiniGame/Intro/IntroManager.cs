@@ -41,13 +41,16 @@ public class IntroManager : MonoBehaviour
     private int bgmCount;
     private bool skipped = false;
     private IEnumerator process;
-    void Start(){
+    void Awake(){
         resetSprites();
         process = wholeScene();
         bgmCount = 0;
         sceneCount = 0;
         content = prologue.text.Split('\n').ToList();
         // StartCoroutine(keepCallingGen(outerPoints,studentPoints,10f,1f));
+        blackScreenObject.SetActive(true);
+        narration.text = "";
+        StartCoroutine(fadeOut(blackScreenObject.GetComponent<SpriteRenderer>(),8f));
         StartCoroutine(process);
         
 
@@ -59,6 +62,7 @@ public class IntroManager : MonoBehaviour
     }
     IEnumerator wholeScene(){
         bgm[0].Play();
+        yield return new WaitForSeconds(0.5f);
         yield return StartCoroutine(TypeSentence(content[0]));
         yield return StartCoroutine(deleteSentence(2f,0.03f));
         yield return StartCoroutine(TypeSentence(content[1]));
@@ -191,6 +195,7 @@ public class IntroManager : MonoBehaviour
         //     StopAllCoroutines();
     }
     public void skipFunction(){
+        blackScreenObject.GetComponent<SpriteRenderer>().color = new Color(0,0,0,0);
         StopAllCoroutines();
         dialogueImages[0].color = new Color(dialogueImages[0].color.r,dialogueImages[0].color.g,dialogueImages[0].color.b,0f);
         skip.color = new Color(skip.color.r,skip.color.g,skip.color.b,0f);

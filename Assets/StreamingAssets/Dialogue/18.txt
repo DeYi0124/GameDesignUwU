@@ -1,48 +1,49 @@
-DrunkenSunLakeGoddess You System Event *
-Event
-your bikes fall in the Drunken Sun Lake.
-System
-(You lost one bike.)
-you
-Oh, no. My bike!
-DrunkenSunLakeGoddess
-what is this?
-you
-It is my hard working in one day, please give back to me.
-DrunkenSunLakeGoddess
-Do you know which bikes is your?
-you
-options || Gold/Sliver/Normal
+醉日湖女神 *
+ 
+你的腳踏車掉入了醉日湖。
+ 
+(你損失了一臺腳踏車。)
+Me
+喔不，我的車！
+醉日湖女神
+這是什麼？(皺眉頭。)
+Me
+這是我好不容一拖一天的成果，求求您還給我。
+醉日湖女神
+那你知道你掉進來的，是哪臺腳踏車嗎？
+Me
+我的車是……
+options || 金腳踏車/銀腳踏車/普通腳踏車
 A
-you
-I thought... I falled the golden one.
-DrunkenSunLakeGoddess
-Oh, you are a ambitious guy who I likes to.
-DrunkenSunLakeGoddess
-This golden bike is yours.
-System
-(The golden bike changes to five normal bikes.)
-you
-Lucky~
+Me
+我掉的是金色的那臺！
+醉日湖女神
+年輕人，你很有企圖心喔。我喜歡。
+醉日湖女神
+這臺金腳踏車就送給你了。
+ 
+(金色腳踏車換成了五臺普通腳踏車！！)
+Me
+讚啦！
 B
-you
-I thought... that I falled the silver one.
-DrunkenSunLakeGoddess
-(She stared at you with a suspicious look in her eyes.)
-DrunkenSunLakeGoddess
-You fail to hide your eager faces of golden bike.
-DrunkenSunLakeGoddess
-Stop your wishful thinking. You will get nothing.
-DrunkenSunLakeGoddess
-(Swimimg and leaving directly)
+Me
+我掉的是銀色的那臺！
+醉日湖女神
+(她用鄙夷的眼神盯著你。)
+醉日湖女神
+你明明在看旁邊的金腳踏車，睜眼說瞎話。
+醉日湖女神
+停止你的妄想，就算裝謙卑，你也拿不到金腳踏車。Stop your wishful thinking. You will get nothing.
+醉日湖女神
+(直接跳如湖中，游泳離開了。)
 C
-you
-I thought... that I just falled a normal bike like this.
-DrunkenSunLakeGoddess
-(She looked at you with unbelieving eyes.)
-DrunkenSunLakeGoddess
-Have you desired the money, the power, or something luxurious?
-DrunkenSunLakeGoddess
-How unmotivated nowadays young man are!
-DrunkenSunLakeGoddess
-(tossing the bike behind her into the lake like it’s trash and sinking the lake with disappointment in face)
+Me
+我掉的只是普通腳踏車。
+醉日湖女神
+(她用不敢置信的眼神看著你。)
+醉日湖女神
+你難道完全不渴望金錢、權力還有奢侈品嗎？
+醉日湖女神
+現在的年輕人怎麼那麼沒有上進心？
+醉日湖女神
+(把普通腳踏車丟回湖裡，對新生代感到萬分絕望地離開現場。)

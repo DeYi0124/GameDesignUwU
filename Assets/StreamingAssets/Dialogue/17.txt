@@ -1,41 +1,35 @@
-DrunkenMoonLakeGoddess You System *
-you
-(pleacefully drive around the Drunken Moon Lake.)
-DrunkenMoonLakeGoddess
-(Ermeging from lake.)
-DrunkenMoonLakeGoddess
-Are you from the shueiYuan civilization?
-you
-Uh? Yes, but what's going on?
-DrunkenMoonLakeGoddess
-Is this your bike?
-you
-options || Gold/Sliver/Normal/Wait, I don't fall any bike.
+醉月湖女神 *
+Me
+(悠哉地開著卡車經過醉月湖。)
+醉月湖女神
+(從醉月湖中浮出。)
+醉月湖女神
+你是從水源拖吊場來的嗎？
+Me
+嗯。怎麼了嗎？
+醉月湖女神
+這是你的腳踏車嗎？
+Me
+我的車是……
+options || 金腳踏車/銀腳踏車/等等，我還沒掉腳踏車下去。
 A
-DrunkenMoonLakeGoddess
-OK, take it for yourself.
-System
-(The golden bike changes to five normal bikes.)
-(You get five bikes.)
+醉月湖女神
+這是你的喔，你要就拿去吧。
+ 
+(金色腳踏車換成了五臺普通腳踏車！！)
 B
-DrunkenMoonLakeGoddess
-All right, here you go.
-System
-(The silver bike changes to three normal bikes.)
-(You get three bikes.)
+醉月湖女神
+這是你的喔，你要就拿去吧。
+ 
+(銀色腳踏車換成了三臺普通腳踏車！！)
 C
-DrunkenMoonLakeGoddess
-Take the strange thing and leave.
-System
-(You get one bike.)
-D
-DrunkenMoonLakeGoddess
-You said you are from the shueiYuan civilization, didn't you?
-you
-Ya, but I am just an ShueiYuan noob now.
-DrunkenMoonLakeGoddess
-So... this bike doesn't belong you? I saw it fall from a truck.
-DrunkenMoonLakeGoddess
-Well, scratch that. This bike and the strange statue are yours.
-System
-(The number of Your bike plus one.)
+醉月湖女神
+你不是說你從水源拖吊場來的嗎？這些腳踏車真的不是你掉的？
+Me
+是，但我還是一個水源實習生，還沒拖過長這樣的高級腳踏車。
+醉月湖女神
+所以，這些腳踏車不是你的嗎？我那時候好像看到是從卡車上掉下來。
+醉月湖女神
+算了，腳踏車跟這尊神奇的雕像都給你好了，不要再掉腳踏車到湖裡囉。
+ 
+(你獲得了兩臺腳踏車，以及一尊神秘的雕像。)

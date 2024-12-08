@@ -3,14 +3,6 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-[System.Serializable]
-    public class FurnitureData
-    {
-        public GameObject prefab;   // 家具對應的Prefab
-        public Sprite icon;         // 家具的圖示
-        public int count;           // 家具的數量
-    }
-
 public class furnitureManage : MonoBehaviour
 {
     //切換介面
@@ -23,8 +15,8 @@ public class furnitureManage : MonoBehaviour
     private GameObject currentFurniture;
     
     //家具列表
-    public List<FurnitureData> furnitureDataList; 
-    private List<FurnitureData> initialFurnitureDataList; 
+    private List<furnitureData> furnitureDataList; 
+    private List<furnitureData> initialFurnitureDataList; 
     //家具欄
     public GameObject backpackSlotPrefab;   
     public Transform backpackGrid;
@@ -37,24 +29,57 @@ public class furnitureManage : MonoBehaviour
     public GameObject furniturePanel;
     public GameObject currentLayerText;
 
+    public FurnitureInventory inventory;
+    private void OnEnable()
+        {
+            // 訂閱事件
+            if (inventory != null)
+            {
+                inventory.OnInventoryChanged += PopulateBackpack;
+                furnitureDataList = inventory.furnitureList;
+            }
+        }
+
+    private void OnDisable()
+    {
+        // 取消訂閱事件
+        if (inventory != null)
+        {
+            inventory.OnInventoryChanged -= PopulateBackpack;
+            furnitureDataList = inventory.furnitureList;
+        }
+    }
+
 
     void Awake()
     {
         furnitureUI.SetActive(isPlacementMode);
         PopulateBackpack();
-        UpdateArrowButtons();
-        initialFurnitureDataList = new List<FurnitureData>();
-        foreach (var furnitureData in furnitureDataList)
+        // UpdateArrowButtons();
+        if (furnitureDataList == null || furnitureDataList.Count == 0)
         {
-            // 深拷貝數據，確保是獨立的對象
-            initialFurnitureDataList.Add(new FurnitureData
-            {
-                prefab = furnitureData.prefab,
-                icon = furnitureData.icon,
-                count = furnitureData.count
-            });
+            Debug.Log("No furniture available in furnitureDataList.");
+            return;
         }
+        else{
+            initialFurnitureDataList = new List<furnitureData>();
+            if (initialFurnitureDataList != null || initialFurnitureDataList.Count != 0)
+            {
+                foreach (var furnitureData in furnitureDataList)
+                {
+                    // 深拷貝數據，確保是獨立的對象
+                    initialFurnitureDataList.Add(new furnitureData
+                    {
+                        prefab = furnitureData.prefab,
+                        icon = furnitureData.icon,
+                        count = furnitureData.count
+                    });
+                }
+            }
+        }
+         
     }
+
 
 
     void Update()
@@ -72,13 +97,32 @@ public class furnitureManage : MonoBehaviour
                 ChangeFurnitureLayer(currentFurniture, -1);
                 Debug.Log("S");
             }
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                RotateUDFurniture(currentFurniture);
+                Debug.Log("E");
+            }
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                RotateRLFurniture(currentFurniture);
+                Debug.Log("Q");
+            }
+      
+
+
         }
+
         
     }
 
     // 更新背包顯示
     void PopulateBackpack()
     {
+         if (furnitureDataList == null || furnitureDataList.Count == 0)
+    {
+        Debug.Log("No furniture available in furnitureDataList.");
+        return;
+    }
 
         // 清空當前的Grid
         foreach (Transform child in backpackGrid)
@@ -128,6 +172,14 @@ public class furnitureManage : MonoBehaviour
 
         // 右箭頭在最後一頁時禁用
         rightArrowButton.interactable = (currentPage + 1) * iconsPerPage < furnitureDataList.Count;
+
+
+        if (furnitureDataList == null || furnitureDataList.Count == 0)
+        {
+            leftArrowButton.interactable = false;
+            rightArrowButton.interactable = false;
+            return;
+        }
     }
 
     // 選擇家具
@@ -266,6 +318,12 @@ void ChangeFurnitureLayer(GameObject furniture, int direction)
  // 回復上一個動作
     public void UndoLastPlacement()
     {
+        if (furnitureDataList == null || furnitureDataList.Count == 0)
+        {
+            Debug.Log("No furniture available in furnitureDataList.");
+            return;
+        }
+
         Debug.Log($"堆疊狀態：{placedFurnitureStack.Count} 個家具物件");
         if (placedFurnitureStack.Count > 0)
         {
@@ -313,6 +371,11 @@ void ChangeFurnitureLayer(GameObject furniture, int direction)
     // 全部收回
     public void ClearAllFurniture()
     {
+        if (furnitureDataList == null || furnitureDataList.Count == 0)
+        {
+            Debug.Log("No furniture available in furnitureDataList.");
+            return;
+        }
         while (placedFurnitureStack.Count > 0)
         {
             GameObject furniture = placedFurnitureStack.Pop();
@@ -337,10 +400,40 @@ void ChangeFurnitureLayer(GameObject furniture, int direction)
     
     }
 
+public void RotateRLFurniture(GameObject furniture)
+{
+    // 取得家具的 RectTransform 組件
+    RectTransform rectTransform = furniture.GetComponent<RectTransform>();
 
-    public void RotateFurniture()
+    // 進行水平鏡像
+    Vector3 localScale = rectTransform.localScale;
+    if (rectTransform.localScale.x > 0)
     {
-        transform.Rotate(0, 0, 180); // 鏡像
+        // 需要翻轉
+        localScale.x = -localScale.x;
+        rectTransform.localScale = localScale;
     }
+    else
+    {
+        // 可以恢復到正向狀態
+        localScale.x = Mathf.Abs(localScale.x);
+        rectTransform.localScale = localScale;
+    }
+
+}
+public void RotateUDFurniture(GameObject furniture)
+{
+    // 取得家具的 RectTransform 組件
+    RectTransform rectTransform = furniture.GetComponent<RectTransform>();
+
+    // 進行水平鏡像
+    Vector3 localScale = rectTransform.localScale;
+    
+    // 翻轉 X 軸的 scale 值，實現鏡像效果
+    localScale.y = -localScale.y;
+    rectTransform.localScale = localScale;
+
+}
+
 
 }

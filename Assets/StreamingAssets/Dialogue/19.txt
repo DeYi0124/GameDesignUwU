@@ -1,49 +1,51 @@
-DrunkenStarLakeGoddess You System Event *
-Event
-your bikes fall in the Drunken Star Lake.
-System
-(You lost one bike.)
-you
-Oh, no. My bike!
-DrunkenStarLakeGoddess
-what is this?
-you
-It is my hard working in one day, please give back to me.
-DrunkenStarLakeGoddess
-Do you know which bikes is your?
-you
-options || Gold/Sliver/Normal
+醉星湖女神 *
+ 
+你的腳踏車掉入了醉星湖。
+ 
+(你損失了一臺腳踏車。)
+Me
+喔不，我的車！
+醉星湖女神
+這是什麼？(挑起眉毛。)
+Me
+這是我好不容一拖一天的成果，求求您還給我。
+醉星湖女神
+那你知道你掉進來的，是哪臺腳踏車嗎？
+Me
+我的車是……
+options || 金腳踏車/銀腳踏車/普通腳踏車
 A
-you
-I want... I mean I thought I falled the golden one.
-DrunkenStarLakeGoddess
-You are a greedy guy. It is not a good attitude.
-DrunkenStarLakeGoddess
-If you still make speculation in you life, you will get into trouble sooner or later.
-DrunkenStarLakeGoddess
-That’s a piece of advice for you before leaving.
-DrunkenStarLakeGoddess
-(Diving into lake directly)
+Me
+我想要……不，我是說我掉的是金色的那臺！
+醉星湖女神
+你真是個貪得無厭的人，這樣的態度實在是很糟糕。
+醉星湖女神
+如果你之後都抱持著這樣的心態在過你的人生，遲早會遇到麻煩。
+醉星湖女神
+最好在離開之前好好記下這些忠告。
+醉星湖女神
+(直接潛入水中。)
 B
-you
-I am sure... that I falled the silver one.
-DrunkenStarLakeGoddess
-Humble but ambitious... I like it.
-DrunkenStarLakeGoddess
-This silver bike is yours.
-System
-(The silver bike changes to three normal bikes.)
-(You get additional reputation.)
-you
-Oh, ya~
+Me
+我掉的是銀色的那臺！
+醉星湖女神
+謙虛但雄心勃勃……我喜歡。
+醉星湖女神
+這輛銀色腳踏車是你的了。
+ 
+(銀色腳踏車換成了三臺普通腳踏車！！)
+ 
+（你獲得額外的聲望。）
+Me
+噢耶~
 C
-you
-I thought... that I just falled a normal bike like this.
-DrunkenStarLakeGoddess
-You think? Don't you know how it happen?
-DrunkenStarLakeGoddess
-Nobody is sure the bike come from. I will take it to lost and found.
-DrunkenStarLakeGoddess
-(Leaving without goodbye.)
-you
-Wait! My bike... My heart is broken.
+Me
+我想……我掉的只是普通腳踏車，拜託您還給我吧。
+醉星湖女神
+你想？所以你也不知道發生什麼事情囉？
+醉星湖女神
+沒辦法確認這臺腳踏車是你的。我會把它帶到失物招領處。
+醉星湖女神
+（不辭而別。）
+你
+等待！我的腳踏車……我感覺我的心破了一個洞。

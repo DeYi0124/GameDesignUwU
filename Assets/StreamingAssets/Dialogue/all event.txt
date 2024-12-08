@@ -1,21 +1,25 @@
 -11 DiGoLiangFan  ->
 1   3 bikes 
 2   Shark  -> 每遇到一次就獲得一隻鯊鯊V
-3   Obama  -> 留聲機&櫃子V
+3   Obama  -> 留聲機V床頭櫃v
 4   cock
-5   周玉ko  ->爛台大校徽
-6   cowboy  ->牛仔帽
-7   Rat   ->每遇到一次就獲得兩顆酪梨
-8   Time old man -> 時鐘
+5   周玉ko  ->爛台大校徽V
+6   cowboy  ->牛仔帽V
+7   Rat   ->每遇到一次就獲得兩顆酪梨V
+8   Time old man -> 時鐘V
 9   DiGoLiang
 10  So many bikes, so much pain ->床V
 11  DiGoLiangFan
 12  UwU -> 解鎖獎盃
-13  grumpy_old_ma -> 高等微積分
-14  C-- -> C--獎盃
-15  Random_8+9 -> 打字獎盃
+13  grumpy_old_ma -> 高等微積分V
+14  C-- -> C--獎盃V
+15  Random_8+9 -> 打字獎盃V
 16  NTUST_magician -> 拚完哪個拼圖就會獲得哪個畫框
-17  醉月湖女神  -> 水源阿伯雕像
-18  醉日湖女神  -> 金色釣竿
+17  醉月湖女神  -> 水源阿伯雕像V
+18  醉日湖女神  -> 金色窗框
 19  醉星湖女神  -> 銀色魚缸
-20  醉明湖女神  -> 花瓶&茶几
+20  醉⺼湖女神  -> 花瓶&茶几
+21  21點  -> 牌 獎盃
+22  跨三小 
+23  ikea鯊鯊騎車
+24  水源粉絲 -> 電風扇

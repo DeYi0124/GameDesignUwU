@@ -70,6 +70,8 @@ public class CarSoundHandler : MonoBehaviour
     }
 
     void OnCollisionEnter2D(Collision2D collision2D) {
+        if(collision2D.gameObject.tag != "building") return;
+        GameManager.Instance.oil -= 10;
         float relativeVelocity = collision2D.relativeVelocity.magnitude;
         float volume = relativeVelocity * 0.1f;
         hit.pitch = Random.Range(0.95f, 1.05f);

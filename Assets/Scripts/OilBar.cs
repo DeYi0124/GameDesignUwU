@@ -26,6 +26,8 @@ public class OilBar : MonoBehaviour
         // }
         // else 
         //     Instance = this;
+        // Debug.Log(slider);
+        // Debug.Log(GameManager.Instance);
         slider.maxValue = GameManager.Instance.maxOil;
         easeSlider.maxValue = GameManager.Instance.maxOil;
         CurrentBike[] currs = FindObjectsOfType<CurrentBike>();

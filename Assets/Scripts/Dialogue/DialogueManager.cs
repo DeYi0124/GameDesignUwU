@@ -115,6 +115,10 @@ public class DialogueManager : MonoBehaviour
         charNum.Add(14,1);
         charNum.Add(15,2);
         charNum.Add(16,1);
+        charNum.Add(17,1);
+        charNum.Add(18,1);
+        charNum.Add(19,1);
+        charNum.Add(20,1);
         charNum.Add(21,4);
         charNum.Add(22,1);
         charNum.Add(23,2);
@@ -327,7 +331,7 @@ public class DialogueManager : MonoBehaviour
             nameText.text = namesDict[currentOption].Dequeue();
         }
         else if(namesDict[currentOption].Peek() == "Me"){
-            nameText.text = whatsMyPurpose.Instance.getPlayerName();
+            nameText.text = (whatsMyPurpose.Instance != null)? whatsMyPurpose.Instance.getPlayerName() : "testName";
             nameBG.SetActive(true);
             namesDict[currentOption].Dequeue();
         }
@@ -425,6 +429,10 @@ public class DialogueManager : MonoBehaviour
         ScaleDict.Add(12, new Vector3(1.5f,0.9f,0));
         ScaleDict.Add(15, new Vector3(2,2,0));
         ScaleDict.Add(16, new Vector3(2,2,0));
+        ScaleDict.Add(17, new Vector3(2,2,0));
+        ScaleDict.Add(18, new Vector3(2,2,0));
+        ScaleDict.Add(19, new Vector3(2,2,0));
+        ScaleDict.Add(20, new Vector3(2,2,0));
         ScaleDict.Add(21, new Vector3(2,2,0));
         ScaleDict.Add(22, new Vector3(2,2,0));
         ScaleDict.Add(23, new Vector3(8,8,0));
@@ -496,6 +504,14 @@ public class DialogueManager : MonoBehaviour
         ScaleDict[15].Add(new Vector3(100,100,0));
         ScaleDict.Add(16,new List<Vector3>());
         ScaleDict[16].Add(new Vector3(110,110,0));
+        ScaleDict.Add(17,new List<Vector3>());
+        ScaleDict[17].Add(new Vector3(110,110,0));
+        ScaleDict.Add(18,new List<Vector3>());
+        ScaleDict[18].Add(new Vector3(110,110,0));
+        ScaleDict.Add(19,new List<Vector3>());
+        ScaleDict[19].Add(new Vector3(110,110,0));
+        ScaleDict.Add(20,new List<Vector3>());
+        ScaleDict[20].Add(new Vector3(110,110,0));
         ScaleDict.Add(21,new List<Vector3>());
         ScaleDict[21].Add(new Vector3(110,110,0));
         ScaleDict[21].Add(new Vector3(110,110,0));

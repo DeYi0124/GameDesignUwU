@@ -11,6 +11,7 @@ TagManager:
   - EnemySprite
   - CarCollider
   - TimeText
+  - building
   layers:
   - Default
   - TransparentFX

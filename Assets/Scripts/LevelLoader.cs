@@ -36,8 +36,16 @@ public class LevelLoader : MonoBehaviour
         StartCoroutine(LoadLevel());
     }
 
+    public void fi() {
+        StartCoroutine(lfi());
+    }
+
     public void FadeIn() {
         StartCoroutine(LoadFadeIn());
+    }
+
+    public void FadeOut() {
+        StartCoroutine(LoadFadeOut());
     }
 
     public void FadeInT() {
@@ -54,12 +62,25 @@ public class LevelLoader : MonoBehaviour
         GameManager.Instance.pause = false;
     }
 
+    IEnumerator lfi() {
+        LoadText.text = "Loading...";
+        // Debug.Log("UwU");
+        transition.SetTrigger("bait master");
+        yield return new WaitForSecondsRealtime(3f);
+    }
+
     IEnumerator LoadFadeIn() {
         LoadText.text = "Loading...";
         transition.SetTrigger("Start");
         yield return new WaitForSecondsRealtime(3f);
         SceneManager.LoadSceneAsync("MainScene");
         Destroy(this);
+    }
+
+    IEnumerator LoadFadeOut() {
+        LoadText.text = "Loading...";
+        transition.SetTrigger("master bait");
+        yield return new WaitForSecondsRealtime(3f);
     }
 
     IEnumerator LoadFadeInT() {

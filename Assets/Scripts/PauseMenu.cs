@@ -7,8 +7,9 @@ using TMPro;
 public class PauseMenu : MonoBehaviour
 {
     public GameObject pauseMenu;
-    public TextMeshProUGUI timeText;
+    // public TextMeshProUGUI timeText;
     public static bool isPaused;
+    private bool inMainScene;
     // Start is called before the first frame update
     void OnEnable()
     {
@@ -17,14 +18,14 @@ public class PauseMenu : MonoBehaviour
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         if(scene.name == "MainScene" || scene.name == "TutorialScene") {
-            if(GameObject.FindWithTag("TimeText") != null)
-                timeText = GameObject.FindWithTag("TimeText").GetComponent<TextMeshProUGUI>();
+            // if(inMainScene)
+            //     timeText = GameObject.FindWithTag("TimeText").GetComponent<TextMeshProUGUI>();
             pauseMenu = GameObject.Find("PauseMenu");
             pauseMenu.SetActive(false);
         }
     }
     void Awake() {
-        //Debug.Log("Paused");
+        //Debug.Log("Paused"); 
     }
     void Start()
     {
@@ -39,9 +40,11 @@ public class PauseMenu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        int sec = (int)Time.time%60;
-        int min = (int)Time.time/60;
-        timeText.text = "Time Played: " + string.Format("{0:00}:{1:00}", min, sec);
+        inMainScene = (SceneManager.GetActiveScene().name == "MainScene" || SceneManager.GetActiveScene().name == "TutorialScene");
+        // int sec = (int)Time.time%60;
+        // int min = (int)Time.time/60;
+        // if(inMainScene)
+        //     timeText.text = "Time Played: " + string.Format("{0:00}:{1:00}", min, sec);
         if(Input.GetKeyDown(KeyCode.Escape)) {
             if(isPaused) {
                 ResumeGame();

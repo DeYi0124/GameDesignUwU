@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     public GameObject Car;
     public GameObject vb;
     public GameState State;
+    public GameObject ll;
     public int bike = 0;
     public int KPI = 5;
     public float oil = 0;
@@ -46,6 +47,7 @@ public class GameManager : MonoBehaviour
     public bool[] events = new bool[100];
 
     public int coins = 0;
+    public bool firstTime = false;
     private int credits = 0;
     
     public bool pause = false;
@@ -67,6 +69,13 @@ public class GameManager : MonoBehaviour
     }
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        if(firstTime == false) {
+            firstTime = true;
+        } else {
+            Debug.Log("Fading out");
+            ll.GetComponent<LevelLoader>().FadeOut();
+        }
+
         if(scene.name == "MainScene" || scene.name == "TutorialScene") {
             vb = GameObject.Find("VineBoom");
             vb.SetActive(false);
@@ -87,6 +96,7 @@ public class GameManager : MonoBehaviour
         else 
             Instance = this;
         bike = 0;
+        firstTime = false;
         KPI = 10;
         PR = 5;
         days = 0;

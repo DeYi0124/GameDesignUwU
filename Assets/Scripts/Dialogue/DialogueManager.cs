@@ -12,6 +12,7 @@ using UnityEngine.SceneManagement;
 public class DialogueManager : MonoBehaviour
 {
     public GameObject Car;
+    public GameObject ll;
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI dialogueText;
     public Animator dialogueBoxAnimator;

@@ -1,13 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
-using System;
 using UnityEngine;
-using Random = UnityEngine.Random;
-using UnityEngine.Events;
-using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using UnityEngine.Networking;
 using System.IO;
 using TMPro;
-using UnityEngine.Networking;
+using System.Linq;
+using UnityEngine.SceneManagement;
+using System;
 
 
 public class whatsMyPurpose : MonoBehaviour
@@ -70,6 +70,69 @@ public class whatsMyPurpose : MonoBehaviour
             furnitureList.Add(newFurniture);
         }
         OnInventoryChanged?.Invoke();
+    }
+
+    IEnumerator fadeIn(SpriteRenderer spriteRenderer,float time, float delay = 0f){
+        yield return new WaitForSeconds(delay);
+        spriteRenderer.color = new Color(spriteRenderer.color.r,spriteRenderer.color.g,spriteRenderer.color.b,0f);
+        float interval = time/Time.deltaTime;
+        for(int i = 0;i<interval;i++){
+            spriteRenderer.color = new Color(spriteRenderer.color.r,spriteRenderer.color.g,spriteRenderer.color.b,i/interval);
+            yield return new WaitForSeconds(Time.deltaTime);
+        }
+    }
+    IEnumerator fadeOut(SpriteRenderer spriteRenderer,float time, float delay = 0f){
+        spriteRenderer.color = new Color(spriteRenderer.color.r,spriteRenderer.color.g,spriteRenderer.color.b,spriteRenderer.color.a);
+        yield return new WaitForSeconds(delay);
+        float originalAlpha = spriteRenderer.color.a;
+        float interval = time/Time.deltaTime;
+        for(int i = 0;i<interval;i++){
+            spriteRenderer.color = new Color(spriteRenderer.color.r,spriteRenderer.color.g,spriteRenderer.color.b,originalAlpha-(i/interval*originalAlpha));
+            yield return new WaitForSeconds(Time.deltaTime);
+        }
+    }
+    IEnumerator ImageFadeOut(Image image,float time, float delay = 0f){
+        image.color = new Color(image.color.r,image.color.g,image.color.b,image.color.a);
+        yield return new WaitForSeconds(delay);
+        float originalAlpha = image.color.a;
+        float interval = time/Time.deltaTime;
+        for(int i = 0;i<interval;i++){
+            image.color = new Color(image.color.r,image.color.g,image.color.b,originalAlpha-(i/interval*originalAlpha));
+            yield return new WaitForSeconds(Time.deltaTime);
+        }
+    }
+
+    IEnumerator ImageFadeIn(Image image,float time, float delay = 0f){
+        yield return new WaitForSeconds(delay);
+        image.color = new Color(image.color.r,image.color.g,image.color.b,0f);
+        float interval = time/Time.deltaTime;
+        for(int i = 0;i<interval;i++){
+            image.color = new Color(image.color.r,image.color.g,image.color.b,i/interval);
+            yield return new WaitForSeconds(Time.deltaTime);
+        }
+
+    }
+    IEnumerator textFadeOut(TextMeshProUGUI textMeshPro,float time, float delay = 0f){
+        yield return new WaitForSeconds(delay);
+        float originalAlpha = textMeshPro.color.a;
+        textMeshPro.color = new Color(textMeshPro.color.r,textMeshPro.color.g,textMeshPro.color.b,originalAlpha);
+        float interval = time/Time.deltaTime;
+        for(int i = 0;i<interval;i++){
+            if(textMeshPro.color.a > 0f){
+                textMeshPro.color = new Color(textMeshPro.color.r,textMeshPro.color.g,textMeshPro.color.b,originalAlpha-(i/interval*originalAlpha));
+            }
+            yield return new WaitForSeconds(Time.deltaTime);
+        }
+    }
+    IEnumerator textFadeIn(TextMeshProUGUI textMeshPro,float time, float delay = 0f){
+        yield return new WaitForSeconds(delay);
+        float originalAlpha = textMeshPro.color.a;
+        textMeshPro.color = new Color(textMeshPro.color.r,textMeshPro.color.g,textMeshPro.color.b,originalAlpha);
+        float interval = time/Time.deltaTime;
+        for(int i = 0;i<interval;i++){
+            textMeshPro.color = new Color(textMeshPro.color.r,textMeshPro.color.g,textMeshPro.color.b,i/interval);
+            yield return new WaitForSeconds(Time.deltaTime);
+        }
     }
 
 

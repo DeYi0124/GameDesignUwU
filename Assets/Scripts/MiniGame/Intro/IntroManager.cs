@@ -353,5 +353,6 @@ public class IntroManager : MonoBehaviour
         StartCoroutine(MusicFadeOut(bgm[bgm.Count()-1],5f));
     }
 
+
 }
 

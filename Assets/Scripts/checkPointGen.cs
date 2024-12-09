@@ -208,6 +208,24 @@ public class checkPointGen : MonoBehaviour
                 return (5, 6);
             case 10:
                 return (6, 6);
+            case 11:
+                return (4, 7);
+            case 12:
+                return (5, 7);
+            case 13:
+                return (5, 8);
+            case 14:
+                return (6, 8);
+            case 15:
+                return (7, 8);
+            case 16:
+                return (7, 9);
+            case 17:
+                return (8, 9);
+            case 18:
+                return (8, 10);
+            case 19:
+                return (10, 10);
             default:
                 return (0, 0);
         }

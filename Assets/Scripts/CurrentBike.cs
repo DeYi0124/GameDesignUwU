@@ -11,17 +11,6 @@ public class CurrentBike : MonoBehaviour
     public Transform textMeshTransform;
     CarController carController;
     public event Action<CurrentBike> OnSave;
-    // void OnTriggerExit2D(Collider2D collider2D) {
-    //     if(collider2D.CompareTag("CheckPoints")) {
-    //         checkPointHandler checkpoint = collider2D.GetComponent<checkPointHandler>();
-    //         if (checkpoint.getProgress() == 0) {
-    //             if(carController.bike < carController.maxBike)
-    //                 carController.bike++;
-    //             Destroy(checkpoint.transform.gameObject);
-    //         }
-    //     }
-    // }
-
     void OnTriggerEnter2D(Collider2D collider2D) {
         if(collider2D.CompareTag("save")) {
             OnSave?.Invoke(this);

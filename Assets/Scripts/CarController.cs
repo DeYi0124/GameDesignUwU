@@ -45,16 +45,9 @@ public class CarController : MonoBehaviour
         onBroken = false;
         maxSpeed = 26;
         carAnimator.SetBool("isGlowing", false);
-        // if(FindObjectsOfType<CarController>().Length > 1) {
-        //     Debug.Log("DestroyinG" + FindObjectsOfType<CarController>().Length.ToString());
-        //     this.gameObject.SetActive(false);
-        //     Destroy(this.gameObject);
-        // } else
-        //     DontDestroyOnLoad(gameObject);
     }
 
     void OnSave(CurrentBike currBike) {
-        //Debug.Log("UWUevent!");
     }
 
     // Start is called before the first frame update
@@ -75,8 +68,6 @@ public class CarController : MonoBehaviour
             car.transform.GetChild(0).GetChild(5).gameObject.SetActive(false);
             carAnimator.SetBool("isGlowing", false);
         }
-        //Debug.Log(transform.position);
-        //Debug.Log(transform.rotation);
     }
 
     void FixedUpdate()

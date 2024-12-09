@@ -63,7 +63,6 @@ public class GameManager : MonoBehaviour
 
     void OnEnable()
     {
-        // Debug.Log("OnEnable called");
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -78,14 +77,11 @@ public class GameManager : MonoBehaviour
     }
     void OnDisable()
     {
-        // Debug.Log("OnDisable");
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
     void Awake() {
-        //Debug.Log("state: " + (Instance == null) + (Instance == this));
         if (Instance != null && Instance != this) {
-            //Debug.Log("destroying duplicate game manager");
             Destroy(gameObject);
         }
         else 
@@ -105,25 +101,20 @@ public class GameManager : MonoBehaviour
             events[i] = false;
         }
         carSpawn = CarController.Instance.GetPostion();
-        //CarController.Instance.SetPosition(carSpawn);
         InvokeRepeating("UpdateTime", 1f, 1f);
         if(FindObjectsOfType<GameManager>().Length > 1) {
-            //Debug.Log("DestroyinG" + FindObjectsOfType<GameManager>().Length.ToString());
             this.gameObject.SetActive(false);
             Destroy(this.gameObject);
         } else {
-            //Debug.Log("owo");
             DontDestroyOnLoad(gameObject);
             CurrentBike[] currs = FindObjectsOfType<CurrentBike>();
             foreach (CurrentBike curr in currs) {
-                //Debug.Log("NMSL");
                 curr.OnSave += OnSave;
             }
         }
     }
 
     void OnSave(CurrentBike currBike) {
-        // Debug.Log("user saving");
         bike += CarController.Instance.bike;
         time = (time < maxTime - 5)? time + 5 : maxTime - 1;
         CarController.Instance.bike = 0;
@@ -156,10 +147,6 @@ public class GameManager : MonoBehaviour
     void UpdateTime() {
         if(!pause) {
             time += TimeScale;
-            // int tmpEnt = Random.Range(1, maxEnt+1);
-            // if(tmpEnt <= 50) {
-            //     Debug.Log("event occurs, ID: " + tmpEnt.ToString());
-            // }
             if(PR <= 0) { 
                 pause = true;
                 time = 0;
@@ -238,38 +225,26 @@ public class GameManager : MonoBehaviour
                 time = 0;
                 kills = 0;
                 oil = maxOil;
-                // bike = 99999;
-                //Debug.Log("goodMorning");
                 KPI = 5+10*(days);
-                // Debug.Log(days);
-                // KPI = 0;
                 EnemyLimit = 4 + days;
                 maxTime = 60*((days / 3) + 1);
                 for(int i = 0; i < 100; i++) {
                     events[i] = false;
                 }
-                // if(PR > maxPR) {
-                //     PR = maxPR;
-                // }
                 break;
             case GameState.Evening:
                 break;
             case GameState.Night:
-                //Debug.Log("NIGHT");
                 pause = true;
                 vb.SetActive(false);
-                // Debug.Log(days);
                 break;
             case GameState.Shop:
                 break;
             case GameState.Lose:
                 break;
             default:
-                // throw new ArgumentOutOfRangeException(nameof(newState), newState, null);
-                // Debug.Log("UwU");
                 break;
         }
-        //OnGameStateChanged(newState)?.Invoke();
     }
     private IEnumerator preloadImages(int maxID){
         List<int> charNum = new List<int>();

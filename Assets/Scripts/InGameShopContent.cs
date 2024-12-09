@@ -12,9 +12,9 @@ public class InGameShopContent : MonoBehaviour
     public TextMeshProUGUI maxSkilltext;
     public TextMeshProUGUI IWILLNOTYIELD;
 
-    private int maxLevel = 10;
-    private int[] level2cost = {1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 55};
-    private string[] level2costString = {"1", "1", "2", "3", "5", "8", "13", "21", "34", "55", "MAX"};
+    private int maxLevel = 20;
+    private int[] level2cost = {1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987, 1597, 2584, 4181, 6765, -1};
+    private string[] level2costString = {"1", "1", "2", "3", "5", "8", "13", "21", "34", "55", "89", "144", "233", "377", "610", "987", "1597", "2584", "4181", "6765", "MAX"};
     void Start() {
         maxBiketext.text = "Bike\ncost: " +level2costString[GameManager.Instance.volumeLevel];
         maxOiltext.text = "Oil\ncost: " +level2costString[GameManager.Instance.oilLevel];
@@ -63,7 +63,7 @@ public class InGameShopContent : MonoBehaviour
             GameManager.Instance.coins -= level2cost[GameManager.Instance.volumeLevel];
             GameManager.Instance.volumeLevel ++;
             maxBiketext.text = "Bike\ncost: " +level2cost[GameManager.Instance.volumeLevel];
-            CarController.Instance.maxBike += 10;
+            CarController.Instance.maxBike += 5;
         } else {
             Debug.Log("poor detected");
             return;
@@ -79,7 +79,7 @@ public class InGameShopContent : MonoBehaviour
             GameManager.Instance.coins -= level2cost[GameManager.Instance.oilLevel];
             GameManager.Instance.oilLevel ++;
             maxOiltext.text = "Oil\ncost: " +level2cost[GameManager.Instance.oilLevel];
-            GameManager.Instance.maxOil += 50;
+            GameManager.Instance.maxOil += 25;
         } else {
             Debug.Log("poor detected");
             return;

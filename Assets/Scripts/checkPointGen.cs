@@ -128,8 +128,6 @@ public class checkPointGen : MonoBehaviour
             mc = GameObject.Find("Da Main Camera");
             mc.GetComponent<Follow_player>().cmc(true);
             mc.transform.position -= new Vector3(0, 1.618f, 0);
-            // mc.Size = 2f;
-            // Time.timeScale = 0;
             GameManager.carPosition = GameObject.FindWithTag("Car").GetComponent<Transform>().position;
             if(rng == 1) {
                 CarController.Instance.bike = (CarController.Instance.bike + 5 > CarController.Instance.maxBike)? CarController.Instance.maxBike : CarController.Instance.bike + 5;
@@ -173,7 +171,7 @@ public class checkPointGen : MonoBehaviour
                 GameManager.Instance.PR = (GameManager.Instance.PR + 5 > GameManager.Instance.maxPR)? GameManager.Instance.maxPR : GameManager.Instance.PR + 5;
                 GameManager.Instance.coins += 10;
             }else if(rng == 24) {
-                GameManager.Instance.bike = GameManager.Instance.KPI;
+                CarController.Instance.bike = (CarController.Instance.bike + GameManager.Instance.KPI > CarController.Instance.maxBike)? CarController.Instance.maxBike : CarController.Instance.bike + GameManager.Instance.KPI;
             }
             FadeIn();
         }
@@ -182,7 +180,6 @@ public class checkPointGen : MonoBehaviour
         GameObject prefab = Resources.Load<GameObject>("Prefabs/" + furnitureName);
         Sprite icon = Resources.Load<Sprite>("Icons/" + furnitureName);
         whatsMyPurpose.Instance.AddOrUpdateFurniture(furnitureName, prefab, icon);
-
     }
     public (int, int) getBikePerPointRange(int yieldLevel){
         switch(yieldLevel){

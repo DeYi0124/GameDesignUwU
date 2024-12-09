@@ -49,7 +49,7 @@ public class GameManager : MonoBehaviour
     public int coins = 0;
     public bool firstTime = false;
     private int credits = 0;
-    
+
     public bool pause = false;
     public static event Action<GameState> OnGameStateChanged;
     public static UnityEvent OnTimeUpdated;
@@ -57,9 +57,9 @@ public class GameManager : MonoBehaviour
     public Animator transition;
     public float transitionTime = 3f;
     public TextMeshProUGUI LoadText;
-    private Vector2 carSpawn;  
-    private bool isTutor = false; 
-    
+    private Vector2 carSpawn;
+    private bool isTutor = false;
+
     //items
     public int guatiaShow;
 
@@ -93,7 +93,7 @@ public class GameManager : MonoBehaviour
         if (Instance != null && Instance != this) {
             Destroy(gameObject);
         }
-        else 
+        else
             Instance = this;
         bike = 0;
         firstTime = false;
@@ -128,6 +128,7 @@ public class GameManager : MonoBehaviour
         bike += CarController.Instance.bike;
         time = (time < maxTime - 5)? time + 5 : maxTime - 1;
         CarController.Instance.bike = 0;
+        CarController.Instance.onBroken = false;
         CarController.Instance.SetPosition(carSpawn);
     }
 
@@ -157,7 +158,7 @@ public class GameManager : MonoBehaviour
     void UpdateTime() {
         if(!pause) {
             time += TimeScale;
-            if(PR <= 0) { 
+            if(PR <= 0) {
                 pause = true;
                 time = 0;
                 days = 0;
@@ -170,13 +171,13 @@ public class GameManager : MonoBehaviour
                 }
                 SceneManager.LoadSceneAsync("DeathReportScene");
             }
-        }   
+        }
     }
 
     public int getTime() {
         return time;
     }
-    
+
     void Start() {
         updateGameState(GameState.Morning);
         StartCoroutine(preloadImages(16));
@@ -197,7 +198,7 @@ public class GameManager : MonoBehaviour
         LoadText.text = "End Of The Day";
         transition.SetTrigger("Start");
         yield return new WaitForSecondsRealtime(transitionTime);
-        SceneManager.LoadScene("GameReportScene");  
+        SceneManager.LoadScene("GameReportScene");
     }
 
     void GameStateHandle() {
@@ -216,7 +217,7 @@ public class GameManager : MonoBehaviour
                     PR += (bike - KPI)/5*PRrizz[0];
                 else
                     PR += (bike - KPI)/5*PRrizz[PRlevel];
-                SceneManager.LoadScene("GameReportScene");  
+                SceneManager.LoadScene("GameReportScene");
             } else {
                 days = 0;
                 coins = 0;
@@ -303,9 +304,9 @@ public class GameManager : MonoBehaviour
 }
 
 public enum GameState {
-    Morning, 
-    Evening, 
-    Night, 
+    Morning,
+    Evening,
+    Night,
     Shop,
     Lose
 }

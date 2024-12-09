@@ -118,6 +118,7 @@ public class GameManager : MonoBehaviour
         bike += CarController.Instance.bike;
         time = (time < maxTime - 5)? time + 5 : maxTime - 1;
         CarController.Instance.bike = 0;
+        CarController.Instance.onBroken = false;
         CarController.Instance.SetPosition(carSpawn);
     }
 

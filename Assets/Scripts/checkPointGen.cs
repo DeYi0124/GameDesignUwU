@@ -116,7 +116,7 @@ public class checkPointGen : MonoBehaviour
         Debug.Log(rng);
         if(GameManager.Instance.events[rng]) return;
         if(GameManager.Instance.PR == GameManager.Instance.maxPR) return;
-        rng = 17;
+        // rng = 17;
         GameManager.Instance.events[rng] = true;
         if(isTutor) return;
         if(rng <= 24){

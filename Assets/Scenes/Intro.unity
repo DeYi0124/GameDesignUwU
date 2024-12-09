@@ -1453,7 +1453,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: f3da035c714e29341b6f466eac0ccc5a, type: 3}
   - {fileID: 21300000, guid: 272e78f940eea924e9d43bed96012614, type: 3}
   - {fileID: 21300000, guid: df4c3066c7993a74b9cc766659104d08, type: 3}
-  - {fileID: 21300000, guid: 86f6dc2753b3dfc41acf50be1a5e80f5, type: 3}
+  - {fileID: 21300000, guid: a41ae198f7e7a3649ba7ebe715a05832, type: 3}
   - {fileID: 21300000, guid: b76f7e82739dcc746a00658ec2a16833, type: 3}
   uncle: {fileID: 1475007543}
   aura: {fileID: 1572082196}
@@ -2646,6 +2646,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ccb7bb5a2057844985098b79156e946, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  furnitureList: []
+  placedFurniture: []
 --- !u!4 &763169251
 Transform:
   m_ObjectHideFlags: 0

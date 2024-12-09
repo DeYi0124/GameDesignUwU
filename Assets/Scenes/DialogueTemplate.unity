@@ -2245,8 +2245,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cbced677c21113a4b8220edd8cf31a2b, type: 2}
-  m_sharedMaterial: {fileID: -8567526583361320663, guid: cbced677c21113a4b8220edd8cf31a2b, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 6bbfb2ddabeea2b448558ceb04ab84ed, type: 2}
+  m_sharedMaterial: {fileID: -6999420033459616077, guid: 6bbfb2ddabeea2b448558ceb04ab84ed, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2385,7 +2385,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u4E2D"
+  m_text: "\u8173\u4E2D\u6587"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6bbfb2ddabeea2b448558ceb04ab84ed, type: 2}
   m_sharedMaterial: {fileID: -6999420033459616077, guid: 6bbfb2ddabeea2b448558ceb04ab84ed, type: 2}
@@ -3743,10 +3743,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u4E2D\u6587"
+  m_text: "\u8173"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cbced677c21113a4b8220edd8cf31a2b, type: 2}
-  m_sharedMaterial: {fileID: -8567526583361320663, guid: cbced677c21113a4b8220edd8cf31a2b, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 6bbfb2ddabeea2b448558ceb04ab84ed, type: 2}
+  m_sharedMaterial: {fileID: -6999420033459616077, guid: 6bbfb2ddabeea2b448558ceb04ab84ed, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3881,8 +3881,8 @@ MonoBehaviour:
 
 '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cbced677c21113a4b8220edd8cf31a2b, type: 2}
-  m_sharedMaterial: {fileID: -8567526583361320663, guid: cbced677c21113a4b8220edd8cf31a2b, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 6bbfb2ddabeea2b448558ceb04ab84ed, type: 2}
+  m_sharedMaterial: {fileID: -6999420033459616077, guid: 6bbfb2ddabeea2b448558ceb04ab84ed, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

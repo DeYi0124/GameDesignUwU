@@ -277,18 +277,47 @@ public class DialogueManager : MonoBehaviour
     }
     public void setToOptionA(){
         currentOption = "A";
+        if(id == 17) {
+            CarController.Instance.bike = (CarController.Instance.bike + 5 > CarController.Instance.maxBike) ? CarController.Instance.maxBike : CarController.Instance.bike + 5;
+        } else if(id == 18) {
+            CarController.Instance.bike = (CarController.Instance.bike + 5 > CarController.Instance.maxBike) ? CarController.Instance.maxBike : CarController.Instance.bike + 5;
+        } else if(id == 19) {
+            //nothing
+        } else if(id == 20) {
+            //nothing
+        }
         DisplayNextSentence();
         continueButton.SetActive(true);
         turnOffOption();
     }
     public void setToOptionB(){
         currentOption = "B";
+        if(id == 17) {
+            CarController.Instance.bike = (CarController.Instance.bike + 3 > CarController.Instance.maxBike) ? CarController.Instance.maxBike : CarController.Instance.bike + 3;
+        } else if(id == 18) {
+            //nothing
+        } else if(id == 19) {
+            CarController.Instance.bike = (CarController.Instance.bike + 3 > CarController.Instance.maxBike) ? CarController.Instance.maxBike : CarController.Instance.bike + 3;
+            GameManager.Instance.PR += 10;
+        } else if(id == 20) {
+            //nothing
+        }
         DisplayNextSentence();
         continueButton.SetActive(true);
         turnOffOption();
     }
     public void setToOptionC(){
         currentOption = "C";
+        if(id == 17) {
+            CarController.Instance.bike = (CarController.Instance.bike + 2 > CarController.Instance.maxBike) ? CarController.Instance.maxBike : CarController.Instance.bike + 2;
+        } else if(id == 18) {
+            //nothing
+        } else if(id == 19) {
+            //nothing
+        } else if(id == 20) {
+            CarController.Instance.bike = (CarController.Instance.bike + 1 > CarController.Instance.maxBike) ? CarController.Instance.maxBike : CarController.Instance.bike + 1;
+            GameManager.Instance.PR += 20;
+        }
         DisplayNextSentence();
         continueButton.SetActive(true);
         turnOffOption();

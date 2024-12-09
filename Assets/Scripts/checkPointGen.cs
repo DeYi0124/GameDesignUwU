@@ -166,6 +166,12 @@ public class checkPointGen : MonoBehaviour
                 addFurniture("type_cup");
             }else if(rng == 17) {
                 addFurniture("statue");
+            }else if(rng == 18) {
+                CarController.Instance.bike --;
+            }else if(rng == 19) {
+                CarController.Instance.bike --;
+            }else if(rng == 20) {
+                CarController.Instance.bike --;
             }else if(rng == 22) {
                 int tr = Random.Range(1, 10);
                 CarController.Instance.bike = (CarController.Instance.bike + tr > CarController.Instance.maxBike)? CarController.Instance.maxBike : CarController.Instance.bike + tr;

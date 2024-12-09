@@ -110,7 +110,7 @@ public class CarController : MonoBehaviour
         }
         float steeringMin = (carRigidbody2D.velocity.magnitude / 8);
         steeringMin = Mathf.Clamp01(steeringMin);
-        rotatingAngle -= (1 + (0.1f)*GameManager.Instance.speedLevel)*steerInput * turn * steeringMin;
+        rotatingAngle -= steerInput * turn * steeringMin;
         carRigidbody2D.MoveRotation(rotatingAngle);
     }
 

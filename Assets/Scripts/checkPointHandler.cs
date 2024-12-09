@@ -82,11 +82,16 @@ public class checkPointHandler : MonoBehaviour
 
                 transform.right = positionDiff;
                 transform.position += transform.right * MoveSpeed * Time.deltaTime;
+                // if (Vector3.Distance(transform.position, CarController.Instance.transform.position) > MaxDist)
+                // {
+                //     MoveSpeed = 2;// - Vector3.Distance(transform.position, CarController.Instance.transform.position);
+                //     transform.position += transform.right * MoveSpeed * Time.deltaTime;
+                // }
             }
         }
 
         if(!GameManager.Instance.pause && isWorking && CarController.Instance.bike < CarController.Instance.maxBike) {
-            progress -= (0.33f*(GameManager.Instance.skillLevel+1)*Time.deltaTime);
+            progress -= (0.25f*(GameManager.Instance.skillLevel+1)*Time.deltaTime);
             progress = Mathf.Clamp01(progress);
             m_SpriteRenderer.color = new Color (255, 255, 255, progress);
             if (progress == 0) {

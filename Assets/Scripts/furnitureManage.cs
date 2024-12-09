@@ -59,20 +59,20 @@ public class furnitureManage : MonoBehaviour
 
     }
 
-
     void Awake()
     {
+        initialFurnitureDataList = new List<furnitureData>();
+        furnitureDataList = whatsMyPurpose.Instance.furnitureList;
         furnitureUI.SetActive(isPlacementMode);
         PopulateBackpack();
         // UpdateArrowButtons();
         //Debug.Log("Furniture list count: " + whatsMyPurpose.Instance.furnitureList.Count);
-        if (furnitureDataList == null || furnitureDataList.Count == 0)
-        {
-            //Debug.Log("No furniture available in furnitureDataList.");
-            return;
-        }
-        else{
-            initialFurnitureDataList = new List<furnitureData>();
+        // if (furnitureDataList == null || furnitureDataList.Count == 0)
+        // {
+        //     //Debug.Log("No furniture available in furnitureDataList.");
+        //     return;
+        // }
+        // else{
             foreach (var furnitureData in furnitureDataList)
             {
                 // 深拷貝數據，確保是獨立的對象
@@ -83,7 +83,7 @@ public class furnitureManage : MonoBehaviour
                     count = furnitureData.count
                 });
             }
-        }
+        // }
          
     }
 
@@ -391,6 +391,8 @@ void ChangeFurnitureLayer(GameObject furniture, int direction)
         }
 
             // 將數量重設為初始數據
+        if(initialFurnitureDataList.Count < furnitureDataList.Count)
+            return;
         for (int i = 0; i < furnitureDataList.Count; i++)
         {
             furnitureDataList[i].count = initialFurnitureDataList[i].count;

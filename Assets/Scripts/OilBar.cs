@@ -46,7 +46,7 @@ public class OilBar : MonoBehaviour
         if(CarController.Instance.onGrass) {
             uwu *= 3;
         }
-        oilCut(1 + uwu);
+        oilCut(1 + 0.33f*uwu);
     }
 
     void Start()

@@ -132,7 +132,7 @@ public class checkPointGen : MonoBehaviour
             if(rng == 1) {
                 CarController.Instance.bike = (CarController.Instance.bike + 5 > CarController.Instance.maxBike)? CarController.Instance.maxBike : CarController.Instance.bike + 5;
             }else if(rng == 2) {
-                GameManager.Instance.PR = (GameManager.Instance.PR + 5 > GameManager.Instance.maxPR)? GameManager.Instance.maxPR : GameManager.Instance.PR + 5;
+                GameManager.Instance.PR = GameManager.Instance.PR + 5;
                 addFurniture("shark");
             }else if(rng == 3) {
                 addFurniture("littlecabinet1");
@@ -140,11 +140,11 @@ public class checkPointGen : MonoBehaviour
             }else if(rng == 4) {
                 CarController.Instance.bike -= 1;
             }else if(rng == 5){
-                GameManager.Instance.PR = (GameManager.Instance.PR + 5 > GameManager.Instance.maxPR)? GameManager.Instance.maxPR : GameManager.Instance.PR + 5;
+                GameManager.Instance.PR = GameManager.Instance.PR + 5;
                 addFurniture("NTU");
             }else if(rng == 6) {
                 CarController.Instance.bike = 0;
-                GameManager.Instance.PR = (GameManager.Instance.PR + 5 > GameManager.Instance.maxPR)? GameManager.Instance.maxPR : GameManager.Instance.PR + 10;
+                GameManager.Instance.PR = GameManager.Instance.PR + 10;
             }else if(rng == 7) {
                 GameManager.Instance.coins = 0;
                 addFurniture("avocado");
@@ -174,7 +174,7 @@ public class checkPointGen : MonoBehaviour
                 int tr = Random.Range(1, 10);
                 CarController.Instance.bike = (CarController.Instance.bike + tr > CarController.Instance.maxBike)? CarController.Instance.maxBike : CarController.Instance.bike + tr;
             }else if(rng == 23) {
-                GameManager.Instance.PR = (GameManager.Instance.PR + 5 > GameManager.Instance.maxPR)? GameManager.Instance.maxPR : GameManager.Instance.PR + 5;
+                GameManager.Instance.PR = GameManager.Instance.PR + 5;
                 GameManager.Instance.coins += 10;
             }else if(rng == 24) {
                 CarController.Instance.bike = (CarController.Instance.bike + GameManager.Instance.KPI > CarController.Instance.maxBike)? CarController.Instance.maxBike : CarController.Instance.bike + GameManager.Instance.KPI;

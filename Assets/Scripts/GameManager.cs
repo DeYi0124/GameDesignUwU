@@ -258,7 +258,7 @@ public class GameManager : MonoBehaviour
         }
     }
     private IEnumerator preloadImages(int maxID){
-        charNum = new Dictionary<int,int>();
+        Dictionary<int,int> charNum = new Dictionary<int,int>();
         charNum.Add(1,1);
         charNum.Add(2,1);
         charNum.Add(3,6);

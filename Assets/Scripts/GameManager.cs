@@ -180,7 +180,7 @@ public class GameManager : MonoBehaviour
 
     void Start() {
         updateGameState(GameState.Morning);
-        StartCoroutine(preloadImages(16));
+        StartCoroutine(preloadImages(24));
     }
 
     void Update() {
@@ -258,25 +258,33 @@ public class GameManager : MonoBehaviour
         }
     }
     private IEnumerator preloadImages(int maxID){
-        List<int> charNum = new List<int>();
-        charNum.Add(1);
-        charNum.Add(1);
-        charNum.Add(6);
-        charNum.Add(1);
-        charNum.Add(1);
-        charNum.Add(1);
-        charNum.Add(1);
-        charNum.Add(1);
-        charNum.Add(1);
-        charNum.Add(1);
-        charNum.Add(1);
-        charNum.Add(1);
-        charNum.Add(1);
-        charNum.Add(1);
-        charNum.Add(2);
-        charNum.Add(1);
+        charNum = new Dictionary<int,int>();
+        charNum.Add(1,1);
+        charNum.Add(2,1);
+        charNum.Add(3,6);
+        charNum.Add(4,1);
+        charNum.Add(5,1);
+        charNum.Add(6,1);
+        charNum.Add(7,1);
+        charNum.Add(8,1);
+        charNum.Add(9,1);
+        charNum.Add(10,1);
+        charNum.Add(11,1);
+        charNum.Add(12,1);
+        charNum.Add(13,1);
+        charNum.Add(14,1);
+        charNum.Add(15,2);
+        charNum.Add(16,1);
+        charNum.Add(17,1);
+        charNum.Add(18,1);
+        charNum.Add(19,1);
+        charNum.Add(20,1);
+        charNum.Add(21,4);
+        charNum.Add(22,1);
+        charNum.Add(23,2);
+        charNum.Add(24,1);
         for(int id = 1;id <= maxID;id++){
-            for(int characterID = 1;characterID < charNum[id-1];characterID++){
+            for(int characterID = 1;characterID < charNum[id];characterID++){
                 // Debug.Log("Loading..."+id.ToString()+" "+characterID.ToString());
                 string charPath = Application.streamingAssetsPath + "/Character/" + id.ToString() +'/'+ characterID.ToString() + ".png";
                 if (charPath.Contains("://") || charPath.Contains(":///"))
